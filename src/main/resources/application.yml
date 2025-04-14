@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eatz
+    driver-class-name: org.postgresql.Driver
+    username:
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
