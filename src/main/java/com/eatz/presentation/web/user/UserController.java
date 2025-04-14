@@ -6,6 +6,7 @@ import com.eatz.domain.user.exceptions.UserNotFoundException;
 import com.eatz.presentation.web.user.dto.UserRequest;
 import com.eatz.presentation.web.user.dto.UserResponse;
 import com.eatz.presentation.web.user.mapper.UserMapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "User", description = "Endpoints for managing users")
 public class UserController {
 
     private final GetUserService getUserService;
