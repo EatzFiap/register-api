@@ -1,15 +1,18 @@
 spring:
-  application:
-    name: api
+  config:
+    activate:
+      on-profile: ${SPRING_PROFILES_ACTIVE:dev}
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/eatz
-    driver-class-name: org.postgresql.Driver
-    username:
-    password:
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/register_db}
+    username: ${SPRING_DATASOURCE_USERNAME:local}
+    password: ${SPRING_DATASOURCE_PASSWORD:local123}
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+  h2:
+    console:
+      enabled: ${SPRING_H2_CONSOLE_ENABLED:true}
