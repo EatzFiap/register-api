@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:latest
+    container_name: postgres-db-local
     environment:
       POSTGRES_USER: local
       POSTGRES_PASSWORD: local123
@@ -8,6 +9,7 @@ services:
     ports:
       - "5432:5432"
   api:
+    container_name: register-api-local
     build:
       context: .
       dockerfile: Dockerfile
