@@ -13,9 +13,9 @@ CREATE TABLE TB_ADDRESS
     is_deleted    BOOLEAN
 );
 
-CREATE TABLE TB_CUSTOMER
+CREATE TABLE TB_CUSTOMER_USER
 (
-    id_customer       INT AUTO_INCREMENT PRIMARY KEY,
+    id_customer_user       INT AUTO_INCREMENT PRIMARY KEY,
     name              VARCHAR(255),
     email             VARCHAR(255),
     password          VARCHAR(255),
@@ -43,9 +43,10 @@ CREATE TABLE TB_RESTAURANT
     FOREIGN KEY (fk_address) REFERENCES TB_ADDRESS (id_address)
 );
 
-CREATE TABLE TB_ADMIN
+CREATE TABLE TB_RESTAURANT_USER
 (
-    id_admin          INT AUTO_INCREMENT PRIMARY KEY,
+    id_restaurant_user          INT AUTO_INCREMENT PRIMARY KEY,
+    role              VARCHAR (8) CHECK (role IN ('ADMIN', 'MANAGER', 'EMPLOYEE')),
     name              VARCHAR(255),
     email             VARCHAR(255),
     password          VARCHAR(255),
@@ -69,6 +70,6 @@ CREATE TABLE TB_CUSTOMER_ADDRESS
     created_at          TIMESTAMP,
     updated_at          TIMESTAMP,
     is_deleted          BOOLEAN,
-    FOREIGN KEY (fk_customer) REFERENCES TB_CUSTOMER (id_customer),
+    FOREIGN KEY (fk_customer) REFERENCES TB_CUSTOMER (id_customer_user),
     FOREIGN KEY (fk_address) REFERENCES TB_ADDRESS (id_address)
 );
