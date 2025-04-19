@@ -3,6 +3,8 @@ package com.eatz.presentation.web.user;
 import com.eatz.application.user.*;
 import com.eatz.domain.user.User;
 import com.eatz.domain.user.exceptions.UserNotFoundException;
+import com.eatz.presentation.web.user.dto.AuthenticationResponse;
+import com.eatz.presentation.web.user.dto.LoginRequest;
 import com.eatz.presentation.web.user.dto.UserRequest;
 import com.eatz.presentation.web.user.dto.UserResponse;
 import com.eatz.presentation.web.user.mapper.UserMapper;
@@ -25,6 +27,7 @@ public class UserController {
     private final CreateUserService createUserService;
     private final UpdateUserService updateService;
     private final DeleteUserService deleteService;
+    private final AuthenticateCustomerUseCase authenticateCustomerUseCase;
     private final UserMapper mapper;
 
     public UserController(
@@ -32,12 +35,14 @@ public class UserController {
             CreateUserService createUserService,
             UpdateUserService updateService,
             DeleteUserService deleteService,
+            AuthenticateCustomerUseCase authenticateCustomerUseCase,
             UserMapper mapper
     ) {
         this.getUserService = getUserService;
         this.createUserService = createUserService;
         this.updateService = updateService;
         this.deleteService = deleteService;
+        this.authenticateCustomerUseCase = authenticateCustomerUseCase;
         this.mapper = mapper;
     }
 
@@ -74,7 +79,7 @@ public class UserController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest request) {
         if (request == null) {
             return ResponseEntity.badRequest().build();
@@ -84,6 +89,21 @@ public class UserController {
             User usuario = mapper.toDomain(request);
             User created = createUserService.execute(usuario);
             return ResponseEntity.ok(mapper.toResponse(created));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody @Valid LoginRequest request) {
+        if (request == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        try {
+            return ResponseEntity.ok(
+                    authenticateCustomerUseCase.execute(request)
+            );
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }

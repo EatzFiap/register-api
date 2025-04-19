@@ -10,8 +10,8 @@ public interface UserRepository {
     Optional<User> findByLogin(String login);
     User save(User user);
     void delete(User user);
-
+    boolean existsByEmailAndIsDeletedFalse(String email);
     Optional<User> findByIdAndAtivoTrue(UUID id);
-
+    Optional<User> findByEmailAndAtivoTrue(String email);
     List<User> findAll();
 }

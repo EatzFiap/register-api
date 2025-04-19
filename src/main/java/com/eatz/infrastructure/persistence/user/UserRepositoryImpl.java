@@ -46,10 +46,24 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public boolean existsByEmailAndIsDeletedFalse(String email) {
+        return jpaRepository.existsByEmailAndIsActiveTrue(email);
+    }
+
+    @Override
     public Optional<User> findByIdAndAtivoTrue(UUID id) {
         return jpaRepository.findById(id)
                 .filter(UserEntity::isActive)
                 .map(mapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> findByEmailAndAtivoTrue(String email) {
+        UserEntity userEntity = jpaRepository.findByEmailAndIsActiveTrue(email)
+                .orElseThrow(
+                        () -> new IllegalArgumentException("User not found with email: " + email)
+                );
+        return Optional.of(mapper.toDomain(userEntity));
     }
 
     @Override
