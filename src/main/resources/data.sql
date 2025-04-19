@@ -6,8 +6,8 @@ VALUES
 
 INSERT INTO TB_CUSTOMER (name, email, password, cpf, phone)
 VALUES
-    ('Maria Silva', 'maria@email.com', 'senha123', '123.456.789-00', '(11) 91234-5678'),
-    ('João Souza', 'joao@email.com', 'senha456', '987.654.321-00', '(21) 99876-5432');
+    ('Maria Silva', 'maria@email.com', '$2a$10$iR6HsE.nl6fS6nPJ6SmajO9DubU/HDQg87C7GCpYm4zT18jKN43ji', '123.456.789-00', '(11) 91234-5678'),
+    ('João Souza', 'joao@email.com', '$2a$10$iR6HsE.nl6fS6nPJ6SmajO9DubU/HDQg87C7GCpYm4zT18jKN43ji', '987.654.321-00', '(21) 99876-5432');
 
 INSERT INTO TB_RESTAURANT (name, logo_image_url, fk_address, phone, whatsapp_phone, cnpj, delivery_radius)
 VALUES

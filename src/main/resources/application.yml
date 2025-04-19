@@ -16,3 +16,9 @@ spring:
   h2:
     console:
       enabled: ${SPRING_H2_CONSOLE_ENABLED:true}
+
+security:
+  jwt:
+      secret: ${JWT_SECRET:12123581251298035890123980512890350981298053295132253802531925312352138923589}
+      expiration: ${JWT_EXPIRATION:3600000}
+
