@@ -1,30 +1,33 @@
 package com.eatz.infrastructure.security;
 
-import com.eatz.domain.user.UserRepository;
+import com.eatz.domain.customer.Customer;
+import com.eatz.domain.customer.CustomerRepository;
 import io.jsonwebtoken.JwtException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import static com.eatz.domain.customer.enums.UserRole.CUSTOMER;
+
 @Service
 public class CustomerDetailsService implements UserDetailsService {
 
-    private final UserRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
-    public CustomerDetailsService(UserRepository customerRepository) {
+    public CustomerDetailsService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws JwtException {
-        com.eatz.domain.user.User customer = customerRepository.findByEmailAndAtivoTrue(username)
+        Customer customer = customerRepository.findByEmailAndAtivoTrue(username)
                 .orElseThrow(() -> new JwtException("Usuário não encontrado: " + username));
 
         return User.builder()
                 .username(customer.getEmail())
                 .password(customer.getPassword())
-                .authorities("CUSTOMER")
+                .authorities(String.valueOf(CUSTOMER))
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
