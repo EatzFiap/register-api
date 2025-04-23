@@ -7,6 +7,8 @@ import com.eatz.presentation.web.customer.dto.CustomerRequest;
 import com.eatz.presentation.web.customer.dto.CustomerResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+
 @Component
 public class CustomerMapper {
     public Customer toDomain(CustomerRequest dto) {
@@ -15,30 +17,38 @@ public class CustomerMapper {
         customer.setEmail(dto.getEmail());
         customer.setPassword(dto.getPassword());
 
-        Address e = new Address();
-        e.setStreet(dto.getAddress().getStreet());
-        e.setCity(dto.getAddress().getCity());
-        e.setState(dto.getAddress().getState());
-        e.setZipCode(dto.getAddress().getZipCode());
+        Address address = new Address();
+        address.setStreet(dto.getAddress().getStreet());
+        address.setCity(dto.getAddress().getCity());
+        address.setState(dto.getAddress().getState());
+        address.setZipCode(dto.getAddress().getZipCode());
 
+        customer.setAddresses(Collections.singletonList(address));
 
-        customer.setAddress(e);
         return customer;
     }
 
     public CustomerResponse toResponse(Customer customer) {
-        AddressResponse endereco = new AddressResponse(
-                customer.getAddress().getState(),
-                customer.getAddress().getCity(),
-                customer.getAddress().getState(),
-                customer.getAddress().getZipCode()
-        );
+        Address address = customer.getAddresses() != null && !customer.getAddresses().isEmpty()
+                ? customer.getAddresses().get(0)
+                : null;
+
+        AddressResponse addressResponse = null;
+        if (address != null) {
+
+            addressResponse = new AddressResponse(
+                    address.getStreet(),
+                    address.getCity(),
+                    address.getState(),
+                    address.getZipCode()
+            );
+        }
 
         return new CustomerResponse(
-                customer.getId(),
+                customer.getIdCustomerUser(),
                 customer.getName(),
                 customer.getEmail(),
-                endereco
+                addressResponse
         );
     }
 }

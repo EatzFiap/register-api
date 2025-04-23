@@ -53,7 +53,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public Optional<Customer> findByIdAndAtivoTrue(UUID id) {
         return jpaRepository.findById(id)
-                .filter(CustomerEntity::isActive)
                 .map(mapper::toDomain);
     }
 

@@ -1,47 +1,56 @@
 package com.eatz.infrastructure.persistence.restaurant;
 
 import com.eatz.infrastructure.persistence.address.AddressEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "TB_RESTAURANT")
 public class RestaurantEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_restaurant")
     private UUID id;
 
     private String name;
-    private String email;
-    private String login;
-    private String password;
-    private String lastUpdated;
-    private boolean isActive;
+
+    @Column(name = "logo_image_url", length = 500)
+    private String logoImageUrl;
+
+    private String phone;
+
+    @Column(name = "whatsapp_phone")
+    private String whatsappPhone;
+
+    private String cnpj;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
+    @Column(name = "delivery_radius")
+    private Double deliveryRadius;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_address", referencedColumnName = "id_address")
     private AddressEntity address;
-
-    public RestaurantEntity(String name, String email, String login, String password, String lastUpdated, AddressEntity address) {
-        this.name = name;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.lastUpdated = lastUpdated;
-        this.address = address;
-    }
 
     public RestaurantEntity() {
     }
 
-    // Getters and setters
+    // Getters e Setters
 
     public UUID getId() {
         return id;
     }
-
     public void setId(UUID id) {
         this.id = id;
     }
@@ -49,41 +58,64 @@ public class RestaurantEntity {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogoImageUrl() {
+        return logoImageUrl;
+    }
+    public void setLogoImageUrl(String logoImageUrl) {
+        this.logoImageUrl = logoImageUrl;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getLogin() {
-        return login;
+    public String getWhatsappPhone() {
+        return whatsappPhone;
+    }
+    public void setWhatsappPhone(String whatsappPhone) {
+        this.whatsappPhone = whatsappPhone;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getCnpj() {
+        return cnpj;
+    }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
-    public String getPassword() {
-        return password;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public String getLastUpdated() {
-        return lastUpdated;
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+    public void setIsDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    public Double getDeliveryRadius() {
+        return deliveryRadius;
+    }
+    public void setDeliveryRadius(Double deliveryRadius) {
+        this.deliveryRadius = deliveryRadius;
     }
 
     public AddressEntity getAddress() {
@@ -92,12 +124,4 @@ public class RestaurantEntity {
     public void setAddress(AddressEntity address) {
         this.address = address;
     }
-
-    public boolean isActive() {
-        return isActive;
-    }
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
 }

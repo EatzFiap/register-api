@@ -1,52 +1,49 @@
 package com.eatz.domain.restaurant;
 
-
 import com.eatz.domain.address.Address;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Restaurant {
 
     private UUID id;
-
     private String name;
     private String email;
-    private String login;
     private String password;
-    private String lastUpdated;
-    private boolean isActive;
-
+    private String logoImageUrl;
+    private String phone;
+    private String whatsappPhone;
+    private String cnpj;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean isDeleted;
+    private Double deliveryRadius;
     private Address address;
-
-    public Restaurant(UUID id, String name, String email, String login, String password, String lastUpdated, Address address, boolean isActive) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.lastUpdated = lastUpdated;
-        this.address = address;
-        this.isActive = isActive;
-    }
 
     public Restaurant() {
     }
 
-    public Restaurant(UUID id, String name, String email, String login, String password, boolean active) {
+    public Restaurant(UUID id, String name, String logoImageUrl, String phone, String whatsappPhone, String cnpj,
+                      LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, Double deliveryRadius, Address address) {
         this.id = id;
         this.name = name;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.isActive = active;
+        this.logoImageUrl = logoImageUrl;
+        this.phone = phone;
+        this.whatsappPhone = whatsappPhone;
+        this.cnpj = cnpj;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isDeleted = isDeleted;
+        this.deliveryRadius = deliveryRadius;
+        this.address = address;
     }
 
-    // Getters and setters
+    // Getters e Setters
 
     public UUID getId() {
         return id;
     }
-
     public void setId(UUID id) {
         this.id = id;
     }
@@ -54,41 +51,64 @@ public class Restaurant {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogoImageUrl() {
+        return logoImageUrl;
+    }
+    public void setLogoImageUrl(String logoImageUrl) {
+        this.logoImageUrl = logoImageUrl;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getLogin() {
-        return login;
+    public String getWhatsappPhone() {
+        return whatsappPhone;
+    }
+    public void setWhatsappPhone(String whatsappPhone) {
+        this.whatsappPhone = whatsappPhone;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getCnpj() {
+        return cnpj;
+    }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
-    public String getPassword() {
-        return password;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public String getLastUpdated() {
-        return lastUpdated;
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    public Double getDeliveryRadius() {
+        return deliveryRadius;
+    }
+    public void setDeliveryRadius(Double deliveryRadius) {
+        this.deliveryRadius = deliveryRadius;
     }
 
     public Address getAddress() {
@@ -98,10 +118,17 @@ public class Restaurant {
         this.address = address;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public String getEmail() {
+        return email;
     }
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

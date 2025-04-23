@@ -10,7 +10,7 @@ public class CustomerResponse {
     private String password;
     private AddressResponse address;
 
-    public CustomerResponse(UUID id, String name, String email, AddressResponse endereco) {
+    public CustomerResponse(Integer id, String name, String email, AddressResponse endereco) {
         this.name = name;
         this.email = email;
         this.address = endereco;

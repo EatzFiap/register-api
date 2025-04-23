@@ -17,7 +17,6 @@ public class DeleteRestaurantUseCase {
         Restaurant Restaurant = RestaurantRepository.findByIdAndAtivoTrue(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        Restaurant.setActive(false);
         RestaurantRepository.save(Restaurant);
     }
 }

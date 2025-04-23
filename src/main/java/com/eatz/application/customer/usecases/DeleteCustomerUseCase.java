@@ -16,7 +16,6 @@ public class DeleteCustomerUseCase {
         Customer customer = customerRepository.findByIdAndAtivoTrue(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        customer.setActive(false);
         customerRepository.save(customer);
     }
 }

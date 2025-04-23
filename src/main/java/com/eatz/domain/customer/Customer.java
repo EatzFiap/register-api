@@ -1,54 +1,49 @@
 package com.eatz.domain.customer;
 
-
 import com.eatz.domain.address.Address;
 
-import java.util.UUID;
+import java.util.List;
 
 public class Customer {
 
-    private UUID id;
-
+    private Integer idCustomerUser;
     private String name;
     private String email;
-    private String login;
     private String password;
-    private String lastUpdated;
-    private boolean isActive;
+    private String cpf;
+    private String phone;
+    private String createdAt;
+    private String updatedAt;
+    private boolean isDeleted;
+    private String profileImageUrl;
 
-    private Address address;
+    private List<Address> addresses;
 
-    public Customer(UUID id, String name, String email, String login, String password, String lastUpdated, Address address, boolean isActive) {
-        this.id = id;
+    public Customer(Integer idCustomerUser, String name, String email, String password, String cpf, String phone, String createdAt, String updatedAt, boolean isDeleted, String profileImageUrl, List<Address> addresses) {
+        this.idCustomerUser = idCustomerUser;
         this.name = name;
         this.email = email;
-        this.login = login;
         this.password = password;
-        this.lastUpdated = lastUpdated;
-        this.address = address;
-        this.isActive = isActive;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isDeleted = isDeleted;
+        this.profileImageUrl = profileImageUrl;
+        this.addresses = addresses;
     }
 
     public Customer() {
     }
 
-    public Customer(UUID id, String name, String email, String login, String password, boolean active) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.isActive = active;
-    }
-
     // Getters and setters
 
-    public UUID getId() {
-        return id;
+    public Integer getIdCustomerUser() {
+        return idCustomerUser;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setIdCustomerUser(Integer idCustomerUser) {
+        this.idCustomerUser = idCustomerUser;
     }
 
     public String getName() {
@@ -67,14 +62,6 @@ public class Customer {
         this.email = email;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -83,25 +70,59 @@ public class Customer {
         this.password = password;
     }
 
-    public String getLastUpdated() {
-        return lastUpdated;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-    public void setAddress(Address address) {
-        this.address = address;
+    public String getPhone() {
+        return phone;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-    public void setActive(boolean active) {
-        isActive = active;
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }

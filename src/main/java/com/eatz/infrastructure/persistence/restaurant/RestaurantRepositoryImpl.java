@@ -53,7 +53,6 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     @Override
     public Optional<Restaurant> findByIdAndAtivoTrue(UUID id) {
         return jpaRepository.findById(id)
-                .filter(RestaurantEntity::isActive)
                 .map(mapper::toDomain);
     }
 

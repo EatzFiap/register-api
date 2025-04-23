@@ -24,7 +24,7 @@ public class UpdateCustomerUseCase {
         customer.setName(newData.getName());
         customer.setEmail(newData.getEmail());
         customer.setPassword(newData.getPassword());
-        customer.setAddress(newData.getAddress());
+        customer.setAddresses(newData.getAddresses());
 
         return customerRepository.save(customer);
     }
