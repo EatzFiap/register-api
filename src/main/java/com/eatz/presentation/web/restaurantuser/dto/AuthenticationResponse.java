@@ -1,4 +1,4 @@
-package com.eatz.presentation.web.restaurant.dto;
+package com.eatz.presentation.web.restaurantuser.dto;
 
 import java.util.Date;
 

@@ -15,7 +15,7 @@ public class CustomerMapper {
         Customer customer = new Customer();
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
-        customer.setPassword(dto.getPassword());
+        customer.setPassword(dto.getPhone());
 
         Address address = new Address();
         address.setStreet(dto.getAddress().getStreet());
@@ -30,7 +30,7 @@ public class CustomerMapper {
 
     public CustomerResponse toResponse(Customer customer) {
         Address address = customer.getAddresses() != null && !customer.getAddresses().isEmpty()
-                ? customer.getAddresses().get(0)
+                ? customer.getAddresses().getFirst()
                 : null;
 
         AddressResponse addressResponse = null;

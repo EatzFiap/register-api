@@ -1,8 +1,8 @@
 
 package com.eatz.infrastructure.persistence.restaurant;
 
-import com.eatz.domain.restaurant.Restaurant;
-import com.eatz.domain.restaurant.RestaurantRepository;
+import com.eatz.domain.restaurantuser.RestaurantUser;
+import com.eatz.domain.restaurantuser.RestaurantUserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,39 +10,39 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class RestaurantRepositoryImpl implements RestaurantRepository {
+public class RestaurantUserRepositoryImpl implements RestaurantUserRepository {
 
     private final JpaRestaurantRepository jpaRepository;
     private final RestaurantEntityMapper mapper;
 
-    public RestaurantRepositoryImpl(JpaRestaurantRepository jpaRepository, RestaurantEntityMapper mapper) {
+    public RestaurantUserRepositoryImpl(JpaRestaurantRepository jpaRepository, RestaurantEntityMapper mapper) {
         this.jpaRepository = jpaRepository;
         this.mapper = mapper;
     }
 
     @Override
-    public Optional<Restaurant> findById(UUID id) {
+    public Optional<RestaurantUser> findById(UUID id) {
         return jpaRepository.findById(id).map(mapper::toDomain);
     }
 
     @Override
-    public Optional<Restaurant> findByEmail(String email) {
+    public Optional<RestaurantUser> findByEmail(String email) {
         return jpaRepository.findByEmail(email).map(mapper::toDomain);
     }
 
     @Override
-    public Optional<Restaurant> findByLogin(String login) {
+    public Optional<RestaurantUser> findByLogin(String login) {
         return jpaRepository.findByLogin(login).map(mapper::toDomain);
     }
 
     @Override
-    public Restaurant save(Restaurant restaurant) {
-        return mapper.toDomain(jpaRepository.save(mapper.toEntity(restaurant)));
+    public RestaurantUser save(RestaurantUser restaurantUser) {
+        return mapper.toDomain(jpaRepository.save(mapper.toEntity(restaurantUser)));
     }
 
     @Override
-    public void delete(Restaurant restaurant) {
-        jpaRepository.delete(mapper.toEntity(restaurant));
+    public void delete(RestaurantUser restaurantUser) {
+        jpaRepository.delete(mapper.toEntity(restaurantUser));
     }
 
     @Override
@@ -51,13 +51,13 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public Optional<Restaurant> findByIdAndAtivoTrue(UUID id) {
+    public Optional<RestaurantUser> findByIdAndAtivoTrue(UUID id) {
         return jpaRepository.findById(id)
                 .map(mapper::toDomain);
     }
 
     @Override
-    public Optional<Restaurant> findByEmailAndAtivoTrue(String email) {
+    public Optional<RestaurantUser> findByEmailAndAtivoTrue(String email) {
         RestaurantEntity restaurantEntity = jpaRepository.findByEmailAndIsActiveTrue(email)
                 .orElseThrow(
                         () -> new IllegalArgumentException("User not found with email: " + email)
@@ -66,7 +66,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public List<Restaurant> findAll() {
+    public List<RestaurantUser> findAll() {
         return jpaRepository.findAll()
                 .stream()
                 .map(mapper::toDomain)

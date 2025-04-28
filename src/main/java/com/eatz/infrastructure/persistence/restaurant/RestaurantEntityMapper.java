@@ -1,6 +1,6 @@
 package com.eatz.infrastructure.persistence.restaurant;
 
-import com.eatz.domain.restaurant.Restaurant;
+import com.eatz.domain.restaurantuser.RestaurantUser;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,10 +9,10 @@ public class RestaurantEntityMapper {
     public RestaurantEntityMapper(AddressEntityMapper addressMapper) {
     }
 
-    public Restaurant toDomain(RestaurantEntity entity) {
+    public RestaurantUser toDomain(RestaurantEntity entity) {
         if (entity == null) return null;
 
-        return new Restaurant(
+        return new RestaurantUser(
                 entity.getId(),
                 entity.getName(),
                 entity.getLogoImageUrl(),
@@ -27,13 +27,13 @@ public class RestaurantEntityMapper {
         );
     }
 
-    public RestaurantEntity toEntity(Restaurant restaurant) {
-        if (restaurant == null) return null;
+    public RestaurantEntity toEntity(RestaurantUser restaurantUser) {
+        if (restaurantUser == null) return null;
 
         RestaurantEntity entity = new RestaurantEntity();
-        entity.setId(restaurant.getId());
-        entity.setName(restaurant.getName());
-        entity.setAddress(AddressEntityMapper.toEntity(restaurant.getAddress()));
+        entity.setId(restaurantUser.getId());
+        entity.setName(restaurantUser.getName());
+        entity.setAddress(AddressEntityMapper.toEntity(restaurantUser.getAddress()));
 
         return entity;
     }

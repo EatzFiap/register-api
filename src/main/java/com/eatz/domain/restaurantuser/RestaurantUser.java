@@ -1,11 +1,11 @@
-package com.eatz.domain.restaurant;
+package com.eatz.domain.restaurantuser;
 
 import com.eatz.domain.address.Address;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Restaurant {
+public class RestaurantUser {
 
     private UUID id;
     private String name;
@@ -21,11 +21,11 @@ public class Restaurant {
     private Double deliveryRadius;
     private Address address;
 
-    public Restaurant() {
+    public RestaurantUser() {
     }
 
-    public Restaurant(UUID id, String name, String logoImageUrl, String phone, String whatsappPhone, String cnpj,
-                      LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, Double deliveryRadius, Address address) {
+    public RestaurantUser(UUID id, String name, String logoImageUrl, String phone, String whatsappPhone, String cnpj,
+                          LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, Double deliveryRadius, Address address) {
         this.id = id;
         this.name = name;
         this.logoImageUrl = logoImageUrl;

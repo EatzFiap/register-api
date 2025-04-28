@@ -13,17 +13,14 @@ public class UpdateCustomerUseCase {
         this.customerRepository = customerRepository;
     }
 
-    public Customer execute(UUID id, Customer newData) {
-        if (id == null || newData == null) {
-            throw new IllegalArgumentException("Id and user data must not be null");
+    public Customer execute(Customer customer, Customer newData) {
+        if (newData == null) {
+            throw new IllegalArgumentException("New user data must not be null");
         }
-
-        Customer customer = customerRepository.findByIdAndAtivoTrue(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         customer.setName(newData.getName());
         customer.setEmail(newData.getEmail());
-        customer.setPassword(newData.getPassword());
+        customer.setPhone(newData.getPhone());
         customer.setAddresses(newData.getAddresses());
 
         return customerRepository.save(customer);

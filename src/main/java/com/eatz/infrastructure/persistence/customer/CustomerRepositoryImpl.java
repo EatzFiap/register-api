@@ -31,11 +31,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> findByLogin(String login) {
-        return jpaRepository.findByLogin(login).map(mapper::toDomain);
-    }
-
-    @Override
     public Customer save(Customer customer) {
         return mapper.toDomain(jpaRepository.save(mapper.toEntity(customer)));
     }
@@ -48,12 +43,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public boolean existsByEmailAndIsDeletedFalse(String email) {
         return jpaRepository.existsByEmailAndIsActiveTrue(email);
-    }
-
-    @Override
-    public Optional<Customer> findByIdAndAtivoTrue(UUID id) {
-        return jpaRepository.findById(id)
-                .map(mapper::toDomain);
     }
 
     @Override
