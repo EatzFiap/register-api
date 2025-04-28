@@ -1,9 +1,6 @@
 package com.eatz.presentation.web.customer;
 
-import com.eatz.application.customer.services.CreateCustomerService;
-import com.eatz.application.customer.services.DeleteCustomerService;
-import com.eatz.application.customer.services.GetCustomerService;
-import com.eatz.application.customer.services.UpdateCustomerService;
+import com.eatz.application.customer.services.CustomerService;
 import com.eatz.application.customer.usecases.AuthenticateCustomerUseCase;
 import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
@@ -23,29 +20,20 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/users")
-@Tag(name = "User", description = "Endpoints for managing users")
+@RequestMapping("/customers")
+@Tag(name = "Customer", description = "Endpoints for managing customers")
 public class CustomerController {
 
-    private final GetCustomerService getCustomerService;
-    private final CreateCustomerService createCustomerService;
-    private final UpdateCustomerService updateService;
-    private final DeleteCustomerService deleteService;
+    private final CustomerService customerService;
     private final AuthenticateCustomerUseCase authenticateCustomerUseCase;
     private final CustomerMapper mapper;
 
     public CustomerController(
-            GetCustomerService getCustomerService,
-            CreateCustomerService createCustomerService,
-            UpdateCustomerService updateService,
-            DeleteCustomerService deleteService,
+            CustomerService customerService,
             AuthenticateCustomerUseCase authenticateCustomerUseCase,
             CustomerMapper mapper
     ) {
-        this.getCustomerService = getCustomerService;
-        this.createCustomerService = createCustomerService;
-        this.updateService = updateService;
-        this.deleteService = deleteService;
+        this.customerService = customerService;
         this.authenticateCustomerUseCase = authenticateCustomerUseCase;
         this.mapper = mapper;
     }
@@ -57,27 +45,10 @@ public class CustomerController {
         }
 
         try {
-            Customer customer = getCustomerService.execute(id);
+            Customer customer = customerService.getCustomer(id);
             return ResponseEntity.ok(mapper.toResponse(customer));
         } catch (CustomerNotFoundException e) {
             return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-    }
-
-    @GetMapping
-    public ResponseEntity<List<CustomerResponse>> findAll() {
-        try {
-            List<Customer> customers = getCustomerService.execute();
-            if (customers == null || customers.isEmpty()) {
-                return ResponseEntity.noContent().build();
-            }
-            List<CustomerResponse> responseList = customers.stream()
-                    .filter(Objects::nonNull)
-                    .map(mapper::toResponse)
-                    .collect(Collectors.toList());
-            return ResponseEntity.ok(responseList);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
@@ -90,8 +61,8 @@ public class CustomerController {
         }
 
         try {
-            Customer usuario = mapper.toDomain(request);
-            Customer created = createCustomerService.execute(usuario);
+            Customer customerRequest = mapper.toDomain(request);
+            Customer created = customerService.createCustomer(customerRequest);
             return ResponseEntity.ok(mapper.toResponse(created));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
@@ -120,8 +91,8 @@ public class CustomerController {
         }
 
         try {
-            Customer usuario = mapper.toDomain(request);
-            Customer updated = updateService.execute(id, usuario);
+            Customer customerRequest = mapper.toDomain(request);
+            Customer updated = customerService.updateCustomer(id, customerRequest);
             return ResponseEntity.ok(mapper.toResponse(updated));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
@@ -135,7 +106,7 @@ public class CustomerController {
         }
 
         try {
-            deleteService.execute(id);
+            customerService.deleteCustomer(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();

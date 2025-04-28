@@ -1,4 +1,4 @@
-package com.eatz.domain.restaurant.enums;
+package com.eatz.domain.restaurantuser.enums;
 
 public enum RestaurantRole {
     ADMIN("Administrador"),

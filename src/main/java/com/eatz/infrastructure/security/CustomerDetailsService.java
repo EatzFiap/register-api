@@ -22,7 +22,7 @@ public class CustomerDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws JwtException {
         Customer customer = customerRepository.findByEmailAndAtivoTrue(username)
-                .orElseThrow(() -> new JwtException("Usuário não encontrado: " + username));
+                .orElseThrow(() -> new JwtException("User not found: " + username));
 
         return User.builder()
                 .username(customer.getEmail())

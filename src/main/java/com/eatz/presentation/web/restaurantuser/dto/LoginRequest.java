@@ -1,4 +1,4 @@
-package com.eatz.presentation.web.restaurant.dto;
+package com.eatz.presentation.web.restaurantuser.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

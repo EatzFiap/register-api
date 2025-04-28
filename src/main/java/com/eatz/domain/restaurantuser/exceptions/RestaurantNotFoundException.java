@@ -1,4 +1,4 @@
-package com.eatz.domain.restaurant.exceptions;
+package com.eatz.domain.restaurantuser.exceptions;
 
 public class RestaurantNotFoundException extends Exception {
 
