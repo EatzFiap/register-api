@@ -2,8 +2,10 @@ package com.eatz.application.customer.usecases;
 
 import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.CustomerRepository;
+import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 
-import java.util.UUID;
+import java.util.Objects;
+
 
 public class UpdateCustomerUseCase {
 
@@ -13,16 +15,18 @@ public class UpdateCustomerUseCase {
         this.customerRepository = customerRepository;
     }
 
-    public Customer execute(Customer customer, Customer newData) {
-        if (newData == null) {
-            throw new IllegalArgumentException("New user data must not be null");
-        }
+    public Customer execute(Long id, Customer newData) {
+        if (id == null) throw new IllegalArgumentException("ID não pode ser nulo.");
+        if (newData == null) throw new IllegalArgumentException("Dados para atualização não podem ser nulos.");
 
-        customer.setName(newData.getName());
-        customer.setEmail(newData.getEmail());
-        customer.setPhone(newData.getPhone());
-        customer.setAddresses(newData.getAddresses());
+        Customer existingCustomer = customerRepository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado para atualização."));
 
-        return customerRepository.save(customer);
+        if (newData.getName() != null) existingCustomer.setName(newData.getName());
+        if (newData.getEmail() != null) existingCustomer.setEmail(newData.getEmail());
+        if (newData.getPhone() != null) existingCustomer.setPhone(newData.getPhone());
+        if (newData.getAddresses() != null) existingCustomer.setAddresses(newData.getAddresses());
+
+        return customerRepository.save(existingCustomer);
     }
 }

@@ -33,7 +33,7 @@ public class AuthenticateCustomerUseCase {
                 new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password())
         );
 
-        String token = jwtUtil.generateToken(loginRequest.email());
+        String token = jwtUtil.generateCustomerUserToken(loginRequest.email());
 
         return new AuthenticationResponse(
                 token,

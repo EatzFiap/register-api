@@ -1,4 +1,3 @@
-
 package com.eatz.infrastructure.persistence.customer;
 
 import com.eatz.domain.customer.Customer;
@@ -7,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 @Repository
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -21,37 +20,27 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> findById(UUID id) {
-        return jpaRepository.findById(id).map(mapper::toDomain);
-    }
-
-    @Override
-    public Optional<Customer> findByEmail(String email) {
-        return jpaRepository.findByEmail(email).map(mapper::toDomain);
+    public Optional<Customer> findById(Long id) {
+        return jpaRepository.findById(id)
+                .map(mapper::toDomain);
     }
 
     @Override
     public Customer save(Customer customer) {
-        return mapper.toDomain(jpaRepository.save(mapper.toEntity(customer)));
-    }
-
-    @Override
-    public void delete(Customer customer) {
-        jpaRepository.delete(mapper.toEntity(customer));
+        CustomerEntity entity = mapper.toEntity(customer);
+        CustomerEntity savedEntity = jpaRepository.save(entity);
+        return mapper.toDomain(savedEntity);
     }
 
     @Override
     public boolean existsByEmailAndIsDeletedFalse(String email) {
-        return jpaRepository.existsByEmailAndIsActiveTrue(email);
+        return jpaRepository.existsByEmailAndIsDeletedFalse(email);
     }
 
     @Override
-    public Optional<Customer> findByEmailAndAtivoTrue(String email) {
-        CustomerEntity customerEntity = jpaRepository.findByEmailAndIsActiveTrue(email)
-                .orElseThrow(
-                        () -> new IllegalArgumentException("User not found with email: " + email)
-                );
-        return Optional.of(mapper.toDomain(customerEntity));
+    public Optional<Customer> findByEmailAndIsDeletedTrue(String email) {
+        return jpaRepository.findByEmailAndIsDeletedTrue(email)
+                .map(mapper::toDomain);
     }
 
     @Override

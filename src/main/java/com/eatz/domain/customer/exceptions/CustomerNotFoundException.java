@@ -1,6 +1,6 @@
 package com.eatz.domain.customer.exceptions;
 
-public class CustomerNotFoundException extends Exception {
+public class CustomerNotFoundException extends RuntimeException {
 
     public CustomerNotFoundException(String message) {
         super(message);

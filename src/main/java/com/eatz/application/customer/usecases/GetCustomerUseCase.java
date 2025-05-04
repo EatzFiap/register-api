@@ -5,7 +5,7 @@ import com.eatz.domain.customer.CustomerRepository;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 
 import java.util.List;
-import java.util.UUID;
+
 
 public class GetCustomerUseCase {
 
@@ -15,19 +15,19 @@ public class GetCustomerUseCase {
         this.customerRepository = customerRepository;
     }
 
-    public Customer execute(UUID id) throws CustomerNotFoundException {
+    public Customer execute(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("ID must not be null");
+            throw new IllegalArgumentException("ID não pode ser nulo.");
         }
 
         return customerRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado com o id: " + id));
     }
 
-    public List<Customer> execute() throws CustomerNotFoundException {
+    public List<Customer> execute() {
         List<Customer> customers = customerRepository.findAll();
         if (customers.isEmpty()) {
-            throw new CustomerNotFoundException("No users found");
+            throw new CustomerNotFoundException("Nenhum usuário encontrado.");
         }
         return customers;
     }

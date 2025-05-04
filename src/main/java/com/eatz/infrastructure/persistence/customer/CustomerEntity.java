@@ -13,7 +13,7 @@ public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_customer_user")
-    private Integer idCustomerUser;
+    private Long idCustomerUser;
 
     private String name;
     private String email;
@@ -33,15 +33,12 @@ public class CustomerEntity {
     @Column(name = "profile_image_url", length = 500)
     private String profileImageUrl;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AddressEntity> addresses;
-
     public CustomerEntity() {
     }
 
     public CustomerEntity(String name, String email, String password, String cpf, String phone,
                           String createdAt, String updatedAt, boolean isDeleted,
-                          String profileImageUrl, List<AddressEntity> addresses) {
+                          String profileImageUrl) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -51,16 +48,13 @@ public class CustomerEntity {
         this.updatedAt = updatedAt;
         this.isDeleted = isDeleted;
         this.profileImageUrl = profileImageUrl;
-        this.addresses = addresses;
     }
 
-    // Getters and setters
-
-    public Integer getIdCustomerUser() {
+    public Long getIdCustomerUser() {
         return idCustomerUser;
     }
 
-    public void setIdCustomerUser(Integer idCustomerUser) {
+    public void setIdCustomerUser(Long idCustomerUser) {
         this.idCustomerUser = idCustomerUser;
     }
 
@@ -134,13 +128,5 @@ public class CustomerEntity {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
-    }
-
-    public List<AddressEntity> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<AddressEntity> addresses) {
-        this.addresses = addresses;
     }
 }

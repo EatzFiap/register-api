@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Customer {
 
-    private Integer idCustomerUser;
+    private Long id;
     private String name;
     private String email;
     private String password;
@@ -19,8 +19,8 @@ public class Customer {
 
     private List<Address> addresses;
 
-    public Customer(Integer idCustomerUser, String name, String email, String password, String cpf, String phone, String createdAt, String updatedAt, boolean isDeleted, String profileImageUrl, List<Address> addresses) {
-        this.idCustomerUser = idCustomerUser;
+    public Customer(Long id, String name, String email, String password, String cpf, String phone, String createdAt, String updatedAt, boolean isDeleted, String profileImageUrl, List<Address> addresses) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -33,17 +33,28 @@ public class Customer {
         this.addresses = addresses;
     }
 
+    public Customer(Long id, String name, String email, String password, String cpf, String phone, String createdAt, String updatedAt, boolean isDeleted, String profileImageUrl) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isDeleted = isDeleted;
+        this.profileImageUrl = profileImageUrl;
+    }
+
     public Customer() {
     }
 
-    // Getters and setters
-
-    public Integer getIdCustomerUser() {
-        return idCustomerUser;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdCustomerUser(Integer idCustomerUser) {
-        this.idCustomerUser = idCustomerUser;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

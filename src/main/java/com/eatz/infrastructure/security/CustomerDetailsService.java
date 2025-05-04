@@ -21,7 +21,7 @@ public class CustomerDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws JwtException {
-        Customer customer = customerRepository.findByEmailAndAtivoTrue(username)
+        Customer customer = customerRepository.findByEmailAndIsDeletedTrue(username)
                 .orElseThrow(() -> new JwtException("User not found: " + username));
 
         return User.builder()

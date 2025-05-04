@@ -45,7 +45,7 @@ public class CustomerMapper {
         }
 
         return new CustomerResponse(
-                customer.getIdCustomerUser(),
+                customer.getId(),
                 customer.getName(),
                 customer.getEmail(),
                 addressResponse

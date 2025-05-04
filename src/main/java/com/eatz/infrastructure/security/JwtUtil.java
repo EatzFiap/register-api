@@ -1,5 +1,6 @@
 package com.eatz.infrastructure.security;
 
+import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -25,10 +26,7 @@ public class JwtUtil {
         this.tokenBlacklistService = tokenBlacklistService;
     }
 
-    /**
-     * Gera token com o companySlug (seguro!)
-     */
-    public String generateToken(String username) {
+    public String generateCustomerUserToken(String username) {
         return Jwts.builder()
                 .subject(username)
                 .claim("userType", "CUSTOMER")
@@ -36,6 +34,21 @@ public class JwtUtil {
                 .expiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
+    }
+
+    public String generateRestaurantUserToken(String username, RestaurantRole role) {
+        return Jwts.builder()
+                .subject(username)
+                .claim("userType", "RESTAURANT_USER")
+                .claim("role", role.name())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + expirationTime))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+    }
+
+    public String extractUserType(String token) {
+        return extractClaim(token, claims -> claims.get("userType", String.class));
     }
 
     public boolean validateToken(String token, String username) {
