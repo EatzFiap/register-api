@@ -15,7 +15,8 @@ public class CustomerMapper {
         Customer customer = new Customer();
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
-        customer.setPassword(dto.getPhone());
+        customer.setPhone(dto.getPhone());
+        customer.setPassword(dto.getPassword());
 
         Address address = new Address();
         address.setStreet(dto.getAddress().getStreet());

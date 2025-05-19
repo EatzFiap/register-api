@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface JpaCustomerRepository extends JpaRepository<CustomerEntity, Long> {
     boolean existsByEmailAndIsDeletedFalse(String email);
+    Optional<CustomerEntity> findByEmailAndIsDeletedFalse(String email);
     Optional<CustomerEntity> findByEmailAndIsDeletedTrue(String email);
 }

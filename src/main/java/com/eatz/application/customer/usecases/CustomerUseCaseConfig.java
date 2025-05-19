@@ -24,6 +24,11 @@ public class CustomerUseCaseConfig {
     }
 
     @Bean
+    public UpdatePasswordUseCase updatePasswordUseCase(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+        return new UpdatePasswordUseCase(customerRepository, passwordEncoder);
+    }
+
+    @Bean
     public GetCustomerUseCase getUserUseCase(CustomerRepository customerRepository) {
         return new GetCustomerUseCase(customerRepository);
     }

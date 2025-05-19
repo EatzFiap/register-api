@@ -7,6 +7,7 @@ public class CustomerRequest {
     private String name;
     private String email;
     private String phone;
+    private String password;
     private AddressRequest address;
 
     public String getName() {
@@ -27,6 +28,7 @@ public class CustomerRequest {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    public String getPassword() { return password; }
     public AddressRequest getAddress() {
         return address;
     }

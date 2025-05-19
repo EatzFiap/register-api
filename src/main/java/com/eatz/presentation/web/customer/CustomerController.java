@@ -3,17 +3,12 @@ package com.eatz.presentation.web.customer;
 import com.eatz.application.customer.services.CustomerService;
 import com.eatz.application.customer.usecases.AuthenticateCustomerUseCase;
 import com.eatz.domain.customer.Customer;
-import com.eatz.presentation.web.customer.dto.AuthenticationResponse;
-import com.eatz.presentation.web.customer.dto.LoginRequest;
-import com.eatz.presentation.web.customer.dto.CustomerRequest;
-import com.eatz.presentation.web.customer.dto.CustomerResponse;
+import com.eatz.presentation.web.customer.dto.*;
 import com.eatz.presentation.web.customer.mapper.CustomerMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 
 @RestController
 @RequestMapping("/customers")
@@ -61,6 +56,16 @@ public class CustomerController {
         Customer updated = customerService.updateCustomer(id, customerRequest);
         CustomerResponse response = mapper.toResponse(updated);
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/password")
+    public ResponseEntity<Void> updatePassword(
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestBody @Valid PasswordUpdateRequest request
+    ) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        customerService.updatePassword(token, request);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

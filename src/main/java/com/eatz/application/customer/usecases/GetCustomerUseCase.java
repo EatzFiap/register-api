@@ -24,6 +24,15 @@ public class GetCustomerUseCase {
                 .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado com o id: " + id));
     }
 
+    public Customer execute(String email) {
+        if (email == null) {
+            throw new IllegalArgumentException("Email cannot be null.");
+        }
+
+        return customerRepository.findByEmailAndIsDeletedFalse(email)
+                .orElseThrow(() -> new CustomerNotFoundException("User not found with email: " + email));
+    }
+
     public List<Customer> execute() {
         List<Customer> customers = customerRepository.findAll();
         if (customers.isEmpty()) {

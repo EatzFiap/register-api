@@ -2,6 +2,7 @@ package com.eatz.infrastructure.exception;
 
 import com.eatz.domain.customer.exceptions.CustomerAlreadyExistsException;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
+import com.eatz.domain.customer.exceptions.InvalidPasswordException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantUserAlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -88,6 +89,12 @@ public class GlobalExceptionHandler {
         log.error("Unexpected exception: {}", ex.getMessage(), ex);
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.", null, request.getRequestURI());
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<String> handleIncorrectPassword(InvalidPasswordException ex) {
+        log.warn("Password exception: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
 
     private ResponseEntity<Object> buildResponse(HttpStatus status, String message, Object details, String path) {
