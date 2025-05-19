@@ -4,8 +4,6 @@ import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.CustomerRepository;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 
-import java.util.Objects;
-
 
 public class UpdateCustomerUseCase {
 

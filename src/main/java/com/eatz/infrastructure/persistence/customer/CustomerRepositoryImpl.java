@@ -38,6 +38,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+    public Optional<Customer> findByEmailAndIsDeletedFalse(String email) {
+        return jpaRepository.findByEmailAndIsDeletedFalse(email)
+                .map(mapper::toDomain);
+    }
+
+    @Override
     public Optional<Customer> findByEmailAndIsDeletedTrue(String email) {
         return jpaRepository.findByEmailAndIsDeletedTrue(email)
                 .map(mapper::toDomain);

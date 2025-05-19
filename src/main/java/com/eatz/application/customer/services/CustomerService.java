@@ -1,17 +1,13 @@
 package com.eatz.application.customer.services;
 
 import com.eatz.application.address.usecases.CreateAddressUseCase;
-import com.eatz.application.customer.usecases.CreateCustomerUseCase;
-import com.eatz.application.customer.usecases.DeleteCustomerUseCase;
-import com.eatz.application.customer.usecases.GetCustomerUseCase;
-import com.eatz.application.customer.usecases.UpdateCustomerUseCase;
+import com.eatz.application.customer.usecases.*;
 import com.eatz.application.customerAddresses.usecases.AssociateAddressToCustomerUseCase;
 import com.eatz.domain.address.Address;
 import com.eatz.domain.customer.Customer;
-import com.eatz.domain.customerAddresses.CustomerAddress;
+import com.eatz.infrastructure.security.JwtUtil;
+import com.eatz.presentation.web.customer.dto.PasswordUpdateRequest;
 import org.springframework.stereotype.Service;
-
-
 
 @Service
 public class CustomerService {
@@ -22,6 +18,8 @@ public class CustomerService {
     private final GetCustomerUseCase getCustomerUseCase;
     private final CreateAddressUseCase createAddressUseCase;
     private final AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase;
+    private final UpdatePasswordUseCase updatePasswordUseCase;
+    private final JwtUtil jwtUtil;
 
     public CustomerService(
             CreateCustomerUseCase createCustomerUseCase,
@@ -29,7 +27,9 @@ public class CustomerService {
             UpdateCustomerUseCase updateCustomerUseCase,
             GetCustomerUseCase getCustomerUseCase,
             CreateAddressUseCase createAddressUseCase,
-            AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase
+            AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase,
+            UpdatePasswordUseCase updatePasswordUseCase,
+            JwtUtil jwtUtil
     ) {
         this.createCustomerUseCase = createCustomerUseCase;
         this.deleteCustomerUseCase = deleteCustomerUseCase;
@@ -37,6 +37,8 @@ public class CustomerService {
         this.getCustomerUseCase = getCustomerUseCase;
         this.createAddressUseCase = createAddressUseCase;
         this.associateAddressToCustomerUseCase = associateAddressToCustomerUseCase;
+        this.updatePasswordUseCase = updatePasswordUseCase;
+        this.jwtUtil = jwtUtil;
     }
 
     public Customer createCustomer(Customer customer) {
@@ -63,4 +65,13 @@ public class CustomerService {
     public void deleteCustomer(Long customerId) {
         deleteCustomerUseCase.execute(customerId);
     }
+
+    public void updatePassword(String token, PasswordUpdateRequest request) {
+
+        String email = jwtUtil.extractUsername(token);
+        Customer customer = getCustomerUseCase.execute(email);
+        updatePasswordUseCase.execute(customer, request.getOldPassword(), request.getNewPassword());
+
+    }
+
 }
