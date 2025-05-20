@@ -1,7 +1,9 @@
 package com.eatz.application.restaurantUser.usecases;
 
+import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
 import com.eatz.infrastructure.security.JwtUtil;
+import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +30,11 @@ public class RestaurantUserUseCaseConfig {
     @Bean
     public GetRestaurantUserUseCase getRestaurantUseCase(RestaurantUserRepository restaurantUserRepository) {
         return new GetRestaurantUserUseCase(restaurantUserRepository);
+    }
+
+    @Bean
+    public UpdateUserPasswordUseCase<RestaurantUser> updateRestaurantUserPasswordUseCase(RestaurantUserRepository restaurantUserRepository, PasswordEncoder passwordEncoder) {
+        return new UpdateUserPasswordUseCase<>(restaurantUserRepository, passwordEncoder);
     }
 
     @Bean

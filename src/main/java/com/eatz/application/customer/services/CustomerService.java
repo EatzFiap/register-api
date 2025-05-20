@@ -6,7 +6,8 @@ import com.eatz.application.customerAddresses.usecases.AssociateAddressToCustome
 import com.eatz.domain.address.Address;
 import com.eatz.domain.customer.Customer;
 import com.eatz.infrastructure.security.JwtUtil;
-import com.eatz.presentation.web.customer.dto.PasswordUpdateRequest;
+import com.eatz.shared.dto.PasswordUpdateRequest;
+import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,7 @@ public class CustomerService {
     private final GetCustomerUseCase getCustomerUseCase;
     private final CreateAddressUseCase createAddressUseCase;
     private final AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase;
-    private final UpdatePasswordUseCase updatePasswordUseCase;
+    private final UpdateUserPasswordUseCase<Customer> updatePasswordUseCase;
     private final JwtUtil jwtUtil;
 
     public CustomerService(
@@ -28,7 +29,7 @@ public class CustomerService {
             GetCustomerUseCase getCustomerUseCase,
             CreateAddressUseCase createAddressUseCase,
             AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase,
-            UpdatePasswordUseCase updatePasswordUseCase,
+            UpdateUserPasswordUseCase<Customer> updatePasswordUseCase,
             JwtUtil jwtUtil
     ) {
         this.createCustomerUseCase = createCustomerUseCase;

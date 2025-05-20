@@ -1,23 +1,15 @@
 package com.eatz.domain.customer;
 
 import com.eatz.domain.address.Address;
+import com.eatz.shared.domain.User;
 
 import java.util.List;
 
-public class Customer {
-
-    private Long id;
-    private String name;
-    private String email;
-    private String password;
-    private String cpf;
-    private String phone;
-    private String createdAt;
-    private String updatedAt;
-    private boolean isDeleted;
-    private String profileImageUrl;
+public class Customer extends User {
 
     private List<Address> addresses;
+    private String createdAt;
+    private String updatedAt;
 
     public Customer(Long id, String name, String email, String password, String cpf, String phone, String createdAt, String updatedAt, boolean isDeleted, String profileImageUrl, List<Address> addresses) {
         this.id = id;
@@ -49,52 +41,12 @@ public class Customer {
     public Customer() {
     }
 
-    public Long getId() {
-        return id;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public String getCreatedAt() {
@@ -113,27 +65,4 @@ public class Customer {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
-
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
 }

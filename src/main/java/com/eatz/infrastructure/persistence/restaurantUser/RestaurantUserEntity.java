@@ -36,24 +36,6 @@ public class RestaurantUserEntity {
     @Column(name = "fk_restaurant")
     private Long restaurantId;
 
-    public RestaurantUserEntity(Long id, String role, String name, String email, String password, String cpf, String phone, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, String profileImageUrl, Long restaurantId) {
-        this.id = id;
-        this.role = role;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
-        this.profileImageUrl = profileImageUrl;
-        this.restaurantId = restaurantId;
-    }
-
-    public RestaurantUserEntity() {
-    }
-
     public Long getId() {
         return id;
     }

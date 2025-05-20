@@ -2,8 +2,9 @@ package com.eatz.presentation.web.restaurantUser;
 
 import com.eatz.application.restaurantUser.services.RestaurantUserService;
 import com.eatz.domain.restaurantUser.RestaurantUser;
-import com.eatz.presentation.web.restaurantUser.dto.AuthenticationResponse;
-import com.eatz.presentation.web.restaurantUser.dto.LoginRequest;
+import com.eatz.shared.dto.AuthenticationResponse;
+import com.eatz.shared.dto.LoginRequest;
+import com.eatz.shared.dto.PasswordUpdateRequest;
 import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserRequest;
 import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserResponse;
 import com.eatz.presentation.web.restaurantUser.mapper.RestaurantUserMapper;
@@ -11,8 +12,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 
 @RestController
 @RequestMapping("/restaurant-users")
@@ -54,6 +53,16 @@ public class RestaurantUserController {
         RestaurantUser user = mapper.toDomain(request);
         RestaurantUser updated = restaurantUserService.updateUser(id, user);
         return ResponseEntity.ok(mapper.toResponse(updated));
+    }
+
+    @PatchMapping("/password")
+    public ResponseEntity<Void> updatePassword(
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestBody @Valid PasswordUpdateRequest request
+    ) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        restaurantUserService.updatePassword(token, request);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

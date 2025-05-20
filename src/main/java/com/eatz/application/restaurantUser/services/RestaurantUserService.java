@@ -6,11 +6,12 @@ import com.eatz.application.restaurantUser.usecases.UpdateRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.DeleteRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.GetRestaurantUserUseCase;
 import com.eatz.domain.restaurantUser.RestaurantUser;
-import com.eatz.presentation.web.restaurantUser.dto.AuthenticationResponse;
-import com.eatz.presentation.web.restaurantUser.dto.LoginRequest;
+import com.eatz.infrastructure.security.JwtUtil;
+import com.eatz.shared.dto.AuthenticationResponse;
+import com.eatz.shared.dto.LoginRequest;
+import com.eatz.shared.dto.PasswordUpdateRequest;
+import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.stereotype.Service;
-
-
 
 @Service
 public class RestaurantUserService {
@@ -19,20 +20,26 @@ public class RestaurantUserService {
     private final UpdateRestaurantUserUseCase updateUserUseCase;
     private final DeleteRestaurantUserUseCase deleteUserUseCase;
     private final GetRestaurantUserUseCase getUserUseCase;
+    private final UpdateUserPasswordUseCase<RestaurantUser> updatePasswordUseCase;
     private final AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase;
+    private final JwtUtil jwtUtil;
 
     public RestaurantUserService(
             CreateRestaurantUserUseCase createUserUseCase,
             UpdateRestaurantUserUseCase updateUserUseCase,
             DeleteRestaurantUserUseCase deleteUserUseCase,
             GetRestaurantUserUseCase getUserUseCase,
-            AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase
+            UpdateUserPasswordUseCase<RestaurantUser> updatePasswordUseCase,
+            AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase,
+            JwtUtil jwtUtil
     ) {
         this.createUserUseCase = createUserUseCase;
         this.updateUserUseCase = updateUserUseCase;
         this.deleteUserUseCase = deleteUserUseCase;
         this.getUserUseCase = getUserUseCase;
+        this.updatePasswordUseCase = updatePasswordUseCase;
         this.authenticateRestaurantUserUseCase = authenticateRestaurantUserUseCase;
+        this.jwtUtil = jwtUtil;
     }
 
     public RestaurantUser createUser(RestaurantUser restaurantUser) {
@@ -54,4 +61,11 @@ public class RestaurantUserService {
     public AuthenticationResponse authenticate(LoginRequest loginRequest) {
         return authenticateRestaurantUserUseCase.execute(loginRequest);
     }
+
+    public void updatePassword(String token, PasswordUpdateRequest request) {
+        String email = jwtUtil.extractUsername(token);
+        RestaurantUser user = getUserUseCase.execute(email);
+        updatePasswordUseCase.execute(user, request.getOldPassword(), request.getNewPassword());
+    }
+
 }

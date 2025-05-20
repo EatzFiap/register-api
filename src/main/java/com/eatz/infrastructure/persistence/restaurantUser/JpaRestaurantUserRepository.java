@@ -2,6 +2,7 @@ package com.eatz.infrastructure.persistence.restaurantUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.nio.channels.FileChannel;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,4 +12,5 @@ public interface JpaRestaurantUserRepository extends JpaRepository<RestaurantUse
     Optional<RestaurantUserEntity> findByIdAndIsDeletedFalse(Long id);
     List<RestaurantUserEntity> findAllByIsDeletedFalse();
     Optional<String> findRoleByEmailAndIsDeletedFalse(String email);
+    Optional<RestaurantUserEntity> findByEmailAndIsDeletedFalse(String email);
 }
