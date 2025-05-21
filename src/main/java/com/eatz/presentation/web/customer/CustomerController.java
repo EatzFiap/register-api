@@ -32,6 +32,16 @@ public class CustomerController {
         this.mapper = mapper;
     }
 
+    @GetMapping
+    public ResponseEntity<CustomerResponse> findByUsername(
+            @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Customer customer = customerService.getCustomerByUsername(token);
+        CustomerResponse response = mapper.toResponse(customer);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponse> findById(@PathVariable Long id) {
         Customer customer = customerService.getCustomer(id);
@@ -54,7 +64,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponse> update(@PathVariable Long id, @RequestBody @Valid CustomerRequest request) {
+    public ResponseEntity<CustomerResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateCustomerRequest request) {
         Customer customerRequest = mapper.toDomain(request);
         Customer updated = customerService.updateCustomer(id, customerRequest);
         CustomerResponse response = mapper.toResponse(updated);

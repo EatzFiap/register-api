@@ -1,12 +1,12 @@
 package com.eatz.presentation.web.customer.dto;
 
-
 import com.eatz.presentation.web.address.dto.AddressRequest;
 
 public class UpdateCustomerRequest {
     private String name;
     private String email;
     private String phone;
+    private String cpf;
     private AddressRequest address;
 
     public String getName() {
@@ -33,5 +33,6 @@ public class UpdateCustomerRequest {
     public void setAddress(AddressRequest address) {
         this.address = address;
     }
+    public String getCpf() { return cpf; }
 
 }

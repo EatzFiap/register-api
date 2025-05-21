@@ -60,7 +60,14 @@ public class CustomerService {
     }
 
     public Customer updateCustomer(Long customerId, Customer newData) {
-        return updateCustomerUseCase.execute(customerId, newData);
+        Customer updatedCustomer = updateCustomerUseCase.execute(customerId, newData);
+        if (newData.getAddresses() != null) {
+            for (Address address : newData.getAddresses()) {
+                Address savedAddress = createAddressUseCase.execute(address);
+                associateAddressToCustomerUseCase.execute(updatedCustomer.getId(), savedAddress.getId(), savedAddress);
+            }
+        }
+        return updatedCustomer;
     }
 
     public void deleteCustomer(Long customerId) {
@@ -75,4 +82,8 @@ public class CustomerService {
 
     }
 
+    public Customer getCustomerByUsername(String token) {
+        String email = jwtUtil.extractUsername(token);
+        return getCustomerUseCase.execute(email);
+    }
 }

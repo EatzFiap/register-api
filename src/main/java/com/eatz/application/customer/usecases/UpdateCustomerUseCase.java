@@ -25,7 +25,6 @@ public class UpdateCustomerUseCase {
         if (newData.getName() != null) existingCustomer.setName(newData.getName());
         if (newData.getEmail() != null) existingCustomer.setEmail(newData.getEmail());
         if (newData.getPhone() != null) existingCustomer.setPhone(newData.getPhone());
-        if (newData.getAddresses() != null) existingCustomer.setAddresses(newData.getAddresses());
         existingCustomer.setUpdatedAt(LocalDateTime.now().toString());
 
         return customerRepository.save(existingCustomer);

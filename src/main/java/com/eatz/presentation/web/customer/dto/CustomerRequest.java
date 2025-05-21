@@ -2,12 +2,17 @@ package com.eatz.presentation.web.customer.dto;
 
 
 import com.eatz.presentation.web.address.dto.AddressRequest;
+import jakarta.validation.constraints.NotNull;
 
 public class CustomerRequest {
+    @NotNull
     private String name;
+    @NotNull
     private String email;
-    private String phone;
+    @NotNull
     private String password;
+    private String phone;
+    private String cpf;
     private AddressRequest address;
 
     public String getName() {
@@ -35,5 +40,5 @@ public class CustomerRequest {
     public void setAddress(AddressRequest address) {
         this.address = address;
     }
-
+    public String getCpf() { return cpf; }
 }

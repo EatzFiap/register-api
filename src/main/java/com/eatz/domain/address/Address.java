@@ -28,6 +28,13 @@ public class Address {
     public Address() {
     }
 
+    public Address(String street, String city, String state, String zipCode) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
     public Long getId() {
         return id;
     }

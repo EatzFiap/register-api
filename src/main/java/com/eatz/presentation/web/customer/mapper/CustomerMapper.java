@@ -5,6 +5,7 @@ import com.eatz.presentation.web.address.dto.AddressResponse;
 import com.eatz.domain.customer.Customer;
 import com.eatz.presentation.web.customer.dto.CustomerRequest;
 import com.eatz.presentation.web.customer.dto.CustomerResponse;
+import com.eatz.presentation.web.customer.dto.UpdateCustomerRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -19,11 +20,31 @@ public class CustomerMapper {
         customer.setPhone(dto.getPhone());
         customer.setPassword(dto.getPassword());
 
-        Address address = new Address();
-        address.setStreet(dto.getAddress().getStreet());
-        address.setCity(dto.getAddress().getCity());
-        address.setState(dto.getAddress().getState());
-        address.setZipCode(dto.getAddress().getZipCode());
+        Address address = new Address(
+                dto.getAddress().getStreet(),
+                dto.getAddress().getCity(),
+                dto.getAddress().getState(),
+                dto.getAddress().getZipCode()
+        );
+
+        customer.setAddresses(Collections.singletonList(address));
+
+        return customer;
+    }
+
+    public Customer toDomain(UpdateCustomerRequest dto) {
+        Customer customer = new Customer();
+        customer.setName(dto.getName());
+        customer.setEmail(dto.getEmail());
+        customer.setPhone(dto.getPhone());
+        customer.setCpf(dto.getCpf());
+
+        Address address = new Address(
+                dto.getAddress().getStreet(),
+                dto.getAddress().getCity(),
+                dto.getAddress().getState(),
+                dto.getAddress().getZipCode()
+        );
 
         customer.setAddresses(Collections.singletonList(address));
 
