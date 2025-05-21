@@ -2,18 +2,31 @@ package com.eatz.presentation.web.customer.dto;
 
 import com.eatz.presentation.web.address.dto.AddressResponse;
 
+import java.util.List;
+
 public class CustomerResponse {
 
     private Long id;
     private String name;
     private String email;
-    private AddressResponse address;
+    private String createdAt;
+    private String updatedAt;
+    private List<AddressResponse> addresses;
 
-    public CustomerResponse(Long id, String name, String email, AddressResponse address) {
+    public CustomerResponse(
+            Long id,
+            String name,
+            String email,
+            String createdAt,
+            String updatedAt,
+            List<AddressResponse> addresses
+    ) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.address = address;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.addresses = addresses;
     }
 
     public Long getId() {
@@ -40,11 +53,20 @@ public class CustomerResponse {
         this.email = email;
     }
 
-    public AddressResponse getAddress() {
-        return address;
+    public List<AddressResponse> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(AddressResponse address) {
-        this.address = address;
+    public void setAddresses(List<AddressResponse> addresses) {
+        this.addresses = addresses;
     }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
 }

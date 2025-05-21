@@ -1,25 +1,33 @@
 package com.eatz.infrastructure.persistence.customer;
 
+import com.eatz.domain.address.Address;
 import com.eatz.domain.customer.Customer;
 
+import com.eatz.infrastructure.persistence.address.AddressEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class CustomerEntityMapper {
 
     public Customer toDomain(CustomerEntity entity) {
-        return new Customer(
-                entity.getIdCustomerUser(),
-                entity.getName(),
-                entity.getEmail(),
-                entity.getPassword(),
-                entity.getCpf(),
-                entity.getPhone(),
-                entity.getCreatedAt(),
-                entity.getUpdatedAt(),
-                entity.isDeleted(),
-                entity.getProfileImageUrl()
-        );
+        List<Address> addresses = entity.getCustomerAddresses().stream()
+                .filter(customerAddress -> !customerAddress.isDeleted() && !customerAddress.getAddress().isDeleted())
+                .map(customerAddress -> {
+                    AddressEntity address = customerAddress.getAddress();
+                    return new Address(
+                            address.getStreet(),
+                            address.getNumber(),
+                            address.getComplement(),
+                            address.getCity(),
+                            address.getNeighbourhood(),
+                            address.getState(),
+                            address.getZipCode()
+                    );
+                }).toList();
+
+        return new Customer(entity, addresses);
     }
 
     public CustomerEntity toEntity(Customer customer) {

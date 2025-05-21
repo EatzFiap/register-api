@@ -8,6 +8,7 @@ import com.eatz.presentation.web.customer.dto.CustomerResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class CustomerMapper {
@@ -30,26 +31,29 @@ public class CustomerMapper {
     }
 
     public CustomerResponse toResponse(Customer customer) {
-        Address address = customer.getAddresses() != null && !customer.getAddresses().isEmpty()
-                ? customer.getAddresses().getFirst()
-                : null;
+        List<Address> addresses = customer.getAddresses() != null && !customer.getAddresses().isEmpty() ? customer.getAddresses() : null;
 
-        AddressResponse addressResponse = null;
-        if (address != null) {
-
-            addressResponse = new AddressResponse(
-                    address.getStreet(),
-                    address.getCity(),
-                    address.getState(),
-                    address.getZipCode()
-            );
+        List<AddressResponse> addressesResponses;
+        if (addresses != null) {
+            addressesResponses = addresses.stream()
+                    .map(address -> new AddressResponse(
+                            address.getStreet(),
+                            address.getCity(),
+                            address.getState(),
+                            address.getZipCode()
+                    ))
+                    .toList();
+        } else {
+            addressesResponses = Collections.emptyList();
         }
 
         return new CustomerResponse(
                 customer.getId(),
                 customer.getName(),
                 customer.getEmail(),
-                addressResponse
+                customer.getCreatedAt(),
+                customer.getUpdatedAt(),
+                addressesResponses
         );
     }
 }

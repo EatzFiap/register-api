@@ -4,6 +4,8 @@ import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.CustomerRepository;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 
+import java.time.LocalDateTime;
+
 
 public class UpdateCustomerUseCase {
 
@@ -24,6 +26,7 @@ public class UpdateCustomerUseCase {
         if (newData.getEmail() != null) existingCustomer.setEmail(newData.getEmail());
         if (newData.getPhone() != null) existingCustomer.setPhone(newData.getPhone());
         if (newData.getAddresses() != null) existingCustomer.setAddresses(newData.getAddresses());
+        existingCustomer.setUpdatedAt(LocalDateTime.now().toString());
 
         return customerRepository.save(existingCustomer);
     }

@@ -1,9 +1,9 @@
 package com.eatz.infrastructure.persistence.customer;
 
-import com.eatz.infrastructure.persistence.address.AddressEntity;
+import com.eatz.infrastructure.persistence.customerAddress.CustomerAddressEntity;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,22 +33,8 @@ public class CustomerEntity {
     @Column(name = "profile_image_url", length = 500)
     private String profileImageUrl;
 
-    public CustomerEntity() {
-    }
-
-    public CustomerEntity(String name, String email, String password, String cpf, String phone,
-                          String createdAt, String updatedAt, boolean isDeleted,
-                          String profileImageUrl) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
-        this.profileImageUrl = profileImageUrl;
-    }
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private List<CustomerAddressEntity> customerAddresses = new ArrayList<>();
 
     public Long getIdCustomerUser() {
         return idCustomerUser;
@@ -129,4 +115,9 @@ public class CustomerEntity {
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
     }
+
+    public List<CustomerAddressEntity> getCustomerAddresses() {
+        return customerAddresses;
+    }
+
 }

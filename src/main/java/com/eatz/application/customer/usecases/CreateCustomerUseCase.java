@@ -5,6 +5,7 @@ import com.eatz.domain.customer.CustomerRepository;
 import com.eatz.domain.customer.exceptions.CustomerAlreadyExistsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class CreateCustomerUseCase {
@@ -27,6 +28,7 @@ public class CreateCustomerUseCase {
 
         String encodedPassword = passwordEncoder.encode(Objects.requireNonNull(customer.getPassword(), "Senha é obrigatória."));
         customer.setPassword(encodedPassword);
+        customer.setCreatedAt(LocalDateTime.now().toString());
 
         return customerRepository.save(customer);
     }

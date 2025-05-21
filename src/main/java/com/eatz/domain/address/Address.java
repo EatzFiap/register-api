@@ -15,6 +15,19 @@ public class Address {
     private String updatedAt;
     private boolean isDeleted;
 
+    public Address(String street, String number, String complement, String city, String neighbourhood, String state, String zipCode) {
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.city = city;
+        this.neighbourhood = neighbourhood;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    public Address() {
+    }
+
     public Long getId() {
         return id;
     }
