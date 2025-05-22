@@ -13,7 +13,7 @@ public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_customer_user")
-    private Long idCustomerUser;
+    private Long id;
 
     private String name;
     private String email;
@@ -36,12 +36,12 @@ public class CustomerEntity {
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<CustomerAddressEntity> customerAddresses = new ArrayList<>();
 
-    public Long getIdCustomerUser() {
-        return idCustomerUser;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdCustomerUser(Long idCustomerUser) {
-        this.idCustomerUser = idCustomerUser;
+    public void setId(Long idCustomerUser) {
+        this.id = idCustomerUser;
     }
 
     public String getName() {

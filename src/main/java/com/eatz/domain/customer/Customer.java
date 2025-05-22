@@ -13,7 +13,7 @@ public class Customer extends User {
     private String updatedAt;
 
     public Customer(CustomerEntity entity, List<Address> addresses) {
-        this.id = entity.getIdCustomerUser();
+        this.id = entity.getId();
         this.name = entity.getName();
         this.email = entity.getEmail();
         this.password = entity.getPassword();

@@ -39,14 +39,16 @@ public class CustomerMapper {
         customer.setPhone(dto.getPhone());
         customer.setCpf(dto.getCpf());
 
-        Address address = new Address(
-                dto.getAddress().getStreet(),
-                dto.getAddress().getCity(),
-                dto.getAddress().getState(),
-                dto.getAddress().getZipCode()
-        );
+        if (dto.getAddress() != null) {
+            Address address = new Address(
+                    dto.getAddress().getStreet(),
+                    dto.getAddress().getCity(),
+                    dto.getAddress().getState(),
+                    dto.getAddress().getZipCode()
+            );
 
-        customer.setAddresses(Collections.singletonList(address));
+            customer.setAddresses(Collections.singletonList(address));
+        }
 
         return customer;
     }

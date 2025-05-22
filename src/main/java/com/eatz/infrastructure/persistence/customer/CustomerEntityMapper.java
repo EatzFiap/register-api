@@ -32,7 +32,7 @@ public class CustomerEntityMapper {
 
     public CustomerEntity toEntity(Customer customer) {
         CustomerEntity entity = new CustomerEntity();
-        entity.setIdCustomerUser(customer.getId());
+        entity.setId(customer.getId());
         entity.setName(customer.getName());
         entity.setEmail(customer.getEmail());
         entity.setPassword(customer.getPassword());

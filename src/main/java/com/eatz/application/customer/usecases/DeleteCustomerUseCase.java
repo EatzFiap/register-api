@@ -14,7 +14,7 @@ public class DeleteCustomerUseCase {
     public void execute(Long id) {
         if (id == null) throw new IllegalArgumentException("ID não pode ser nulo.");
 
-        Customer customer = customerRepository.findById(id)
+        Customer customer = customerRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado para exclusão."));
 
         customer.setDeleted(true);
