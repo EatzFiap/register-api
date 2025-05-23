@@ -2,6 +2,7 @@ package com.eatz.infrastructure.persistence.restaurantUser;
 
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.enums.RestaurantRole;
+import com.eatz.infrastructure.persistence.address.AddressEntityMapper;
 
 public class RestaurantUserEntityMapper {
 
@@ -23,6 +24,7 @@ public class RestaurantUserEntityMapper {
         entity.setDeleted(user.isDeleted());
         entity.setProfileImageUrl(user.getProfileImageUrl());
         entity.setRestaurantId(user.getRestaurantId());
+        entity.setAddress(AddressEntityMapper.toEntity(user.getAddress()));
         return entity;
     }
 
@@ -42,6 +44,11 @@ public class RestaurantUserEntityMapper {
         user.setDeleted(entity.isDeleted());
         user.setProfileImageUrl(entity.getProfileImageUrl());
         user.setRestaurantId(entity.getRestaurantId());
+
+        if (entity.getAddress() != null && !entity.getAddress().isDeleted()) {
+            user.setAddress(AddressEntityMapper.toDomain(entity.getAddress()));
+        }
+
         return user;
     }
 }

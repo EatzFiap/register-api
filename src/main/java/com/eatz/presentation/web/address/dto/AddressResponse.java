@@ -1,5 +1,7 @@
 package com.eatz.presentation.web.address.dto;
 
+import com.eatz.domain.address.Address;
+
 public class AddressResponse {
     private Long id;
     private String street;
@@ -16,6 +18,14 @@ public class AddressResponse {
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
+    }
+
+    public AddressResponse(Address address) {
+        this.id = address.getId();
+        this.street = address.getStreet();
+        this.city = address.getCity();
+        this.state = address.getState();
+        this.zipCode = address.getZipCode();
     }
 
     public Long getId() { return id; }

@@ -1,10 +1,12 @@
 package com.eatz.application.restaurantUser.services;
 
+import com.eatz.application.address.usecases.CreateAddressUseCase;
 import com.eatz.application.restaurantUser.usecases.AuthenticateRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.CreateRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.UpdateRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.DeleteRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.GetRestaurantUserUseCase;
+import com.eatz.domain.address.Address;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.shared.dto.AuthenticationResponse;
@@ -22,6 +24,7 @@ public class RestaurantUserService {
     private final GetRestaurantUserUseCase getUserUseCase;
     private final UpdateUserPasswordUseCase<RestaurantUser> updatePasswordUseCase;
     private final AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase;
+    private final CreateAddressUseCase createAddressUseCase;
     private final JwtUtil jwtUtil;
 
     public RestaurantUserService(
@@ -31,6 +34,7 @@ public class RestaurantUserService {
             GetRestaurantUserUseCase getUserUseCase,
             UpdateUserPasswordUseCase<RestaurantUser> updatePasswordUseCase,
             AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase,
+            CreateAddressUseCase createAddressUseCase,
             JwtUtil jwtUtil
     ) {
         this.createUserUseCase = createUserUseCase;
@@ -39,10 +43,13 @@ public class RestaurantUserService {
         this.getUserUseCase = getUserUseCase;
         this.updatePasswordUseCase = updatePasswordUseCase;
         this.authenticateRestaurantUserUseCase = authenticateRestaurantUserUseCase;
+        this.createAddressUseCase = createAddressUseCase;
         this.jwtUtil = jwtUtil;
     }
 
     public RestaurantUser createUser(RestaurantUser restaurantUser) {
+        Address savedAddress = createAddressUseCase.execute(restaurantUser.getAddress());
+        restaurantUser.setAddress(savedAddress);
         return createUserUseCase.execute(restaurantUser);
     }
 

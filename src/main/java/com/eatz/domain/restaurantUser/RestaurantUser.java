@@ -1,5 +1,6 @@
 package com.eatz.domain.restaurantUser;
 
+import com.eatz.domain.address.Address;
 import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import com.eatz.shared.domain.User;
 
@@ -11,6 +12,7 @@ public class RestaurantUser extends User {
     private Long restaurantId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Address address;
 
     public RestaurantUser(Long id, RestaurantRole role, String name, String email, String password, String cpf, String phone, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, String profileImageUrl, Long restaurantId) {
         this.id = id;
@@ -60,6 +62,14 @@ public class RestaurantUser extends User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
 }
