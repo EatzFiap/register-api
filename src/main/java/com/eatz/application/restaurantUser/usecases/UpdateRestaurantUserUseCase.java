@@ -17,7 +17,7 @@ public class UpdateRestaurantUserUseCase {
     public RestaurantUser execute(Long id, RestaurantUser newData) {
         if (id == null) throw new IllegalArgumentException("ID não pode ser nulo.");
         if (newData == null) throw new IllegalArgumentException("Dados para atualização não podem ser nulos.");
-        RestaurantUser user = restaurantUserRepository.findById(id)
+        RestaurantUser user = restaurantUserRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new RestaurantNotFoundException("Usuário não encontrado para atualização."));
 
         if (newData.getName() != null) user.setName(newData.getName());

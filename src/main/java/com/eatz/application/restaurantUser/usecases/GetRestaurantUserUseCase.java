@@ -21,7 +21,7 @@ public class GetRestaurantUserUseCase {
         if (id == null)
             throw new IllegalArgumentException("ID não pode ser nulo.");
 
-        return restaurantUserRepository.findById(id)
+        return restaurantUserRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new RestaurantNotFoundException("Usuário não encontrado com id: " + id));
     }
 

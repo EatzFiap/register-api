@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RestaurantUserRepository extends UserRepository<RestaurantUser> {
-    Optional<RestaurantUser> findById(Long id);
     Optional<RestaurantUser> findByEmail(String email);
     void delete(RestaurantUser user);
     boolean existsByEmailAndIsDeletedFalse(String email);

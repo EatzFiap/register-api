@@ -15,7 +15,7 @@ public class DeleteRestaurantUserUseCase {
 
     public void execute(Long id) {
         if (id == null) throw new IllegalArgumentException("ID não pode ser nulo.");
-        RestaurantUser user = restaurantUserRepository.findById(id)
+        RestaurantUser user = restaurantUserRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new RestaurantNotFoundException("Usuário não encontrado para exclusão."));
         user.setDeleted(true);
         restaurantUserRepository.save(user);

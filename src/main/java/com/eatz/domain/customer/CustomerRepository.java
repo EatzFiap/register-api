@@ -7,7 +7,6 @@ import java.util.Optional;
 
 
 public interface CustomerRepository extends UserRepository<Customer> {
-    Optional<Customer> findByIdAndIsDeletedFalse(Long id);
     Optional<Customer> findByEmailAndIsDeletedTrue(String email);
     List<Customer> findAll();
 }
