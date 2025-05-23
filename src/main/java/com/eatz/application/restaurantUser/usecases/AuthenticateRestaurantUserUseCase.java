@@ -6,8 +6,10 @@ import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.shared.auth.AuthenticateUserUseCase;
 import com.eatz.shared.dto.AuthenticationResponse;
 import com.eatz.shared.dto.LoginRequest;
+import com.eatz.shared.exceptions.InvalidCredentialsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 
 public class AuthenticateRestaurantUserUseCase extends AuthenticateUserUseCase {
 
@@ -29,7 +31,11 @@ public class AuthenticateRestaurantUserUseCase extends AuthenticateUserUseCase {
         if (!restaurantRepository.existsByEmailAndIsDeletedFalse(loginRequest.email()))
             throw new EntityNotFoundException("User not found");
 
-        authenticate(loginRequest.email(), loginRequest.password());
+        try {
+            authenticate(loginRequest.email(), loginRequest.password());
+        } catch (BadCredentialsException e) {
+            throw new InvalidCredentialsException();
+        }
 
         String role = restaurantRepository.findRoleByEmailAndIsDeletedFalse(loginRequest.email())
                 .orElseThrow(() -> new EntityNotFoundException("User role not found"));

@@ -60,6 +60,7 @@ public class CustomerMapper {
         if (addresses != null) {
             addressesResponses = addresses.stream()
                     .map(address -> new AddressResponse(
+                            address.getId(),
                             address.getStreet(),
                             address.getCity(),
                             address.getState(),

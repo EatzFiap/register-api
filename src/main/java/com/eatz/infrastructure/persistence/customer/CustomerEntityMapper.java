@@ -17,6 +17,7 @@ public class CustomerEntityMapper {
                 .map(customerAddress -> {
                     AddressEntity address = customerAddress.getAddress();
                     return new Address(
+                            address.getId(),
                             address.getStreet(),
                             address.getNumber(),
                             address.getComplement(),

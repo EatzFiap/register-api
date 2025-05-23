@@ -1,21 +1,24 @@
 package com.eatz.presentation.web.address.dto;
 
 public class AddressResponse {
+    private Long id;
     private String street;
     private String city;
     private String state;
     private String zipCode;
 
-
     public AddressResponse() {
     }
-    public AddressResponse(String street, String city, String state, String zipCode) {
+
+    public AddressResponse(Long id, String street, String city, String state, String zipCode) {
+        this.id = id;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
     }
 
+    public Long getId() { return id; }
     public String getStreet() {
         return street;
     }
