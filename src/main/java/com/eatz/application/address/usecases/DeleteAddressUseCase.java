@@ -3,11 +3,11 @@ package com.eatz.application.address.usecases;
 import com.eatz.domain.address.Address;
 import com.eatz.domain.address.AddressRepository;
 
-public class CreateAddressUseCase {
+public class DeleteAddressUseCase {
 
     private final AddressRepository addressRepository;
 
-    public CreateAddressUseCase(AddressRepository addressRepository) {
+    public DeleteAddressUseCase(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
 
@@ -15,6 +15,7 @@ public class CreateAddressUseCase {
         if (address == null)
             throw new IllegalArgumentException("Endereço não pode ser nulo.");
 
+        address.setDeleted(true);
         return addressRepository.save(address);
     }
 }

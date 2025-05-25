@@ -1,15 +1,22 @@
 package com.eatz.presentation.web.restaurantUser.dto;
 
 import com.eatz.domain.address.Address;
+import jakarta.validation.constraints.NotBlank;
 
 public class RestaurantUserRequest {
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String email;
+
+    @NotBlank
+    private String role; // Deve ser uma das opções do enum: ADMIN, MANAGER, EMPLOYEE
+
     private String password;
     private String cpf;
     private String phone;
     private String profileImageUrl;
-    private String role; // Deve ser uma das opções do enum: ADMIN, MANAGER, EMPLOYEE
     private Long restaurantId; // FK para TB_RESTAURANT
     private Address address;
 

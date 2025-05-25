@@ -4,6 +4,7 @@ import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
 
+import java.time.LocalDateTime;
 
 
 public class UpdateRestaurantUserUseCase {
@@ -23,6 +24,10 @@ public class UpdateRestaurantUserUseCase {
         if (newData.getName() != null) user.setName(newData.getName());
         if (newData.getEmail() != null) user.setEmail(newData.getEmail());
         if (newData.getPhone() != null) user.setPhone(newData.getPhone());
+        if (newData.getCpf() != null) user.setCpf(newData.getCpf());
+        if (newData.getProfileImageUrl() != null) user.setProfileImageUrl(newData.getProfileImageUrl());
+        if (newData.getAddress() != null) user.setAddress(newData.getAddress());
+        user.setUpdatedAt(LocalDateTime.now());
 
         return restaurantUserRepository.save(user);
     }

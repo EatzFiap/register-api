@@ -40,7 +40,7 @@ public class RestaurantUserEntity {
     @Column(name = "fk_address", insertable=false, updatable=false)
     private Long addressId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_address")
     private AddressEntity address;
 

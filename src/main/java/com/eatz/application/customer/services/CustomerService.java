@@ -1,14 +1,18 @@
 package com.eatz.application.customer.services;
 
-import com.eatz.application.address.usecases.CreateAddressUseCase;
+import com.eatz.application.address.usecases.DeleteAddressUseCase;
+import com.eatz.application.address.usecases.SaveAddressUseCase;
 import com.eatz.application.customer.usecases.*;
 import com.eatz.application.customerAddresses.usecases.AssociateAddressToCustomerUseCase;
 import com.eatz.domain.address.Address;
 import com.eatz.domain.customer.Customer;
 import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.shared.dto.PasswordUpdateRequest;
+import com.eatz.shared.exceptions.AddressNotFoundException;
 import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -17,9 +21,10 @@ public class CustomerService {
     private final DeleteCustomerUseCase deleteCustomerUseCase;
     private final UpdateCustomerUseCase updateCustomerUseCase;
     private final GetCustomerUseCase getCustomerUseCase;
-    private final CreateAddressUseCase createAddressUseCase;
+    private final SaveAddressUseCase saveAddressUseCase;
     private final AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase;
     private final UpdateUserPasswordUseCase<Customer> updatePasswordUseCase;
+    private final DeleteAddressUseCase deleteAddressUseCase;
     private final JwtUtil jwtUtil;
 
     public CustomerService(
@@ -27,18 +32,20 @@ public class CustomerService {
             DeleteCustomerUseCase deleteCustomerUseCase,
             UpdateCustomerUseCase updateCustomerUseCase,
             GetCustomerUseCase getCustomerUseCase,
-            CreateAddressUseCase createAddressUseCase,
+            SaveAddressUseCase saveAddressUseCase,
             AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase,
             UpdateUserPasswordUseCase<Customer> updatePasswordUseCase,
+            DeleteAddressUseCase deleteAddressUseCase,
             JwtUtil jwtUtil
     ) {
         this.createCustomerUseCase = createCustomerUseCase;
         this.deleteCustomerUseCase = deleteCustomerUseCase;
         this.updateCustomerUseCase = updateCustomerUseCase;
         this.getCustomerUseCase = getCustomerUseCase;
-        this.createAddressUseCase = createAddressUseCase;
+        this.saveAddressUseCase = saveAddressUseCase;
         this.associateAddressToCustomerUseCase = associateAddressToCustomerUseCase;
         this.updatePasswordUseCase = updatePasswordUseCase;
+        this.deleteAddressUseCase = deleteAddressUseCase;
         this.jwtUtil = jwtUtil;
     }
 
@@ -47,7 +54,7 @@ public class CustomerService {
 
         if (customer.getAddresses() != null) {
             for (Address address : customer.getAddresses()) {
-                Address savedAddress = createAddressUseCase.execute(address);
+                Address savedAddress = saveAddressUseCase.execute(address);
                 associateAddressToCustomerUseCase.execute(createdCustomer.getId(), savedAddress.getId(), savedAddress);
             }
         }
@@ -63,7 +70,7 @@ public class CustomerService {
         Customer updatedCustomer = updateCustomerUseCase.execute(customerId, newData);
         if (newData.getAddresses() != null) {
             for (Address address : newData.getAddresses()) {
-                Address savedAddress = createAddressUseCase.execute(address);
+                Address savedAddress = saveAddressUseCase.execute(address);
                 associateAddressToCustomerUseCase.execute(updatedCustomer.getId(), savedAddress.getId(), savedAddress);
             }
         }
@@ -86,4 +93,21 @@ public class CustomerService {
         String email = jwtUtil.extractUsername(token);
         return getCustomerUseCase.execute(email);
     }
+
+    public void deleteAddress(Long customerId, Long addressId) {
+        Customer customer = getCustomerUseCase.execute(customerId);
+
+        Optional<Address> addressOptional = customer.getAddresses().stream()
+                .filter(addr -> addr.getId().equals(addressId))
+                .findFirst();
+
+        if (addressOptional.isPresent()) {
+            Address address = addressOptional.get();
+            deleteAddressUseCase.execute(address);
+        } else {
+            throw new AddressNotFoundException();
+        }
+
+    }
+
 }

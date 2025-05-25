@@ -1,6 +1,6 @@
 package com.eatz.application.restaurantUser.services;
 
-import com.eatz.application.address.usecases.CreateAddressUseCase;
+import com.eatz.application.address.usecases.SaveAddressUseCase;
 import com.eatz.application.restaurantUser.usecases.AuthenticateRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.CreateRestaurantUserUseCase;
 import com.eatz.application.restaurantUser.usecases.UpdateRestaurantUserUseCase;
@@ -24,7 +24,7 @@ public class RestaurantUserService {
     private final GetRestaurantUserUseCase getUserUseCase;
     private final UpdateUserPasswordUseCase<RestaurantUser> updatePasswordUseCase;
     private final AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase;
-    private final CreateAddressUseCase createAddressUseCase;
+    private final SaveAddressUseCase saveAddressUseCase;
     private final JwtUtil jwtUtil;
 
     public RestaurantUserService(
@@ -34,7 +34,7 @@ public class RestaurantUserService {
             GetRestaurantUserUseCase getUserUseCase,
             UpdateUserPasswordUseCase<RestaurantUser> updatePasswordUseCase,
             AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase,
-            CreateAddressUseCase createAddressUseCase,
+            SaveAddressUseCase saveAddressUseCase,
             JwtUtil jwtUtil
     ) {
         this.createUserUseCase = createUserUseCase;
@@ -43,12 +43,12 @@ public class RestaurantUserService {
         this.getUserUseCase = getUserUseCase;
         this.updatePasswordUseCase = updatePasswordUseCase;
         this.authenticateRestaurantUserUseCase = authenticateRestaurantUserUseCase;
-        this.createAddressUseCase = createAddressUseCase;
+        this.saveAddressUseCase = saveAddressUseCase;
         this.jwtUtil = jwtUtil;
     }
 
     public RestaurantUser createUser(RestaurantUser restaurantUser) {
-        Address savedAddress = createAddressUseCase.execute(restaurantUser.getAddress());
+        Address savedAddress = saveAddressUseCase.execute(restaurantUser.getAddress());
         restaurantUser.setAddress(savedAddress);
         return createUserUseCase.execute(restaurantUser);
     }
@@ -58,6 +58,17 @@ public class RestaurantUserService {
     }
 
     public RestaurantUser updateUser(Long id, RestaurantUser newData) {
+        RestaurantUser existingUser = getUserUseCase.execute(id);
+        Address newAddress = newData.getAddress();
+
+        if (newAddress != null) {
+            if (existingUser.getAddress() != null) {
+                newAddress.setId(existingUser.getAddress().getId());
+            }
+            Address savedAddress = saveAddressUseCase.execute(newData.getAddress());
+            newData.setAddress(savedAddress);
+        }
+
         return updateUserUseCase.execute(id, newData);
     }
 
@@ -73,6 +84,11 @@ public class RestaurantUserService {
         String email = jwtUtil.extractUsername(token);
         RestaurantUser user = getUserUseCase.execute(email);
         updatePasswordUseCase.execute(user, request.getOldPassword(), request.getNewPassword());
+    }
+
+    public RestaurantUser getUserByUsername(String token) {
+        String email = jwtUtil.extractUsername(token);
+        return getUserUseCase.execute(email);
     }
 
 }

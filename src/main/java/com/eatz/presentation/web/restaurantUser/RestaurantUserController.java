@@ -2,12 +2,12 @@ package com.eatz.presentation.web.restaurantUser;
 
 import com.eatz.application.restaurantUser.services.RestaurantUserService;
 import com.eatz.domain.restaurantUser.RestaurantUser;
-import com.eatz.shared.dto.AuthenticationResponse;
-import com.eatz.shared.dto.LoginRequest;
-import com.eatz.shared.dto.PasswordUpdateRequest;
 import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserRequest;
 import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserResponse;
 import com.eatz.presentation.web.restaurantUser.mapper.RestaurantUserMapper;
+import com.eatz.shared.dto.AuthenticationResponse;
+import com.eatz.shared.dto.LoginRequest;
+import com.eatz.shared.dto.PasswordUpdateRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +27,16 @@ public class RestaurantUserController {
     ) {
         this.restaurantUserService = restaurantUserService;
         this.mapper = mapper;
+    }
+
+    @GetMapping
+    public ResponseEntity<RestaurantUserResponse> findByUsername(
+            @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        RestaurantUser user = restaurantUserService.getUserByUsername(token);
+        RestaurantUserResponse response = mapper.toResponse(user);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")

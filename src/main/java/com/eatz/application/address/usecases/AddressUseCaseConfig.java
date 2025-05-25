@@ -8,7 +8,13 @@ import org.springframework.context.annotation.Configuration;
 public class AddressUseCaseConfig {
 
     @Bean
-    public CreateAddressUseCase createAddressUseCase(AddressRepository addressRepository) {
-        return new CreateAddressUseCase(addressRepository);
+    public SaveAddressUseCase saveAddressUseCase(AddressRepository addressRepository) {
+        return new SaveAddressUseCase(addressRepository);
     }
+
+    @Bean
+    public DeleteAddressUseCase deleteAddressUseCase(AddressRepository addressRepository) {
+        return new DeleteAddressUseCase(addressRepository);
+    }
+
 }

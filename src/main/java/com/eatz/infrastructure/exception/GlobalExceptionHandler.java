@@ -2,6 +2,7 @@ package com.eatz.infrastructure.exception;
 
 import com.eatz.domain.customer.exceptions.CustomerAlreadyExistsException;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
+import com.eatz.shared.exceptions.AddressNotFoundException;
 import com.eatz.shared.exceptions.InvalidCredentialsException;
 import com.eatz.shared.exceptions.InvalidPasswordException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
@@ -102,6 +103,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleIncorrectCredentials(InvalidCredentialsException ex) {
         log.warn("Error while trying to authenticate: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(AddressNotFoundException.class)
+    public ResponseEntity<Object> handleAddressNotFound(AddressNotFoundException ex, HttpServletRequest request) {
+        log.warn(ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null, request.getRequestURI());
     }
 
     private ResponseEntity<Object> buildResponse(HttpStatus status, String message, Object details, String path) {

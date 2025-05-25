@@ -1,6 +1,6 @@
 package com.eatz.application.customer.services;
 
-import com.eatz.application.address.usecases.CreateAddressUseCase;
+import com.eatz.application.address.usecases.SaveAddressUseCase;
 import com.eatz.application.customer.usecases.CreateCustomerUseCase;
 import com.eatz.application.customerAddresses.usecases.AssociateAddressToCustomerUseCase;
 import com.eatz.domain.address.Address;
@@ -26,7 +26,7 @@ class CustomerServiceTest {
     private CreateCustomerUseCase createCustomerUseCase;
 
     @Mock
-    private CreateAddressUseCase createAddressUseCase;
+    private SaveAddressUseCase saveAddressUseCase;
 
     @Mock
     private AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase;
@@ -52,7 +52,7 @@ class CustomerServiceTest {
 
             assertEquals(createdCustomer, result);
             verify(createCustomerUseCase).execute(customer);
-            verifyNoInteractions(createAddressUseCase, associateAddressToCustomerUseCase);
+            verifyNoInteractions(saveAddressUseCase, associateAddressToCustomerUseCase);
         }
 
         @Test
@@ -71,15 +71,15 @@ class CustomerServiceTest {
             savedAddress2.setId(20L);
 
             when(createCustomerUseCase.execute(customer)).thenReturn(createdCustomer);
-            when(createAddressUseCase.execute(address1)).thenReturn(savedAddress1);
-            when(createAddressUseCase.execute(address2)).thenReturn(savedAddress2);
+            when(saveAddressUseCase.execute(address1)).thenReturn(savedAddress1);
+            when(saveAddressUseCase.execute(address2)).thenReturn(savedAddress2);
 
             Customer result = customerService.createCustomer(customer);
 
             assertEquals(createdCustomer, result);
             verify(createCustomerUseCase).execute(customer);
-            verify(createAddressUseCase).execute(address1);
-            verify(createAddressUseCase).execute(address2);
+            verify(saveAddressUseCase).execute(address1);
+            verify(saveAddressUseCase).execute(address2);
             verify(associateAddressToCustomerUseCase).execute(createdCustomer.getId(), savedAddress1.getId(), savedAddress1);
             verify(associateAddressToCustomerUseCase).execute(createdCustomer.getId(), savedAddress2.getId(), savedAddress2);
         }
@@ -98,7 +98,7 @@ class CustomerServiceTest {
 
             assertEquals(createdCustomer, result);
             verify(createCustomerUseCase).execute(customer);
-            verifyNoInteractions(createAddressUseCase, associateAddressToCustomerUseCase);
+            verifyNoInteractions(saveAddressUseCase, associateAddressToCustomerUseCase);
         }
         
     }
