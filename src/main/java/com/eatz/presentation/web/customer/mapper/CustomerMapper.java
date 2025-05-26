@@ -1,8 +1,10 @@
 package com.eatz.presentation.web.customer.mapper;
 
 import com.eatz.domain.address.Address;
+import com.eatz.domain.address.CustomerAddress;
 import com.eatz.presentation.web.address.dto.AddressResponse;
 import com.eatz.domain.customer.Customer;
+import com.eatz.presentation.web.address.dto.CustomerAddressResponse;
 import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
 import com.eatz.presentation.web.customer.dto.CustomerResponse;
 import com.eatz.presentation.web.customer.dto.UpdateCustomerRequest;
@@ -20,7 +22,7 @@ public class CustomerMapper {
         customer.setPhone(dto.getPhone());
         customer.setPassword(dto.getPassword());
 
-        Address address = new Address(
+        CustomerAddress address = new CustomerAddress(
                 null,
                 dto.getAddress().getStreet(),
                 dto.getAddress().getNumber(),
@@ -28,7 +30,9 @@ public class CustomerMapper {
                 dto.getAddress().getCity(),
                 dto.getAddress().getNeighbourhood(),
                 dto.getAddress().getState(),
-                dto.getAddress().getZipCode()
+                dto.getAddress().getZipCode(),
+                dto.getAddress().getNickname(),
+                dto.getAddress().isDefault()
         );
 
         customer.setAddresses(Collections.singletonList(address));
@@ -48,12 +52,12 @@ public class CustomerMapper {
     }
 
     public CustomerResponse toResponse(Customer customer) {
-        List<Address> addresses = customer.getAddresses() != null && !customer.getAddresses().isEmpty() ? customer.getAddresses() : null;
+        List<CustomerAddress> addresses = customer.getAddresses() != null && !customer.getAddresses().isEmpty() ? customer.getAddresses() : null;
 
-        List<AddressResponse> addressesResponses;
+        List<CustomerAddressResponse> addressesResponses;
         if (addresses != null) {
             addressesResponses = addresses.stream()
-                    .map(address -> new AddressResponse(
+                    .map(address -> new CustomerAddressResponse(
                             address.getId(),
                             address.getStreet(),
                             address.getNumber(),
@@ -61,7 +65,9 @@ public class CustomerMapper {
                             address.getNeighbourhood(),
                             address.getCity(),
                             address.getState(),
-                            address.getZipCode()
+                            address.getZipCode(),
+                            address.getNickname(),
+                            address.isDefault()
                     ))
                     .toList();
         } else {

@@ -8,6 +8,7 @@ import com.eatz.application.customer.usecases.GetCustomerUseCase;
 import com.eatz.application.customer.usecases.UpdateCustomerUseCase;
 import com.eatz.application.customerAddresses.usecases.AssociateAddressToCustomerUseCase;
 import com.eatz.domain.address.Address;
+import com.eatz.domain.address.CustomerAddress;
 import com.eatz.domain.customer.Customer;
 import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.presentation.web.address.dto.AddressRequest;
@@ -18,6 +19,7 @@ import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,11 +62,11 @@ public class CustomerService {
 
     public Customer createCustomer(Customer customer, AddressRequest addressRequest) {
         Customer createdCustomer = createCustomerUseCase.execute(customer);
-
+        Address savedAddress = null;
         if (customer.getAddresses() != null && addressRequest != null) {
             for (Address address : customer.getAddresses()) {
                 address.setCreatedAt(LocalDateTime.now().toString());
-                Address savedAddress = saveAddressUseCase.execute(address);
+                 savedAddress = saveAddressUseCase.execute(address);
                 associateAddressToCustomerUseCase.execute(
                         createdCustomer.getId(),
                         savedAddress,
@@ -74,6 +76,7 @@ public class CustomerService {
             }
         }
 
+        createdCustomer.setAddresses(savedAddress != null ? List.of(new CustomerAddress(savedAddress, addressRequest)) : null);
         return createdCustomer;
     }
 
@@ -111,7 +114,7 @@ public class CustomerService {
     public void deleteAddress(Long customerId, Long addressId) {
         Customer customer = getCustomerUseCase.execute(customerId);
 
-        Optional<Address> addressOptional = customer.getAddresses().stream()
+        Optional<CustomerAddress> addressOptional = customer.getAddresses().stream()
                 .filter(addr -> addr.getId().equals(addressId))
                 .findFirst();
 

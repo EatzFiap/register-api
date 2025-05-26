@@ -1,7 +1,7 @@
 package com.eatz.presentation.web.customer.dto;
 
 import com.eatz.domain.customer.Customer;
-import com.eatz.presentation.web.address.dto.AddressResponse;
+import com.eatz.presentation.web.address.dto.CustomerAddressResponse;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ public class CustomerResponse {
     private String profileImageUrl;
     private String createdAt;
     private String updatedAt;
-    private List<AddressResponse> addresses;
+    private List<CustomerAddressResponse> addresses;
 
     public CustomerResponse(
             Customer customer,
-            List<AddressResponse> addresses
+            List<CustomerAddressResponse> addresses
     ) {
         this.id = customer.getId();
         this.name = customer.getName();
@@ -56,11 +56,11 @@ public class CustomerResponse {
         this.email = email;
     }
 
-    public List<AddressResponse> getAddresses() {
+    public List<CustomerAddressResponse> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<AddressResponse> addresses) {
+    public void setAddresses(List<CustomerAddressResponse> addresses) {
         this.addresses = addresses;
     }
 

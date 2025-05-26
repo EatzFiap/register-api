@@ -1,6 +1,7 @@
 package com.eatz.domain.customer;
 
 import com.eatz.domain.address.Address;
+import com.eatz.domain.address.CustomerAddress;
 import com.eatz.infrastructure.persistence.customer.CustomerEntity;
 import com.eatz.shared.domain.User;
 
@@ -8,11 +9,11 @@ import java.util.List;
 
 public class Customer extends User {
 
-    private List<Address> addresses;
+    private List<CustomerAddress> addresses;
     private String createdAt;
     private String updatedAt;
 
-    public Customer(CustomerEntity entity, List<Address> addresses) {
+    public Customer(CustomerEntity entity, List<CustomerAddress> addresses) {
         this.id = entity.getId();
         this.name = entity.getName();
         this.email = entity.getEmail();
@@ -29,11 +30,11 @@ public class Customer extends User {
     public Customer() {
     }
 
-    public List<Address> getAddresses() {
+    public List<CustomerAddress> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(List<CustomerAddress> addresses) {
         this.addresses = addresses;
     }
 
