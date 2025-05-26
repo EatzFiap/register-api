@@ -1,10 +1,18 @@
 package com.eatz.presentation.web.address.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class AddressRequest {
+    @NotBlank
     private String street;
+    @NotBlank
     private String city;
+    @NotBlank
     private String state;
+    @NotBlank
     private String zipCode;
+    private String nickname;
+    private boolean isDefault;
 
     public String getStreet() {
         return street;
@@ -27,8 +35,9 @@ public class AddressRequest {
     public String getZipCode() {
         return zipCode;
     }
-
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+    public String getNickname() { return nickname; }
+    public boolean isDefault() { return isDefault; }
 }

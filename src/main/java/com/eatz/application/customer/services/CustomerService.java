@@ -2,11 +2,16 @@ package com.eatz.application.customer.services;
 
 import com.eatz.application.address.usecases.DeleteAddressUseCase;
 import com.eatz.application.address.usecases.SaveAddressUseCase;
-import com.eatz.application.customer.usecases.*;
+import com.eatz.application.customer.usecases.CreateCustomerUseCase;
+import com.eatz.application.customer.usecases.DeleteCustomerUseCase;
+import com.eatz.application.customer.usecases.GetCustomerUseCase;
+import com.eatz.application.customer.usecases.UpdateCustomerUseCase;
 import com.eatz.application.customerAddresses.usecases.AssociateAddressToCustomerUseCase;
 import com.eatz.domain.address.Address;
 import com.eatz.domain.customer.Customer;
 import com.eatz.infrastructure.security.JwtUtil;
+import com.eatz.presentation.web.address.dto.AddressRequest;
+import com.eatz.presentation.web.address.mapper.AddressMapper;
 import com.eatz.shared.dto.PasswordUpdateRequest;
 import com.eatz.shared.exceptions.AddressNotFoundException;
 import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
@@ -26,6 +31,7 @@ public class CustomerService {
     private final UpdateUserPasswordUseCase<Customer> updatePasswordUseCase;
     private final DeleteAddressUseCase deleteAddressUseCase;
     private final JwtUtil jwtUtil;
+    private final AddressMapper addressMapper;
 
     public CustomerService(
             CreateCustomerUseCase createCustomerUseCase,
@@ -36,7 +42,8 @@ public class CustomerService {
             AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase,
             UpdateUserPasswordUseCase<Customer> updatePasswordUseCase,
             DeleteAddressUseCase deleteAddressUseCase,
-            JwtUtil jwtUtil
+            JwtUtil jwtUtil,
+            AddressMapper addressMapper
     ) {
         this.createCustomerUseCase = createCustomerUseCase;
         this.deleteCustomerUseCase = deleteCustomerUseCase;
@@ -47,15 +54,21 @@ public class CustomerService {
         this.updatePasswordUseCase = updatePasswordUseCase;
         this.deleteAddressUseCase = deleteAddressUseCase;
         this.jwtUtil = jwtUtil;
+        this.addressMapper = addressMapper;
     }
 
-    public Customer createCustomer(Customer customer) {
+    public Customer createCustomer(Customer customer, AddressRequest addressRequest) {
         Customer createdCustomer = createCustomerUseCase.execute(customer);
 
-        if (customer.getAddresses() != null) {
+        if (customer.getAddresses() != null && addressRequest != null) {
             for (Address address : customer.getAddresses()) {
                 Address savedAddress = saveAddressUseCase.execute(address);
-                associateAddressToCustomerUseCase.execute(createdCustomer.getId(), savedAddress.getId(), savedAddress);
+                associateAddressToCustomerUseCase.execute(
+                        createdCustomer.getId(),
+                        savedAddress,
+                        addressRequest.getNickname(),
+                        addressRequest.isDefault()
+                );
             }
         }
 
@@ -67,14 +80,7 @@ public class CustomerService {
     }
 
     public Customer updateCustomer(Long customerId, Customer newData) {
-        Customer updatedCustomer = updateCustomerUseCase.execute(customerId, newData);
-        if (newData.getAddresses() != null) {
-            for (Address address : newData.getAddresses()) {
-                Address savedAddress = saveAddressUseCase.execute(address);
-                associateAddressToCustomerUseCase.execute(updatedCustomer.getId(), savedAddress.getId(), savedAddress);
-            }
-        }
-        return updatedCustomer;
+        return updateCustomerUseCase.execute(customerId, newData);
     }
 
     public void deleteCustomer(Long customerId) {
@@ -92,6 +98,12 @@ public class CustomerService {
     public Customer getCustomerByUsername(String token) {
         String email = jwtUtil.extractUsername(token);
         return getCustomerUseCase.execute(email);
+    }
+
+    public void addAddress(Long id, AddressRequest req) {
+        Customer customer = getCustomerUseCase.execute(id);
+        Address savedAddress = saveAddressUseCase.execute(addressMapper.toDomain(req));
+        associateAddressToCustomerUseCase.execute(customer.getId(), savedAddress, req.getNickname(), req.isDefault());
     }
 
     public void deleteAddress(Long customerId, Long addressId) {

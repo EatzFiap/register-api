@@ -3,6 +3,7 @@ package com.eatz.presentation.web.customer;
 import com.eatz.application.customer.services.CustomerService;
 import com.eatz.application.customer.usecases.AuthenticateCustomerUseCase;
 import com.eatz.domain.customer.Customer;
+import com.eatz.presentation.web.address.dto.AddressRequest;
 import com.eatz.presentation.web.customer.dto.*;
 import com.eatz.presentation.web.customer.mapper.CustomerMapper;
 import com.eatz.shared.dto.AuthenticationResponse;
@@ -50,11 +51,21 @@ public class CustomerController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<CustomerResponse> create(@RequestBody @Valid CustomerRequest request) {
+    public ResponseEntity<CustomerResponse> create(@RequestBody @Valid NewCustomerRequest request) {
+        AddressRequest addressRequest = request.getAddress();
         Customer customerRequest = mapper.toDomain(request);
-        Customer created = customerService.createCustomer(customerRequest);
+        Customer created = customerService.createCustomer(customerRequest, addressRequest);
         CustomerResponse response = mapper.toResponse(created);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{id}/address")
+    public ResponseEntity<Void> addAddress(
+            @PathVariable Long id,
+            @RequestBody @Valid AddressRequest addressRequest
+    ) {
+        customerService.addAddress(id, addressRequest);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/login")

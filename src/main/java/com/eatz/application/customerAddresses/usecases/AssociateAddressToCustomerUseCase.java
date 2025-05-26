@@ -12,20 +12,23 @@ public class AssociateAddressToCustomerUseCase {
         this.customerAddressRepository = customerAddressRepository;
     }
 
-    public CustomerAddress execute(Long customerId, Long addressId, Address address) {
+    public CustomerAddress execute(
+            Long customerId,
+            Address address,
+            String nickname,
+            boolean isDefault
+    ) {
         if(customerId == null)
             throw new IllegalArgumentException("ID do cliente não pode ser nulo.");
 
-        if(addressId == null)
+        if(address.getId() == null)
             throw new IllegalArgumentException("ID do endereço não pode ser nulo.");
-
-        if(address == null)
-            throw new IllegalArgumentException("Endereço não pode ser nulo.");
 
         CustomerAddress customerAddress = new CustomerAddress();
         customerAddress.setCustomerId(customerId);
-        customerAddress.setAddressId(addressId);
-        customerAddress.setDefault(false);
+        customerAddress.setAddressId(address.getId());
+        customerAddress.setNickname(nickname);
+        customerAddress.setDefault(isDefault);
 
         return customerAddressRepository.save(customerAddress);
     }

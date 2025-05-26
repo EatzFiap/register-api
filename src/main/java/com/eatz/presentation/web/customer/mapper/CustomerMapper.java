@@ -3,7 +3,7 @@ package com.eatz.presentation.web.customer.mapper;
 import com.eatz.domain.address.Address;
 import com.eatz.presentation.web.address.dto.AddressResponse;
 import com.eatz.domain.customer.Customer;
-import com.eatz.presentation.web.customer.dto.CustomerRequest;
+import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
 import com.eatz.presentation.web.customer.dto.CustomerResponse;
 import com.eatz.presentation.web.customer.dto.UpdateCustomerRequest;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 public class CustomerMapper {
-    public Customer toDomain(CustomerRequest dto) {
+    public Customer toDomain(NewCustomerRequest dto) {
         Customer customer = new Customer();
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
@@ -38,17 +38,7 @@ public class CustomerMapper {
         customer.setEmail(dto.getEmail());
         customer.setPhone(dto.getPhone());
         customer.setCpf(dto.getCpf());
-
-        if (dto.getAddress() != null) {
-            Address address = new Address(
-                    dto.getAddress().getStreet(),
-                    dto.getAddress().getCity(),
-                    dto.getAddress().getState(),
-                    dto.getAddress().getZipCode()
-            );
-
-            customer.setAddresses(Collections.singletonList(address));
-        }
+        customer.setProfileImageUrl(dto.getProfileImageUrl());
 
         return customer;
     }

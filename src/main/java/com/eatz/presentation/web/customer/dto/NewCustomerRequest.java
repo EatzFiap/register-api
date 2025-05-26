@@ -4,7 +4,7 @@ package com.eatz.presentation.web.customer.dto;
 import com.eatz.presentation.web.address.dto.AddressRequest;
 import jakarta.validation.constraints.NotNull;
 
-public class CustomerRequest {
+public class NewCustomerRequest {
     @NotNull
     private String name;
     @NotNull
@@ -13,6 +13,7 @@ public class CustomerRequest {
     private String password;
     private String phone;
     private String cpf;
+    private String profileImageUrl;
     private AddressRequest address;
 
     public String getName() {
@@ -41,4 +42,5 @@ public class CustomerRequest {
         this.address = address;
     }
     public String getCpf() { return cpf; }
+    public String getProfileImageUrl() { return profileImageUrl; }
 }
