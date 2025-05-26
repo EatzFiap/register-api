@@ -1,8 +1,6 @@
 package com.eatz.presentation.web.customer.mapper;
 
-import com.eatz.domain.address.Address;
-import com.eatz.domain.address.CustomerAddress;
-import com.eatz.presentation.web.address.dto.AddressResponse;
+import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customer.Customer;
 import com.eatz.presentation.web.address.dto.CustomerAddressResponse;
 import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
@@ -22,7 +20,7 @@ public class CustomerMapper {
         customer.setPhone(dto.getPhone());
         customer.setPassword(dto.getPassword());
 
-        CustomerAddress address = new CustomerAddress(
+        CustomerAddressDetails address = new CustomerAddressDetails(
                 null,
                 dto.getAddress().getStreet(),
                 dto.getAddress().getNumber(),
@@ -32,7 +30,7 @@ public class CustomerMapper {
                 dto.getAddress().getState(),
                 dto.getAddress().getZipCode(),
                 dto.getAddress().getNickname(),
-                dto.getAddress().isDefault()
+                dto.getAddress().isDefaultAddress()
         );
 
         customer.setAddresses(Collections.singletonList(address));
@@ -52,7 +50,7 @@ public class CustomerMapper {
     }
 
     public CustomerResponse toResponse(Customer customer) {
-        List<CustomerAddress> addresses = customer.getAddresses() != null && !customer.getAddresses().isEmpty() ? customer.getAddresses() : null;
+        List<CustomerAddressDetails> addresses = customer.getAddresses() != null && !customer.getAddresses().isEmpty() ? customer.getAddresses() : null;
 
         List<CustomerAddressResponse> addressesResponses;
         if (addresses != null) {

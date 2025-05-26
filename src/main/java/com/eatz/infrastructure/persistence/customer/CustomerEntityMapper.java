@@ -1,7 +1,6 @@
 package com.eatz.infrastructure.persistence.customer;
 
-import com.eatz.domain.address.Address;
-import com.eatz.domain.address.CustomerAddress;
+import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customer.Customer;
 
 import com.eatz.infrastructure.persistence.address.AddressEntity;
@@ -13,11 +12,11 @@ import java.util.List;
 public class CustomerEntityMapper {
 
     public Customer toDomain(CustomerEntity entity) {
-        List<CustomerAddress> addresses = entity.getCustomerAddresses().stream()
+        List<CustomerAddressDetails> addresses = entity.getCustomerAddresses().stream()
                 .filter(customerAddress -> !customerAddress.isDeleted() && !customerAddress.getAddress().isDeleted())
                 .map(customerAddress -> {
                     AddressEntity address = customerAddress.getAddress();
-                    return new CustomerAddress(
+                    return new CustomerAddressDetails(
                             address.getId(),
                             address.getStreet(),
                             address.getNumber(),

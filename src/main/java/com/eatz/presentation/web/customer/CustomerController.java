@@ -84,6 +84,16 @@ public class CustomerController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("{customerId}/address/{addressId}")
+    public ResponseEntity<Void> updateAddress(
+            @PathVariable Long customerId,
+            @PathVariable Long addressId,
+            @RequestBody @Valid AddressRequest addressRequest
+    ) {
+        customerService.updateAddress(customerId, addressId, addressRequest);
+        return ResponseEntity.noContent().build();
+    }
+
     @PatchMapping("/password")
     public ResponseEntity<Void> updatePassword(
             @RequestHeader("Authorization") String authorizationHeader,

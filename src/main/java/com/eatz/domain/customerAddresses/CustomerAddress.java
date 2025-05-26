@@ -1,6 +1,7 @@
 package com.eatz.domain.customerAddresses;
 
 
+import java.time.LocalDateTime;
 
 public class CustomerAddress {
     private Long id;
@@ -9,6 +10,8 @@ public class CustomerAddress {
     private String nickname;
     private boolean isDefault;
     private boolean isDeleted;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public CustomerAddress() { }
 
@@ -67,5 +70,21 @@ public class CustomerAddress {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

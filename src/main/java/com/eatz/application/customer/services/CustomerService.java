@@ -7,8 +7,9 @@ import com.eatz.application.customer.usecases.DeleteCustomerUseCase;
 import com.eatz.application.customer.usecases.GetCustomerUseCase;
 import com.eatz.application.customer.usecases.UpdateCustomerUseCase;
 import com.eatz.application.customerAddresses.usecases.AssociateAddressToCustomerUseCase;
+import com.eatz.application.customerAddresses.usecases.UpdateCustomerAddressUseCase;
 import com.eatz.domain.address.Address;
-import com.eatz.domain.address.CustomerAddress;
+import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customer.Customer;
 import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.presentation.web.address.dto.AddressRequest;
@@ -31,6 +32,7 @@ public class CustomerService {
     private final GetCustomerUseCase getCustomerUseCase;
     private final SaveAddressUseCase saveAddressUseCase;
     private final AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase;
+    private final UpdateCustomerAddressUseCase updateCustomerAddressUseCase;
     private final UpdateUserPasswordUseCase<Customer> updatePasswordUseCase;
     private final DeleteAddressUseCase deleteAddressUseCase;
     private final JwtUtil jwtUtil;
@@ -43,6 +45,7 @@ public class CustomerService {
             GetCustomerUseCase getCustomerUseCase,
             SaveAddressUseCase saveAddressUseCase,
             AssociateAddressToCustomerUseCase associateAddressToCustomerUseCase,
+            UpdateCustomerAddressUseCase updateCustomerAddressUseCase,
             UpdateUserPasswordUseCase<Customer> updatePasswordUseCase,
             DeleteAddressUseCase deleteAddressUseCase,
             JwtUtil jwtUtil,
@@ -54,6 +57,7 @@ public class CustomerService {
         this.getCustomerUseCase = getCustomerUseCase;
         this.saveAddressUseCase = saveAddressUseCase;
         this.associateAddressToCustomerUseCase = associateAddressToCustomerUseCase;
+        this.updateCustomerAddressUseCase = updateCustomerAddressUseCase;
         this.updatePasswordUseCase = updatePasswordUseCase;
         this.deleteAddressUseCase = deleteAddressUseCase;
         this.jwtUtil = jwtUtil;
@@ -71,12 +75,12 @@ public class CustomerService {
                         createdCustomer.getId(),
                         savedAddress,
                         addressRequest.getNickname(),
-                        addressRequest.isDefault()
+                        addressRequest.isDefaultAddress()
                 );
             }
         }
 
-        createdCustomer.setAddresses(savedAddress != null ? List.of(new CustomerAddress(savedAddress, addressRequest)) : null);
+        createdCustomer.setAddresses(savedAddress != null ? List.of(new CustomerAddressDetails(savedAddress, addressRequest)) : null);
         return createdCustomer;
     }
 
@@ -93,11 +97,9 @@ public class CustomerService {
     }
 
     public void updatePassword(String token, PasswordUpdateRequest request) {
-
         String email = jwtUtil.extractUsername(token);
         Customer customer = getCustomerUseCase.execute(email);
         updatePasswordUseCase.execute(customer, request.getOldPassword(), request.getNewPassword());
-
     }
 
     public Customer getCustomerByUsername(String token) {
@@ -108,13 +110,22 @@ public class CustomerService {
     public void addAddress(Long id, AddressRequest req) {
         Customer customer = getCustomerUseCase.execute(id);
         Address savedAddress = saveAddressUseCase.execute(addressMapper.toDomain(req));
-        associateAddressToCustomerUseCase.execute(customer.getId(), savedAddress, req.getNickname(), req.isDefault());
+        associateAddressToCustomerUseCase.execute(customer.getId(), savedAddress, req.getNickname(), req.isDefaultAddress());
+    }
+
+    public void updateAddress(Long customerId, Long addressId, AddressRequest addressRequest) {
+        Customer customer = getCustomerUseCase.execute(customerId);
+        updateCustomerAddressUseCase.execute(
+                customer,
+                addressId,
+                addressRequest
+        );
     }
 
     public void deleteAddress(Long customerId, Long addressId) {
         Customer customer = getCustomerUseCase.execute(customerId);
 
-        Optional<CustomerAddress> addressOptional = customer.getAddresses().stream()
+        Optional<CustomerAddressDetails> addressOptional = customer.getAddresses().stream()
                 .filter(addr -> addr.getId().equals(addressId))
                 .findFirst();
 
