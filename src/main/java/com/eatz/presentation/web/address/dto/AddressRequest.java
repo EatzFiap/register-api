@@ -5,13 +5,25 @@ import jakarta.validation.constraints.NotBlank;
 public class AddressRequest {
     @NotBlank
     private String street;
+
+    private String number;
+
+    private String complement;
+
     @NotBlank
     private String city;
+
+    @NotBlank
+    private String neighbourhood;
+
     @NotBlank
     private String state;
+
     @NotBlank
     private String zipCode;
+
     private String nickname;
+
     private boolean isDefault;
 
     public String getStreet() {
@@ -40,4 +52,7 @@ public class AddressRequest {
     }
     public String getNickname() { return nickname; }
     public boolean isDefault() { return isDefault; }
+    public String getNumber() { return number; }
+    public String getComplement() { return complement; }
+    public @NotBlank String getNeighbourhood() { return neighbourhood; }
 }

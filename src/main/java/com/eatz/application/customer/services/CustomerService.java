@@ -17,6 +17,7 @@ import com.eatz.shared.exceptions.AddressNotFoundException;
 import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -62,6 +63,7 @@ public class CustomerService {
 
         if (customer.getAddresses() != null && addressRequest != null) {
             for (Address address : customer.getAddresses()) {
+                address.setCreatedAt(LocalDateTime.now().toString());
                 Address savedAddress = saveAddressUseCase.execute(address);
                 associateAddressToCustomerUseCase.execute(
                         createdCustomer.getId(),

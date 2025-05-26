@@ -1,5 +1,6 @@
 package com.eatz.presentation.web.customer.dto;
 
+import com.eatz.domain.customer.Customer;
 import com.eatz.presentation.web.address.dto.AddressResponse;
 
 import java.util.List;
@@ -9,23 +10,25 @@ public class CustomerResponse {
     private Long id;
     private String name;
     private String email;
+    private String phone;
+    private String cpf;
+    private String profileImageUrl;
     private String createdAt;
     private String updatedAt;
     private List<AddressResponse> addresses;
 
     public CustomerResponse(
-            Long id,
-            String name,
-            String email,
-            String createdAt,
-            String updatedAt,
+            Customer customer,
             List<AddressResponse> addresses
     ) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.id = customer.getId();
+        this.name = customer.getName();
+        this.email = customer.getEmail();
+        this.phone = customer.getPhone();
+        this.cpf = customer.getCpf();
+        this.profileImageUrl = customer.getProfileImageUrl();
+        this.createdAt = customer.getCreatedAt() != null ? customer.getCreatedAt() : null;
+        this.updatedAt = customer.getUpdatedAt() != null ? customer.getUpdatedAt() : null;
         this.addresses = addresses;
     }
 
@@ -69,4 +72,15 @@ public class CustomerResponse {
         return updatedAt;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
 }

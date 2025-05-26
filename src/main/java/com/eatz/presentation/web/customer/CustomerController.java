@@ -6,6 +6,7 @@ import com.eatz.domain.customer.Customer;
 import com.eatz.presentation.web.address.dto.AddressRequest;
 import com.eatz.presentation.web.customer.dto.*;
 import com.eatz.presentation.web.customer.mapper.CustomerMapper;
+import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserResponse;
 import com.eatz.shared.dto.AuthenticationResponse;
 import com.eatz.shared.dto.LoginRequest;
 import com.eatz.shared.dto.PasswordUpdateRequest;

@@ -21,8 +21,12 @@ public class CustomerMapper {
         customer.setPassword(dto.getPassword());
 
         Address address = new Address(
+                null,
                 dto.getAddress().getStreet(),
+                dto.getAddress().getNumber(),
+                dto.getAddress().getComplement(),
                 dto.getAddress().getCity(),
+                dto.getAddress().getNeighbourhood(),
                 dto.getAddress().getState(),
                 dto.getAddress().getZipCode()
         );
@@ -52,6 +56,9 @@ public class CustomerMapper {
                     .map(address -> new AddressResponse(
                             address.getId(),
                             address.getStreet(),
+                            address.getNumber(),
+                            address.getComplement(),
+                            address.getNeighbourhood(),
                             address.getCity(),
                             address.getState(),
                             address.getZipCode()
@@ -62,11 +69,7 @@ public class CustomerMapper {
         }
 
         return new CustomerResponse(
-                customer.getId(),
-                customer.getName(),
-                customer.getEmail(),
-                customer.getCreatedAt(),
-                customer.getUpdatedAt(),
+                customer,
                 addressesResponses
         );
     }
