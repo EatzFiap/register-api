@@ -1,9 +1,10 @@
 package com.eatz.infrastructure.persistence.customer;
 
-import com.eatz.infrastructure.persistence.address.AddressEntity;
+import com.eatz.infrastructure.persistence.customerAddress.CustomerAddressEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_customer_user")
-    private Long idCustomerUser;
+    private Long id;
 
     private String name;
     private String email;
@@ -22,10 +23,10 @@ public class CustomerEntity {
     private String phone;
 
     @Column(name = "created_at")
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
@@ -33,29 +34,15 @@ public class CustomerEntity {
     @Column(name = "profile_image_url", length = 500)
     private String profileImageUrl;
 
-    public CustomerEntity() {
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private List<CustomerAddressEntity> customerAddresses = new ArrayList<>();
+
+    public Long getId() {
+        return id;
     }
 
-    public CustomerEntity(String name, String email, String password, String cpf, String phone,
-                          String createdAt, String updatedAt, boolean isDeleted,
-                          String profileImageUrl) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public Long getIdCustomerUser() {
-        return idCustomerUser;
-    }
-
-    public void setIdCustomerUser(Long idCustomerUser) {
-        this.idCustomerUser = idCustomerUser;
+    public void setId(Long idCustomerUser) {
+        this.id = idCustomerUser;
     }
 
     public String getName() {
@@ -98,19 +85,19 @@ public class CustomerEntity {
         this.phone = phone;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -129,4 +116,9 @@ public class CustomerEntity {
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
     }
+
+    public List<CustomerAddressEntity> getCustomerAddresses() {
+        return customerAddresses;
+    }
+
 }

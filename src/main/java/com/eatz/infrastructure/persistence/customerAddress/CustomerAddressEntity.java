@@ -1,5 +1,7 @@
 package com.eatz.infrastructure.persistence.customerAddress;
 
+import com.eatz.infrastructure.persistence.address.AddressEntity;
+import com.eatz.infrastructure.persistence.customer.CustomerEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -33,19 +35,13 @@ public class CustomerAddressEntity {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    public CustomerAddressEntity(Long idCustomerAddress, Long customerId, Long addressId, String nickname, boolean isDefault, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted) {
-        this.idCustomerAddress = idCustomerAddress;
-        this.customerId = customerId;
-        this.addressId = addressId;
-        this.nickname = nickname;
-        this.isDefault = isDefault;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
-    }
+    @ManyToOne
+    @JoinColumn(name = "fk_customer", insertable = false, updatable = false)
+    private CustomerEntity customer;
 
-    public CustomerAddressEntity() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "fk_address", insertable = false, updatable = false)
+    private AddressEntity address;
 
     public Long getIdCustomerAddress() {
         return idCustomerAddress;
@@ -87,16 +83,8 @@ public class CustomerAddressEntity {
         isDefault = aDefault;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
@@ -109,5 +97,9 @@ public class CustomerAddressEntity {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public AddressEntity getAddress() {
+        return address;
     }
 }

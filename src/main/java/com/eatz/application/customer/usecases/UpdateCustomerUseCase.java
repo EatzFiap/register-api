@@ -4,6 +4,8 @@ import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.CustomerRepository;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 
+import java.time.LocalDateTime;
+
 
 public class UpdateCustomerUseCase {
 
@@ -17,13 +19,15 @@ public class UpdateCustomerUseCase {
         if (id == null) throw new IllegalArgumentException("ID não pode ser nulo.");
         if (newData == null) throw new IllegalArgumentException("Dados para atualização não podem ser nulos.");
 
-        Customer existingCustomer = customerRepository.findById(id)
+        Customer existingCustomer = customerRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado para atualização."));
 
         if (newData.getName() != null) existingCustomer.setName(newData.getName());
         if (newData.getEmail() != null) existingCustomer.setEmail(newData.getEmail());
         if (newData.getPhone() != null) existingCustomer.setPhone(newData.getPhone());
-        if (newData.getAddresses() != null) existingCustomer.setAddresses(newData.getAddresses());
+        if (newData.getCpf() != null) existingCustomer.setCpf(newData.getCpf());
+        existingCustomer.setProfileImageUrl(newData.getProfileImageUrl());
+        existingCustomer.setUpdatedAt(LocalDateTime.now());
 
         return customerRepository.save(existingCustomer);
     }

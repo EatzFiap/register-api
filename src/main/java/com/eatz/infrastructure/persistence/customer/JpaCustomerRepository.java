@@ -9,4 +9,5 @@ public interface JpaCustomerRepository extends JpaRepository<CustomerEntity, Lon
     boolean existsByEmailAndIsDeletedFalse(String email);
     Optional<CustomerEntity> findByEmailAndIsDeletedFalse(String email);
     Optional<CustomerEntity> findByEmailAndIsDeletedTrue(String email);
+    Optional<CustomerEntity> findByIdAndIsDeletedFalse(Long id);
 }

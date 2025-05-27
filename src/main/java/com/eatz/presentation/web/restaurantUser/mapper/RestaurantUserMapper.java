@@ -18,6 +18,7 @@ public class RestaurantUserMapper {
         restaurantUser.setCpf(dto.getCpf());
         restaurantUser.setProfileImageUrl(dto.getProfileImageUrl());
         restaurantUser.setRestaurantId(dto.getRestaurantId());
+        restaurantUser.setAddress(dto.getAddress());
 
         if (dto.getRole() != null) {
             restaurantUser.setRole(RestaurantRole.valueOf(dto.getRole()));
@@ -27,15 +28,6 @@ public class RestaurantUserMapper {
     }
 
     public RestaurantUserResponse toResponse(RestaurantUser restaurantUser) {
-        return new RestaurantUserResponse(
-                restaurantUser.getId(),
-                restaurantUser.getName(),
-                restaurantUser.getEmail(),
-                restaurantUser.getCpf(),
-                restaurantUser.getPhone(),
-                restaurantUser.getRole() != null ? restaurantUser.getRole().name() : null,
-                restaurantUser.getProfileImageUrl(),
-                restaurantUser.getRestaurantId()
-        );
+        return new RestaurantUserResponse(restaurantUser);
     }
 }

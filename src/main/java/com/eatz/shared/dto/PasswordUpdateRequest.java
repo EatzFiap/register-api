@@ -1,4 +1,4 @@
-package com.eatz.presentation.web.customer.dto;
+package com.eatz.shared.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

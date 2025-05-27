@@ -3,16 +3,16 @@ package com.eatz.application.restaurantUser.usecases;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
 import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import com.eatz.infrastructure.security.JwtUtil;
-import com.eatz.presentation.web.restaurantUser.dto.AuthenticationResponse;
-import com.eatz.presentation.web.restaurantUser.dto.LoginRequest;
+import com.eatz.shared.auth.AuthenticateUserUseCase;
+import com.eatz.shared.dto.AuthenticationResponse;
+import com.eatz.shared.dto.LoginRequest;
+import com.eatz.shared.exceptions.InvalidCredentialsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.stereotype.Service;
+import org.springframework.security.authentication.BadCredentialsException;
 
-public class AuthenticateRestaurantUserUseCase {
+public class AuthenticateRestaurantUserUseCase extends AuthenticateUserUseCase {
 
-    private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final RestaurantUserRepository restaurantRepository;
 
@@ -21,25 +21,26 @@ public class AuthenticateRestaurantUserUseCase {
             JwtUtil jwtUtil,
             RestaurantUserRepository restaurantRepository
     ) {
-        this.authenticationManager = authenticationManager;
+        super(authenticationManager);
         this.jwtUtil = jwtUtil;
         this.restaurantRepository = restaurantRepository;
     }
 
+    @Override
     public AuthenticationResponse execute(LoginRequest loginRequest) {
         if (!restaurantRepository.existsByEmailAndIsDeletedFalse(loginRequest.email()))
-            throw new EntityNotFoundException("usuário");
+            throw new EntityNotFoundException("User not found");
 
-
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password())
-        );
+        try {
+            authenticate(loginRequest.email(), loginRequest.password());
+        } catch (BadCredentialsException e) {
+            throw new InvalidCredentialsException();
+        }
 
         String role = restaurantRepository.findRoleByEmailAndIsDeletedFalse(loginRequest.email())
-                .orElseThrow(() -> new EntityNotFoundException("usuário"));
+                .orElseThrow(() -> new EntityNotFoundException("User role not found"));
 
         RestaurantRole restaurantRole;
-
         try {
             restaurantRole = RestaurantRole.valueOf(role);
         } catch (Exception e) {
@@ -49,10 +50,8 @@ public class AuthenticateRestaurantUserUseCase {
         String token = jwtUtil.generateRestaurantUserToken(loginRequest.email(), restaurantRole);
 
         return new AuthenticationResponse(
-                token,
-                "Bearer",
-                jwtUtil.extractExpiration(token),
-                loginRequest.email()
+                token, "Bearer", jwtUtil.extractExpiration(token), loginRequest.email()
         );
     }
+
 }

@@ -18,6 +18,8 @@ public class CustomerAddressEntityMapper {
         entity.setNickname(domain.getNickname());
         entity.setDefault(domain.isDefault());
         entity.setDeleted(domain.isDeleted());
+        entity.setCreatedAt(domain.getCreatedAt());
+        entity.setUpdatedAt(domain.getUpdatedAt());
 
         return entity;
     }

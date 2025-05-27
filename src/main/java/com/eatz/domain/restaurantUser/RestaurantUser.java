@@ -1,23 +1,16 @@
 package com.eatz.domain.restaurantUser;
 
+import com.eatz.domain.address.Address;
 import com.eatz.domain.restaurantUser.enums.RestaurantRole;
+import com.eatz.shared.domain.User;
 
 import java.time.LocalDateTime;
 
-public class RestaurantUser {
+public class RestaurantUser extends User {
 
-    private Long id;
     private RestaurantRole role;
-    private String name;
-    private String email;
-    private String password;
-    private String cpf;
-    private String phone;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private boolean isDeleted;
-    private String profileImageUrl;
     private Long restaurantId;
+    private Address address;
 
     public RestaurantUser(Long id, RestaurantRole role, String name, String email, String password, String cpf, String phone, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, String profileImageUrl, Long restaurantId) {
         this.id = id;
@@ -37,14 +30,6 @@ public class RestaurantUser {
     public RestaurantUser() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public RestaurantRole getRole() {
         return role;
     }
@@ -53,44 +38,12 @@ public class RestaurantUser {
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    public Long getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setRestaurantId(Long restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -109,27 +62,12 @@ public class RestaurantUser {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
-
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public Long getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(Long restaurantId) {
-        this.restaurantId = restaurantId;
-    }
 }

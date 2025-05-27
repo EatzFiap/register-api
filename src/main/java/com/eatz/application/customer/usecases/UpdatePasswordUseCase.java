@@ -2,11 +2,8 @@ package com.eatz.application.customer.usecases;
 
 import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.CustomerRepository;
-import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
-import com.eatz.domain.customer.exceptions.InvalidPasswordException;
+import com.eatz.shared.exceptions.InvalidPasswordException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
 
 
 public class UpdatePasswordUseCase {

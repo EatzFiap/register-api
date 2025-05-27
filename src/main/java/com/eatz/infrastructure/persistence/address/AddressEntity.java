@@ -1,9 +1,6 @@
 package com.eatz.infrastructure.persistence.address;
 
-import com.eatz.domain.address.Address;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TB_ADDRESS")

@@ -1,55 +1,82 @@
 package com.eatz.presentation.web.customer.mapper;
 
-import com.eatz.domain.address.Address;
-import com.eatz.presentation.web.address.dto.AddressResponse;
+import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customer.Customer;
-import com.eatz.presentation.web.customer.dto.CustomerRequest;
+import com.eatz.presentation.web.address.dto.CustomerAddressResponse;
+import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
 import com.eatz.presentation.web.customer.dto.CustomerResponse;
+import com.eatz.presentation.web.customer.dto.UpdateCustomerRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class CustomerMapper {
-    public Customer toDomain(CustomerRequest dto) {
+    public Customer toDomain(NewCustomerRequest dto) {
         Customer customer = new Customer();
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
         customer.setPhone(dto.getPhone());
+        customer.setCpf(dto.getCpf());
+        customer.setProfileImageUrl(dto.getProfileImageUrl());
         customer.setPassword(dto.getPassword());
 
-        Address address = new Address();
-        address.setStreet(dto.getAddress().getStreet());
-        address.setCity(dto.getAddress().getCity());
-        address.setState(dto.getAddress().getState());
-        address.setZipCode(dto.getAddress().getZipCode());
+        CustomerAddressDetails address = new CustomerAddressDetails(
+                null,
+                dto.getAddress().getStreet(),
+                dto.getAddress().getNumber(),
+                dto.getAddress().getComplement(),
+                dto.getAddress().getCity(),
+                dto.getAddress().getNeighbourhood(),
+                dto.getAddress().getState(),
+                dto.getAddress().getZipCode(),
+                dto.getAddress().getNickname(),
+                dto.getAddress().isDefaultAddress()
+        );
 
         customer.setAddresses(Collections.singletonList(address));
 
         return customer;
     }
 
+    public Customer toDomain(UpdateCustomerRequest dto) {
+        Customer customer = new Customer();
+        customer.setName(dto.getName());
+        customer.setEmail(dto.getEmail());
+        customer.setPhone(dto.getPhone());
+        customer.setCpf(dto.getCpf());
+        customer.setProfileImageUrl(dto.getProfileImageUrl());
+
+        return customer;
+    }
+
     public CustomerResponse toResponse(Customer customer) {
-        Address address = customer.getAddresses() != null && !customer.getAddresses().isEmpty()
-                ? customer.getAddresses().getFirst()
-                : null;
+        List<CustomerAddressDetails> addresses = customer.getAddresses() != null && !customer.getAddresses().isEmpty() ? customer.getAddresses() : null;
 
-        AddressResponse addressResponse = null;
-        if (address != null) {
-
-            addressResponse = new AddressResponse(
-                    address.getStreet(),
-                    address.getCity(),
-                    address.getState(),
-                    address.getZipCode()
-            );
+        List<CustomerAddressResponse> addressesResponses;
+        if (addresses != null) {
+            addressesResponses = addresses.stream()
+                    .map(address -> new CustomerAddressResponse(
+                            address.getId(),
+                            address.getStreet(),
+                            address.getNumber(),
+                            address.getComplement(),
+                            address.getNeighbourhood(),
+                            address.getCity(),
+                            address.getState(),
+                            address.getZipCode(),
+                            address.getNickname(),
+                            address.isDefault()
+                    ))
+                    .toList();
+        } else {
+            addressesResponses = Collections.emptyList();
         }
 
         return new CustomerResponse(
-                customer.getId(),
-                customer.getName(),
-                customer.getEmail(),
-                addressResponse
+                customer,
+                addressesResponses
         );
     }
 }

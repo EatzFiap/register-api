@@ -1,5 +1,10 @@
 package com.eatz.presentation.web.restaurantUser.dto;
 
+import com.eatz.domain.restaurantUser.RestaurantUser;
+import com.eatz.presentation.web.address.dto.AddressResponse;
+
+import java.time.LocalDateTime;
+
 public class RestaurantUserResponse {
     private Long id;
     private String name;
@@ -9,24 +14,22 @@ public class RestaurantUserResponse {
     private String role;
     private String profileImageUrl;
     private Long restaurantId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private AddressResponse address;
 
-    public RestaurantUserResponse(
-            Long id,
-            String name,
-            String email,
-            String cpf,
-            String phone,
-            String role,
-            String profileImageUrl,
-            Long restaurantId) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.role = role;
-        this.profileImageUrl = profileImageUrl;
-        this.restaurantId = restaurantId;
+    public RestaurantUserResponse(RestaurantUser restaurantUser) {
+        this.id = restaurantUser.getId();
+        this.name = restaurantUser.getName();
+        this.email = restaurantUser.getEmail();
+        this.cpf = restaurantUser.getCpf();
+        this.phone = restaurantUser.getPhone();
+        this.role = restaurantUser.getRole() != null ? restaurantUser.getRole().name() : null;
+        this.profileImageUrl = restaurantUser.getProfileImageUrl();
+        this.restaurantId = restaurantUser.getRestaurantId();
+        this.createdAt = restaurantUser.getCreatedAt();
+        this.updatedAt = restaurantUser.getUpdatedAt();
+        this.address = restaurantUser.getAddress() != null ? new AddressResponse(restaurantUser.getAddress()) : null;
     }
 
     // Getters e Setters
@@ -78,5 +81,20 @@ public class RestaurantUserResponse {
     }
     public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
+    }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    public AddressResponse getAddress() {
+        return address;
     }
 }

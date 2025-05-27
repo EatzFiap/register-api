@@ -5,6 +5,7 @@ import com.eatz.domain.restaurantUser.RestaurantUserRepository;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantUserAlreadyExistsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class CreateRestaurantUserUseCase {
@@ -28,6 +29,7 @@ public class CreateRestaurantUserUseCase {
 
         String encodedPassword = passwordEncoder.encode(Objects.requireNonNull(restaurantUser.getPassword(), "Senha é obrigatória."));
         restaurantUser.setPassword(encodedPassword);
+        restaurantUser.setCreatedAt(LocalDateTime.now());
 
         return restaurantUserRepository.save(restaurantUser);
     }

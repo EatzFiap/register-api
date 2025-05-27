@@ -23,9 +23,8 @@ public class RestaurantUserRepositoryImpl implements RestaurantUserRepository {
         return RestaurantUserEntityMapper.toDomain(saved);
     }
 
-    @Override
-    public Optional<RestaurantUser> findById(Long id) {
-        return jpaRepository.findById(id)
+    public Optional<RestaurantUser> findByIdAndIsDeletedFalse(Long id) {
+        return jpaRepository.findByIdAndIsDeletedFalse(id)
                 .map(RestaurantUserEntityMapper::toDomain);
     }
 
@@ -43,6 +42,12 @@ public class RestaurantUserRepositoryImpl implements RestaurantUserRepository {
     @Override
     public boolean existsByEmailAndIsDeletedFalse(String email) {
         return jpaRepository.existsByEmailAndIsDeletedFalse(email);
+    }
+
+    @Override
+    public Optional<RestaurantUser> findByEmailAndIsDeletedFalse(String email) {
+        return jpaRepository.findByEmailAndIsDeletedFalse(email)
+                .map(RestaurantUserEntityMapper::toDomain);
     }
 
     @Override

@@ -1,14 +1,11 @@
 package com.eatz.presentation.web.customer.dto;
 
-
-import com.eatz.presentation.web.address.dto.AddressRequest;
-
-public class CustomerRequest {
+public class UpdateCustomerRequest {
     private String name;
     private String email;
     private String phone;
-    private String password;
-    private AddressRequest address;
+    private String cpf;
+    private String profileImageUrl;
 
     public String getName() {
         return name;
@@ -28,12 +25,6 @@ public class CustomerRequest {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public String getPassword() { return password; }
-    public AddressRequest getAddress() {
-        return address;
-    }
-    public void setAddress(AddressRequest address) {
-        this.address = address;
-    }
-
+    public String getCpf() { return cpf; }
+    public String getProfileImageUrl() { return profileImageUrl; }
 }

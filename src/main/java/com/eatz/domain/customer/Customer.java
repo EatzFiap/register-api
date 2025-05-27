@@ -1,139 +1,38 @@
 package com.eatz.domain.customer;
 
-import com.eatz.domain.address.Address;
+import com.eatz.domain.address.CustomerAddressDetails;
+import com.eatz.infrastructure.persistence.customer.CustomerEntity;
+import com.eatz.shared.domain.User;
 
 import java.util.List;
 
-public class Customer {
+public class Customer extends User {
 
-    private Long id;
-    private String name;
-    private String email;
-    private String password;
-    private String cpf;
-    private String phone;
-    private String createdAt;
-    private String updatedAt;
-    private boolean isDeleted;
-    private String profileImageUrl;
+    private List<CustomerAddressDetails> addresses;
 
-    private List<Address> addresses;
-
-    public Customer(Long id, String name, String email, String password, String cpf, String phone, String createdAt, String updatedAt, boolean isDeleted, String profileImageUrl, List<Address> addresses) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
-        this.profileImageUrl = profileImageUrl;
+    public Customer(CustomerEntity entity, List<CustomerAddressDetails> addresses) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.email = entity.getEmail();
+        this.password = entity.getPassword();
+        this.cpf = entity.getCpf();
+        this.phone = entity.getPhone();
+        this.createdAt = entity.getCreatedAt();
+        this.updatedAt = entity.getUpdatedAt();
+        this.isDeleted = entity.isDeleted();
+        this.profileImageUrl = entity.getProfileImageUrl();
         this.addresses = addresses;
-    }
-
-    public Customer(Long id, String name, String email, String password, String cpf, String phone, String createdAt, String updatedAt, boolean isDeleted, String profileImageUrl) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
-        this.profileImageUrl = profileImageUrl;
     }
 
     public Customer() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
-
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public List<Address> getAddresses() {
+    public List<CustomerAddressDetails> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(List<CustomerAddressDetails> addresses) {
         this.addresses = addresses;
     }
+
 }

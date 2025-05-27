@@ -1,5 +1,6 @@
 package com.eatz.infrastructure.persistence.restaurantUser;
 
+import com.eatz.infrastructure.persistence.address.AddressEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -36,23 +37,12 @@ public class RestaurantUserEntity {
     @Column(name = "fk_restaurant")
     private Long restaurantId;
 
-    public RestaurantUserEntity(Long id, String role, String name, String email, String password, String cpf, String phone, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, String profileImageUrl, Long restaurantId) {
-        this.id = id;
-        this.role = role;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
-        this.profileImageUrl = profileImageUrl;
-        this.restaurantId = restaurantId;
-    }
+    @Column(name = "fk_address", insertable=false, updatable=false)
+    private Long addressId;
 
-    public RestaurantUserEntity() {
-    }
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_address")
+    private AddressEntity address;
 
     public Long getId() {
         return id;
@@ -149,4 +139,21 @@ public class RestaurantUserEntity {
     public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
     }
+
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
+    public AddressEntity getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressEntity address) {
+        this.address = address;
+    }
+
 }

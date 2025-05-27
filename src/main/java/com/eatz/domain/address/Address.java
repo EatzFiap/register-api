@@ -1,6 +1,8 @@
 package com.eatz.domain.address;
 
 
+import com.eatz.infrastructure.persistence.address.AddressEntity;
+
 public class Address {
 
     private Long id;
@@ -14,6 +16,41 @@ public class Address {
     private String createdAt;
     private String updatedAt;
     private boolean isDeleted;
+
+    public Address() {
+    }
+
+    public Address(Long id, String street, String number, String complement, String city, String neighbourhood, String state, String zipCode) {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.city = city;
+        this.neighbourhood = neighbourhood;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    public Address(String street, String city, String state, String zipCode) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    public Address(AddressEntity addressEntity) {
+        this.id = addressEntity.getId();
+        this.street = addressEntity.getStreet();
+        this.number = addressEntity.getNumber();
+        this.complement = addressEntity.getComplement();
+        this.city = addressEntity.getCity();
+        this.neighbourhood = addressEntity.getNeighbourhood();
+        this.state = addressEntity.getState();
+        this.zipCode = addressEntity.getZipCode();
+        this.createdAt = addressEntity.getCreatedAt();
+        this.updatedAt = addressEntity.getUpdatedAt();
+        this.isDeleted = addressEntity.isDeleted();
+    }
 
     public Long getId() {
         return id;

@@ -1,4 +1,4 @@
-package com.eatz.domain.customer.exceptions;
+package com.eatz.shared.exceptions;
 
 public class InvalidPasswordException extends RuntimeException {
 
