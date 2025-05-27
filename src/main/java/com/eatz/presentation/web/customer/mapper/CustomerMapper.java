@@ -18,6 +18,8 @@ public class CustomerMapper {
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
         customer.setPhone(dto.getPhone());
+        customer.setCpf(dto.getCpf());
+        customer.setProfileImageUrl(dto.getProfileImageUrl());
         customer.setPassword(dto.getPassword());
 
         CustomerAddressDetails address = new CustomerAddressDetails(

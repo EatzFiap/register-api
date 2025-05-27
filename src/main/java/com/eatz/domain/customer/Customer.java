@@ -9,8 +9,6 @@ import java.util.List;
 public class Customer extends User {
 
     private List<CustomerAddressDetails> addresses;
-    private String createdAt;
-    private String updatedAt;
 
     public Customer(CustomerEntity entity, List<CustomerAddressDetails> addresses) {
         this.id = entity.getId();
@@ -35,22 +33,6 @@ public class Customer extends User {
 
     public void setAddresses(List<CustomerAddressDetails> addresses) {
         this.addresses = addresses;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
 }

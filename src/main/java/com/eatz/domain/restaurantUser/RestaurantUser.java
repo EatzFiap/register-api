@@ -10,8 +10,6 @@ public class RestaurantUser extends User {
 
     private RestaurantRole role;
     private Long restaurantId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     private Address address;
 
     public RestaurantUser(Long id, RestaurantRole role, String name, String email, String password, String cpf, String phone, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isDeleted, String profileImageUrl, Long restaurantId) {

@@ -2,7 +2,6 @@ package com.eatz.application.customerAddresses.usecases;
 
 import com.eatz.domain.address.Address;
 import com.eatz.domain.address.AddressRepository;
-import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customerAddresses.CustomerAddress;
 import com.eatz.domain.customerAddresses.CustomerAddressRepository;
@@ -50,9 +49,9 @@ public class UpdateCustomerAddressUseCase {
         address.setNeighbourhood(request.getNeighbourhood());
         address.setState(request.getState());
         address.setZipCode(request.getZipCode());
+        address.setUpdatedAt(LocalDateTime.now().toString());
 
         addressRepository.save(address);
-
     }
 
 }

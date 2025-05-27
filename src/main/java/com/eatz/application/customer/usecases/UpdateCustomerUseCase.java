@@ -26,8 +26,8 @@ public class UpdateCustomerUseCase {
         if (newData.getEmail() != null) existingCustomer.setEmail(newData.getEmail());
         if (newData.getPhone() != null) existingCustomer.setPhone(newData.getPhone());
         if (newData.getCpf() != null) existingCustomer.setCpf(newData.getCpf());
-        if (newData.getProfileImageUrl() != null) existingCustomer.setProfileImageUrl(newData.getProfileImageUrl());
-        existingCustomer.setUpdatedAt(LocalDateTime.now().toString());
+        existingCustomer.setProfileImageUrl(newData.getProfileImageUrl());
+        existingCustomer.setUpdatedAt(LocalDateTime.now());
 
         return customerRepository.save(existingCustomer);
     }

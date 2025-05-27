@@ -28,7 +28,7 @@ public class CreateCustomerUseCase {
 
         String encodedPassword = passwordEncoder.encode(Objects.requireNonNull(customer.getPassword(), "Senha é obrigatória."));
         customer.setPassword(encodedPassword);
-        customer.setCreatedAt(LocalDateTime.now().toString());
+        customer.setCreatedAt(LocalDateTime.now());
 
         return customerRepository.save(customer);
     }

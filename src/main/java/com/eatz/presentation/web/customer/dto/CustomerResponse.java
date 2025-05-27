@@ -3,6 +3,7 @@ package com.eatz.presentation.web.customer.dto;
 import com.eatz.domain.customer.Customer;
 import com.eatz.presentation.web.address.dto.CustomerAddressResponse;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CustomerResponse {
@@ -13,8 +14,8 @@ public class CustomerResponse {
     private String phone;
     private String cpf;
     private String profileImageUrl;
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private List<CustomerAddressResponse> addresses;
 
     public CustomerResponse(
@@ -64,11 +65,11 @@ public class CustomerResponse {
         this.addresses = addresses;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public String getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 

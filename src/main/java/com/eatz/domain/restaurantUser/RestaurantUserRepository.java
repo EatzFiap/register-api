@@ -9,6 +9,5 @@ public interface RestaurantUserRepository extends UserRepository<RestaurantUser>
     Optional<RestaurantUser> findByEmail(String email);
     void delete(RestaurantUser user);
     boolean existsByEmailAndIsDeletedFalse(String email);
-    List<RestaurantUser> findAll();
     Optional<String> findRoleByEmailAndIsDeletedFalse(String email);
 }

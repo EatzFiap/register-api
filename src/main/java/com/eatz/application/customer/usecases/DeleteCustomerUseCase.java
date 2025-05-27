@@ -4,6 +4,8 @@ import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.CustomerRepository;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 
+import java.time.LocalDateTime;
+
 public class DeleteCustomerUseCase {
     private final CustomerRepository customerRepository;
 
@@ -17,6 +19,7 @@ public class DeleteCustomerUseCase {
         Customer customer = customerRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado para exclusão."));
 
+        customer.setUpdatedAt(LocalDateTime.now());
         customer.setDeleted(true);
         customerRepository.save(customer);
     }

@@ -1,5 +1,7 @@
 package com.eatz.shared.domain;
 
+import java.time.LocalDateTime;
+
 public abstract class User {
 
     protected Long id;
@@ -10,6 +12,8 @@ public abstract class User {
     protected String phone;
     protected String profileImageUrl;
     protected boolean isDeleted;
+    protected LocalDateTime createdAt;
+    protected LocalDateTime updatedAt;
 
     public Long getId() {
         return id;
@@ -71,4 +75,19 @@ public abstract class User {
         isDeleted = deleted;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
