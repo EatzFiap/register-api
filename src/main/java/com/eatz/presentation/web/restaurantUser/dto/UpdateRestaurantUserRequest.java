@@ -3,7 +3,7 @@ package com.eatz.presentation.web.restaurantUser.dto;
 import com.eatz.domain.address.Address;
 import jakarta.validation.constraints.NotBlank;
 
-public class RestaurantUserRequest {
+public class UpdateRestaurantUserRequest {
     @NotBlank
     private String name;
 
@@ -13,15 +13,11 @@ public class RestaurantUserRequest {
     @NotBlank
     private String role; // Deve ser uma das opções do enum: ADMIN, MANAGER, EMPLOYEE
 
-    private String password;
-
     private String cpf;
 
     private String phone;
 
     private String profileImageUrl;
-
-    private Long restaurantId;
 
     private Address address;
 
@@ -36,12 +32,6 @@ public class RestaurantUserRequest {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
     }
     public String getCpf() {
         return cpf;
@@ -66,12 +56,6 @@ public class RestaurantUserRequest {
     }
     public void setRole(String role) {
         this.role = role;
-    }
-    public Long getRestaurantId() {
-        return restaurantId;
-    }
-    public void setRestaurantId(Long restaurantId) {
-        this.restaurantId = restaurantId;
     }
     public Address getAddress() {
         return address;
