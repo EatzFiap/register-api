@@ -4,6 +4,7 @@ import com.eatz.application.restaurantUser.services.RestaurantUserService;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserRequest;
 import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserResponse;
+import com.eatz.presentation.web.restaurantUser.dto.UpdateRestaurantUserRequest;
 import com.eatz.presentation.web.restaurantUser.mapper.RestaurantUserMapper;
 import com.eatz.shared.dto.AuthenticationResponse;
 import com.eatz.shared.dto.LoginRequest;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/restaurant-users")
@@ -49,7 +52,8 @@ public class RestaurantUserController {
     public ResponseEntity<RestaurantUserResponse> create(@RequestBody @Valid RestaurantUserRequest request) {
         RestaurantUser user = mapper.toDomain(request);
         RestaurantUser created = restaurantUserService.createUser(user);
-        return ResponseEntity.ok(mapper.toResponse(created));
+        URI location = URI.create("/customers/" + created.getId());
+        return ResponseEntity.created(location).body(mapper.toResponse(created));
     }
 
     @PostMapping("/login")
@@ -59,7 +63,7 @@ public class RestaurantUserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestaurantUserResponse> update(@PathVariable Long id, @RequestBody @Valid RestaurantUserRequest request) {
+    public ResponseEntity<RestaurantUserResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateRestaurantUserRequest request) {
         RestaurantUser user = mapper.toDomain(request);
         RestaurantUser updated = restaurantUserService.updateUser(id, user);
         return ResponseEntity.ok(mapper.toResponse(updated));

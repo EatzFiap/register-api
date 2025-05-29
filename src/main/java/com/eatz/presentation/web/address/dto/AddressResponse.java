@@ -34,6 +34,9 @@ public class AddressResponse {
     public AddressResponse(Address address) {
         this.id = address.getId();
         this.street = address.getStreet();
+        this.number = address.getNumber();
+        this.complement = address.getComplement();
+        this.neighborhood = address.getNeighbourhood();
         this.city = address.getCity();
         this.state = address.getState();
         this.zipCode = address.getZipCode();

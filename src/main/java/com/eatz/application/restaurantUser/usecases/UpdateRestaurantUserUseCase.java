@@ -25,8 +25,9 @@ public class UpdateRestaurantUserUseCase {
         if (newData.getEmail() != null) user.setEmail(newData.getEmail());
         if (newData.getPhone() != null) user.setPhone(newData.getPhone());
         if (newData.getCpf() != null) user.setCpf(newData.getCpf());
-        if (newData.getProfileImageUrl() != null) user.setProfileImageUrl(newData.getProfileImageUrl());
+        if (newData.getRole() != null) user.setRole(newData.getRole());
         if (newData.getAddress() != null) user.setAddress(newData.getAddress());
+        user.setProfileImageUrl(newData.getProfileImageUrl());
         user.setUpdatedAt(LocalDateTime.now());
 
         return restaurantUserRepository.save(user);

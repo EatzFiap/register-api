@@ -1,6 +1,5 @@
 package com.eatz.application.restaurantUser.usecases;
 
-import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;

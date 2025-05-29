@@ -16,6 +16,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/customers")
 @Tag(name = "Customer", description = "Endpoints for managing customers")
@@ -58,7 +60,8 @@ public class CustomerController {
         Customer customerRequest = mapper.toDomain(request);
         Customer created = customerService.createCustomer(customerRequest, addressRequest);
         CustomerResponse response = mapper.toResponse(created);
-        return ResponseEntity.ok(response);
+        URI location = URI.create("/customers/" + created.getId());
+        return ResponseEntity.created(location).body(response);
     }
 
     @PostMapping("/{id}/address")
