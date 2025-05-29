@@ -1,0 +1,23 @@
+spring:
+  config:
+    activate:
+      on-profile: ${SPRING_PROFILES_ACTIVE:dev}
+
+  datasource:
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/register_db}
+    username: ${SPRING_DATASOURCE_USERNAME:local}
+    password: ${SPRING_DATASOURCE_PASSWORD:local123}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+  h2:
+    console:
+      enabled: ${SPRING_H2_CONSOLE_ENABLED:true}
+
+security:
+  jwt:
+      secret: ${JWT_SECRET:12123581251298035890123980512890350981298053295132253802531925312352138923589}
+      expiration: ${JWT_EXPIRATION:3600000}

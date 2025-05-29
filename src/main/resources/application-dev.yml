@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/register_db}
+    username: ${SPRING_DATASOURCE_USERNAME:local}
+    password: ${SPRING_DATASOURCE_PASSWORD:local123}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
