@@ -1,0 +1,2832 @@
+{
+	"info": {
+		"_postman_id": "ac1e5350-c5a5-4407-a83e-ae2c41721d84",
+		"name": "Register API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44152001",
+		"_collection_link": "https://eatzfiap.postman.co/workspace/Team-Workspace~efc4d0be-07f3-4213-8f2e-6d1dbc32593b/collection/44152001-ac1e5350-c5a5-4407-a83e-ae2c41721d84?action=share&source=collection_link&creator=44152001"
+	},
+	"item": [
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "find by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"10"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:00:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"addresses\": [\n        {\n            \"id\": 1,\n            \"street\": \"Rua das Laranjeiras, 124\",\n            \"number\": \"455\",\n            \"complement\": null,\n            \"neighborhood\": \"Centro\",\n            \"city\": \"Rio  de Janeiro\",\n            \"state\": \"RJ\",\n            \"zipCode\": \"43210-567\",\n            \"nickname\": \"Casa\",\n            \"default\": true\n        },\n        {\n            \"id\": 2,\n            \"street\": \"Rua das Figueiras\",\n            \"number\": \"111\",\n            \"complement\": \"11º andar\",\n            \"neighborhood\": \"Centro\",\n            \"city\": \"Rio  de Janeiro\",\n            \"state\": \"RJ\",\n            \"zipCode\": \"43210-567\",\n            \"nickname\": \"Trabalho\",\n            \"default\": false\n        }\n    ],\n    \"id\": 1,\n    \"name\": \"Sarah Rosa Oliveira\",\n    \"email\": \"sarah.rosa2@email.com\",\n    \"phone\": \"980807071\",\n    \"cpf\": \"35582555506\",\n    \"profileImageUrl\": null,\n    \"createdAt\": \"2025-05-26T23:59:19.729329\",\n    \"updatedAt\": \"2025-05-26T23:59:42.988418\"\n}"
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"6"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 May 2025 03:51:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/customers/6\",\n    \"error\": \"Not Found\",\n    \"message\": \"Usuário não encontrado com o id: 6\",\n    \"timestamp\": \"2025-05-22T00:51:03.6254447\",\n    \"status\": 404\n}"
+						}
+					]
+				},
+				{
+					"name": "find by token username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 02:59:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"addresses\": [\n        {\n            \"id\": 1,\n            \"street\": \"Rua das Laranjeiras, 124\",\n            \"number\": \"455\",\n            \"complement\": null,\n            \"neighborhood\": \"Centro\",\n            \"city\": \"Rio  de Janeiro\",\n            \"state\": \"RJ\",\n            \"zipCode\": \"43210-567\",\n            \"nickname\": \"Casa\",\n            \"default\": true\n        },\n        {\n            \"id\": 2,\n            \"street\": \"Rua das Figueiras\",\n            \"number\": \"111\",\n            \"complement\": \"11º andar\",\n            \"neighborhood\": \"Centro\",\n            \"city\": \"Rio  de Janeiro\",\n            \"state\": \"RJ\",\n            \"zipCode\": \"43210-567\",\n            \"nickname\": \"Trabalho\",\n            \"default\": false\n        }\n    ],\n    \"id\": 1,\n    \"name\": \"Sarah Rosa Oliveira\",\n    \"email\": \"sarah.rosa2@email.com\",\n    \"phone\": \"980807071\",\n    \"cpf\": \"35582555506\",\n    \"profileImageUrl\": null,\n    \"createdAt\": \"2025-05-26T23:59:19.729329\",\n    \"updatedAt\": \"2025-05-26T23:59:42.988418\"\n}"
+						},
+						{
+							"name": "401 UNAUTHORIZED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=ISO-8859-1"
+								},
+								{
+									"key": "Content-Length",
+									"value": "130"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 May 2025 03:43:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/error\",\n    \"error\": \"Acesso não autorizado\",\n    \"message\": \"Full authentication is required to access this resource\",\n    \"status\": 401\n}"
+						}
+					]
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sarah Rosa Silva\",\r\n    \"email\": \"sarah.rosa2@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"phone\": \"980807070\",\r\n    \"cpf\": \"87688855501\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Laranjeiras, 124\",\r\n        \"number\": \"455\",\r\n        \"complement\": null,\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"Rio  de Janeiro\",\r\n        \"state\": \"RJ\",\r\n        \"zipCode\": \"43210-567\",\r\n        \"nickname\": \"Casa\",\r\n        \"defaultAddress\": true\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 CREATED",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Sarah Rosa Silva\",\r\n    \"email\": \"sarah.rosa3@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"phone\": \"980807070\",\r\n    \"cpf\": \"87688855501\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Laranjeiras, 124\",\r\n        \"number\": \"455\",\r\n        \"complement\": null,\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"Rio  de Janeiro\",\r\n        \"state\": \"RJ\",\r\n        \"zipCode\": \"43210-567\",\r\n        \"nickname\": \"Casa\",\r\n        \"defaultAddress\": true\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Location",
+									"value": "/customers/2"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 29 May 2025 22:34:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"addresses\": [\n        {\n            \"id\": 5,\n            \"street\": \"Rua das Laranjeiras, 124\",\n            \"number\": \"455\",\n            \"complement\": null,\n            \"neighborhood\": \"Centro\",\n            \"city\": \"Rio  de Janeiro\",\n            \"state\": \"RJ\",\n            \"zipCode\": \"43210-567\",\n            \"nickname\": \"Casa\",\n            \"default\": true\n        }\n    ],\n    \"id\": 2,\n    \"name\": \"Sarah Rosa Silva\",\n    \"email\": \"sarah.rosa3@email.com\",\n    \"phone\": \"980807070\",\n    \"cpf\": \"87688855501\",\n    \"profileImageUrl\": \"www.image-url.com\",\n    \"createdAt\": \"2025-05-29T19:34:38.5984753\",\n    \"updatedAt\": null\n}"
+						},
+						{
+							"name": "409 CONFLICT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Sarah Rosa Silva\",\r\n    \"email\": \"sarah.rosa@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"phone\": \"980807070\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Laranjeiras, 124\",\r\n        \"number\": \"455\",\r\n        \"complement\": null,\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"Rio  de Janeiro\",\r\n        \"state\": \"RJ\",\r\n        \"zipCode\": \"43210-567\",\r\n        \"nickname\": \"Casa\",\r\n        \"isDefault\": true\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"register"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 03:01:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/customers/register\",\n    \"error\": \"Conflict\",\n    \"message\": \"Já existe um usuário com este e-mail.\",\n    \"timestamp\": \"2025-05-26T00:01:28.7160215\",\n    \"status\": 409\n}"
+						}
+					]
+				},
+				{
+					"name": "add address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"Rua das Figueiras\",\r\n    \"number\": \"111\",\r\n    \"complement\": \"11º andar\",\r\n    \"neighbourhood\": \"Centro\",\r\n    \"city\": \"Rio  de Janeiro\",\r\n    \"state\": \"RJ\",\r\n    \"zipCode\": \"43210-567\",\r\n    \"nickname\": \"Trabalho\",\r\n    \"defaultAddress\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/1/address",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1",
+								"address"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"street\": \"Rua das Figueiras\",\r\n    \"number\": \"111\",\r\n    \"complement\": \"11º andar\",\r\n    \"neighbourhood\": \"Centro\",\r\n    \"city\": \"Rio  de Janeiro\",\r\n    \"state\": \"RJ\",\r\n    \"zipCode\": \"43210-567\",\r\n    \"nickname\": \"Trabalho\",\r\n    \"defaultAddress\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/1/address",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"1",
+										"address"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 02:48:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"pm.environment.set(\"customer_token\", response.token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sarah.rosa2@email.com\",\r\n    \"password\": \"senha*123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"sarah.rosa2@email.com\",\r\n    \"password\": \"senha*123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 02:45:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYXJhaC5yb3NhMkBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzQ4MzEzOTQ5LCJleHAiOjE3NDgzMTc1NDl9.2mC1Pd05klF480HHterAMqA3K7gUJ65-xagtb2KNH2E\",\n    \"type\": \"Bearer\",\n    \"expiresAt\": \"2025-05-27T03:45:49.000+00:00\",\n    \"username\": \"sarah.rosa2@email.com\"\n}"
+						},
+						{
+							"name": "401 UNAUTHORIZED",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"sarah.rosa@email.com\",\r\n    \"password\": \"senha*129\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 03:02:05 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid credentials. Check your email and password."
+						}
+					]
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"senha*123\",\r\n    \"newPassword\": \"senha*124\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"senha*123\",\r\n    \"newPassword\": \"senha*124\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/password",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"password"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 May 2025 03:56:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "401 UNAUTHORIZED",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"senha*124\",\r\n    \"newPassword\": \"senha*125\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/password",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"password"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 May 2025 03:55:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Password is invalid."
+						}
+					]
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sarah Rosa Oliveira\",\r\n    \"email\": \"sarah.rosa2@email.com\",\r\n    \"phone\": \"980807071\",\r\n    \"cpf\": \"35582555506\",\r\n    \"profileImageUrl\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Maria Rosa Oliveira\",\r\n    \"email\": \"maria.rosa@gmail.com\",\r\n    \"phone\": \"980807071\",\r\n    \"cpf\": \"35582555506\",\r\n    \"address\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 May 2025 03:42:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"name\": \"Maria Rosa Oliveira\",\n    \"email\": \"maria.rosa@gmail.com\",\n    \"createdAt\": \"2025-05-22T00:37:23.344538200\",\n    \"updatedAt\": \"2025-05-22T00:42:51.757884400\",\n    \"addresses\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "update address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"Rua das Palmeiras\",\r\n    \"number\": \"222\",\r\n    \"complement\": \"Apto 22\",\r\n    \"neighbourhood\": \"Vila Velha\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"02123-111\",\r\n    \"nickname\": \"Apto\",\r\n    \"defaultAddress\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/customers/1/address/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"street\": \"Rua das Palmeiras\",\r\n    \"number\": \"222\",\r\n    \"complement\": \"Apto 22\",\r\n    \"neighbourhood\": \"Vila Velha\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"02123-111\",\r\n    \"nickname\": \"Apto\",\r\n    \"defaultAddress\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/11/address/18",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"11",
+										"address",
+										"18"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 23:49:05 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"street\": \"Rua das Palmeiras\",\r\n    \"number\": \"222\",\r\n    \"complement\": \"Apto 22\",\r\n    \"neighbourhood\": \"Vila Velha\",\r\n    \"city\": \"São Paulo\",\r\n    \"state\": \"SP\",\r\n    \"zipCode\": \"02123-111\",\r\n    \"nickname\": \"Apto\",\r\n    \"defaultAddress\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/customers/11/address/42",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"11",
+										"address",
+										"42"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 23:49:33 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/customers/11/address/42\",\n    \"error\": \"Not Found\",\n    \"message\": \"Endereço não encontrado na lista de endereços do cliente\",\n    \"timestamp\": \"2025-05-26T20:49:33.13903\",\n    \"status\": 404\n}"
+						}
+					]
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"1"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 May 2025 03:54:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/6",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"6"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 May 2025 03:51:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/customers/6\",\n    \"error\": \"Not Found\",\n    \"message\": \"Usuário não encontrado para exclusão.\",\n    \"timestamp\": \"2025-05-22T00:51:13.1986951\",\n    \"status\": 404\n}"
+						}
+					]
+				},
+				{
+					"name": "delete address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{customer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/customers/1/address/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"customers",
+								"1",
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/1/address/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"1",
+										"address",
+										"1"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:02:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/customers/7/address/14",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"customers",
+										"7",
+										"address",
+										"14"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 May 2025 23:30:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/customers/7/address/14\",\n    \"error\": \"Not Found\",\n    \"message\": \"Address not found.\",\n    \"timestamp\": \"2025-05-25T20:30:51.349459\",\n    \"status\": 404\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "restaurantUsers",
+			"item": [
+				{
+					"name": "find by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/restaurant-users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:39:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"João Silva Marques\",\n    \"email\": \"joao.ferreira@email.com\",\n    \"cpf\": \"88877799902\",\n    \"phone\": \"970708082\",\n    \"role\": \"MANAGER\",\n    \"profileImageUrl\": \"www.image-url.com\",\n    \"restaurantId\": null,\n    \"createdAt\": \"2025-05-27T00:21:41.915538\",\n    \"updatedAt\": \"2025-05-27T00:38:33.8332\",\n    \"address\": {\n        \"id\": 3,\n        \"street\": \"Rua das Libélulas\",\n        \"number\": \"24\",\n        \"complement\": \"111A\",\n        \"neighborhood\": \"Vila Velha\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"zipCode\": \"01234-569\"\n    }\n}"
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 May 2025 22:24:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/restaurant-users/2\",\n    \"error\": \"Not Found\",\n    \"message\": \"Usuário não encontrado com id: 2\",\n    \"timestamp\": \"2025-05-25T19:24:45.3084622\",\n    \"status\": 404\n}"
+						}
+					]
+				},
+				{
+					"name": "find by token username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/restaurant-users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/restaurant-users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:24:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"João Funcionário\",\n    \"email\": \"joao.ferreira@email.com\",\n    \"cpf\": \"88877799901\",\n    \"phone\": \"970708080\",\n    \"role\": \"ADMIN\",\n    \"profileImageUrl\": \"www.image-url.com\",\n    \"restaurantId\": null,\n    \"createdAt\": \"2025-05-27T00:21:41.915538\",\n    \"updatedAt\": null,\n    \"address\": {\n        \"id\": 3,\n        \"street\": \"Rua das Floriculturas\",\n        \"number\": \"42\",\n        \"complement\": \"222B\",\n        \"neighborhood\": \"Centro\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"zipCode\": \"01234-567\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"João Funcionário\",\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"role\": \"ADMIN\",\r\n    \"cpf\": \"88877799901\",\r\n    \"phone\": \"970708080\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Floriculturas\",\r\n        \"number\": \"42\",\r\n        \"complement\": \"222B\",\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01234-567\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/restaurant-users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-users",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 CREATED",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"João Funcionário\",\r\n    \"email\": \"joao.ferreira2@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"role\": \"ADMIN\",\r\n    \"cpf\": \"88877799901\",\r\n    \"phone\": \"970708080\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Floriculturas\",\r\n        \"number\": \"42\",\r\n        \"complement\": \"222B\",\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01234-567\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Location",
+									"value": "/customers/2"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 29 May 2025 22:45:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"João Funcionário\",\n    \"email\": \"joao.ferreira2@email.com\",\n    \"cpf\": \"88877799901\",\n    \"phone\": \"970708080\",\n    \"role\": \"ADMIN\",\n    \"profileImageUrl\": \"www.image-url.com\",\n    \"restaurantId\": null,\n    \"createdAt\": \"2025-05-29T19:45:44.6807782\",\n    \"updatedAt\": null,\n    \"address\": {\n        \"id\": 6,\n        \"street\": \"Rua das Floriculturas\",\n        \"number\": \"42\",\n        \"complement\": \"222B\",\n        \"neighborhood\": \"Centro\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"zipCode\": \"01234-567\"\n    }\n}"
+						},
+						{
+							"name": "409 CONFLICT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"João Funcionário\",\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"role\": \"ADMIN\",\r\n    \"cpf\": \"88877799901\",\r\n    \"phone\": \"970708080\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Floriculturas\",\r\n        \"number\": \"42\",\r\n        \"complement\": \"222B\",\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01234-567\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"register"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:22:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/restaurant-users/register\",\n    \"error\": \"Conflict\",\n    \"message\": \"Este e-mail já está em uso.\",\n    \"timestamp\": \"2025-05-27T00:22:15.2624134\",\n    \"status\": 409\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"pm.environment.set(\"restaurant_user_token\", response.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senha*123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/restaurant-users/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-users",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senha*123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:23:01 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2FvLmZlcnJlaXJhQGVtYWlsLmNvbSIsInVzZXJUeXBlIjoiUkVTVEFVUkFOVF9VU0VSIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzQ4MzE2MTgxLCJleHAiOjE3NDgzMTk3ODF9.-xy52QVnhnxdu-4Q2TAh43ys_uwJPN4BqJC_6ZN1BTg\",\n    \"type\": \"Bearer\",\n    \"expiresAt\": \"2025-05-27T04:23:01.000+00:00\",\n    \"username\": \"joao.ferreira@email.com\"\n}"
+						},
+						{
+							"name": "401 UNAUTHORIZED",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senhaErrada@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 May 2025 21:44:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid credentials. Check your email and password."
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senha*124\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:40:37 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/restaurant-users/login\",\n    \"error\": \"Not Found\",\n    \"message\": \"User not found\",\n    \"timestamp\": \"2025-05-27T00:40:37.1926746\",\n    \"status\": 404\n}"
+						}
+					]
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"senha*123\",\r\n    \"newPassword\": \"senha*124\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/restaurant-users/password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-users",
+								"password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"senha*123\",\r\n    \"newPassword\": \"senha*124\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/password",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"password"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 May 2025 03:44:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "401 UNAUTHORIZED",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"senha*123\",\r\n    \"newPassword\": \"senha*124\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/password",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"password"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 May 2025 03:44:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Password is invalid."
+						}
+					]
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"João Silva Marques\",\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"role\": \"MANAGER\",\r\n    \"cpf\": \"88877799902\",\r\n    \"phone\": \"970708082\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n       \"street\": \"Rua das Libélulas\",\r\n        \"number\": \"24\",\r\n        \"complement\": \"111A\",\r\n        \"neighbourhood\": \"Vila Velha\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01234-569\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/restaurant-users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"João Silva Marques\",\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"role\": \"MANAGER\",\r\n    \"cpf\": \"88877799902\",\r\n    \"phone\": \"970708082\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n       \"street\": \"Rua das Libélulas\",\r\n        \"number\": \"24\",\r\n        \"complement\": \"111A\",\r\n        \"neighbourhood\": \"Vila Velha\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01234-569\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 May 2025 03:38:33 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"João Silva Marques\",\n    \"email\": \"joao.ferreira@email.com\",\n    \"cpf\": \"88877799902\",\n    \"phone\": \"970708082\",\n    \"role\": \"MANAGER\",\n    \"profileImageUrl\": \"www.image-url.com\",\n    \"restaurantId\": null,\n    \"createdAt\": \"2025-05-27T00:21:41.915538\",\n    \"updatedAt\": \"2025-05-27T00:38:33.8332004\",\n    \"address\": {\n        \"id\": 3,\n        \"street\": \"Rua das Libélulas\",\n        \"number\": \"24\",\n        \"complement\": \"111A\",\n        \"neighborhood\": \"Vila Velha\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"zipCode\": \"01234-569\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/restaurant-users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 NO CONTENT",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"1"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 May 2025 03:45:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "404 NOT FOUND",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/restaurant-users/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"restaurant-users",
+										"1"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 May 2025 04:00:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"path\": \"/restaurant-users/1\",\n    \"error\": \"Not Found\",\n    \"message\": \"Usuário não encontrado para exclusão.\",\n    \"timestamp\": \"2025-05-23T01:00:41.6035735\",\n    \"status\": 404\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
