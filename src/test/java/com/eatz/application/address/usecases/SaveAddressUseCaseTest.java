@@ -2,6 +2,7 @@ package com.eatz.application.address.usecases;
 
 import com.eatz.domain.address.Address;
 import com.eatz.domain.address.AddressRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,9 +26,10 @@ class SaveAddressUseCaseTest {
     private SaveAddressUseCase saveAddressUseCase;
 
     @Nested
-    class ExecuteTests {
+    class Execute {
 
         @Test
+        @DisplayName("Should save a valid address successfully")
         void savesValidAddressSuccessfully() {
             Address address = new Address();
             address.setId(1L);
@@ -60,6 +62,7 @@ class SaveAddressUseCaseTest {
         }
 
         @Test
+        @DisplayName("Should throw exception when address is null")
         void throwsExceptionWhenAddressIsNull() {
             IllegalArgumentException exception =
                 assertThrows(IllegalArgumentException.class, () -> saveAddressUseCase.execute(null));
