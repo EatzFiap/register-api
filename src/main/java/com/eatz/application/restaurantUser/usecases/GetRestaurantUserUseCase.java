@@ -33,7 +33,6 @@ public class GetRestaurantUserUseCase {
                 .orElseThrow(() -> new CustomerNotFoundException("User not found with email: " + email));
     }
 
-
     public List<RestaurantUser> execute() {
         List<RestaurantUser> users = restaurantUserRepository.findAll();
         if (users.isEmpty())
