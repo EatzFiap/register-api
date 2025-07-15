@@ -17,23 +17,15 @@ public class CustomerMapper {
         Customer customer = new Customer();
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
+        customer.setPassword(dto.getPassword());
         customer.setPhone(dto.getPhone());
         customer.setCpf(dto.getCpf());
-        customer.setProfileImageUrl(dto.getProfileImageUrl());
-        customer.setPassword(dto.getPassword());
 
-        CustomerAddressDetails address = new CustomerAddressDetails(
-                null,
-                dto.getAddress().getStreet(),
-                dto.getAddress().getNumber(),
-                dto.getAddress().getComplement(),
-                dto.getAddress().getCity(),
-                dto.getAddress().getNeighbourhood(),
-                dto.getAddress().getState(),
-                dto.getAddress().getZipCode(),
-                dto.getAddress().getNickname(),
-                dto.getAddress().isDefaultAddress()
-        );
+        Address address = new Address();
+        address.setStreet(dto.getAddress().street());
+        address.setCity(dto.getAddress().city());
+        address.setState(dto.getAddress().state());
+        address.setZipCode(dto.getAddress().zipCode());
 
         customer.setAddresses(Collections.singletonList(address));
 

@@ -41,22 +41,6 @@ public class CustomerResponse {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public List<CustomerAddressResponse> getAddresses() {
         return addresses;
     }
@@ -83,5 +67,21 @@ public class CustomerResponse {
 
     public String getProfileImageUrl() {
         return profileImageUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

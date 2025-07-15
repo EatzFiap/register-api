@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:latest
@@ -8,6 +10,36 @@ services:
       POSTGRES_DB: register_db
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - eatz-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U local -d register_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  minio:
+    image: minio/minio:latest
+    container_name: eatz-minio
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    ports:
+      - "9000:9000"   # API
+      - "9001:9001"   # Console Web
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - eatz-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   api:
     container_name: register-api-local
     build:
@@ -19,7 +51,26 @@ services:
       SPRING_DATASOURCE_USERNAME: local
       SPRING_DATASOURCE_PASSWORD: local123
       SPRING_H2_CONSOLE_ENABLED: false
+      # ✅ ADICIONAR configurações MinIO
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin123
+      MINIO_BUCKET_NAME: eatz-images
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    networks:
+      - eatz-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  minio_data:
+
+networks:
+  eatz-network:
+    driver: bridge

@@ -5,6 +5,7 @@ import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
 import com.eatz.shared.exceptions.AddressNotFoundException;
 import com.eatz.shared.exceptions.InvalidCredentialsException;
 import com.eatz.shared.exceptions.InvalidPasswordException;
+import com.eatz.domain.menuItem.exceptions.MenuItemNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantUserAlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -108,6 +109,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AddressNotFoundException.class)
     public ResponseEntity<Object> handleAddressNotFound(AddressNotFoundException ex, HttpServletRequest request) {
         log.warn(ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null, request.getRequestURI());
+    }
+
+    @ExceptionHandler(MenuItemNotFoundException.class)
+    public ResponseEntity<Object> handleMenuItemNotFound(MenuItemNotFoundException ex, HttpServletRequest request) {
+        log.warn("Menu item not found: {}", ex.getMessage());
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null, request.getRequestURI());
     }
 

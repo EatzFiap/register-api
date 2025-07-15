@@ -13,7 +13,6 @@ public class NewCustomerRequest {
     private String password;
     private String phone;
     private String cpf;
-    private String profileImageUrl;
     private AddressRequest address;
 
     public String getName() {
@@ -34,7 +33,6 @@ public class NewCustomerRequest {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public String getPassword() { return password; }
     public AddressRequest getAddress() {
         return address;
     }
@@ -42,5 +40,11 @@ public class NewCustomerRequest {
         this.address = address;
     }
     public String getCpf() { return cpf; }
-    public String getProfileImageUrl() { return profileImageUrl; }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
