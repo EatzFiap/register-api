@@ -7,6 +7,7 @@ public class CustomerRequest {
     private String name;
     private String email;
     private String phone;
+    private String password;
     private AddressRequest address;
 
     public String getName() {
@@ -32,6 +33,12 @@ public class CustomerRequest {
     }
     public void setAddress(AddressRequest address) {
         this.address = address;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

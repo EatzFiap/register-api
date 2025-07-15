@@ -2,6 +2,11 @@ spring:
   config:
     activate:
       on-profile: local
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
+      encoding: UTF-8
 
   datasource:
     driver-class-name: org.h2.Driver

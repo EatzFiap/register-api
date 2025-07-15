@@ -2,6 +2,7 @@ package com.eatz.infrastructure.exception;
 
 import com.eatz.domain.customer.exceptions.CustomerAlreadyExistsException;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
+import com.eatz.domain.menuItem.exceptions.MenuItemNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantUserAlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -88,6 +89,12 @@ public class GlobalExceptionHandler {
         log.error("Unexpected exception: {}", ex.getMessage(), ex);
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.", null, request.getRequestURI());
+    }
+
+    @ExceptionHandler(MenuItemNotFoundException.class)
+    public ResponseEntity<Object> handleMenuItemNotFound(MenuItemNotFoundException ex, HttpServletRequest request) {
+        log.warn("Menu item not found: {}", ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null, request.getRequestURI());
     }
 
     private ResponseEntity<Object> buildResponse(HttpStatus status, String message, Object details, String path) {

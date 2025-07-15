@@ -12,10 +12,10 @@ public class AddressMapper {
 
     public Address toDomain(AddressRequest request) {
         Address address = new Address();
-        address.setStreet(request.getStreet());
-        address.setCity(request.getCity());
-        address.setState(request.getState());
-        address.setZipCode(request.getZipCode());
+        address.setStreet(request.street());
+        address.setCity(request.city());
+        address.setState(request.state());
+        address.setZipCode(request.zipCode());
         address.setCreatedAt(String.valueOf(LocalDateTime.now()));
         address.setUpdatedAt(String.valueOf(LocalDateTime.now()));
         address.setDeleted(false);

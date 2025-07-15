@@ -15,13 +15,14 @@ public class CustomerMapper {
         Customer customer = new Customer();
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
-        customer.setPassword(dto.getPhone());
+        customer.setPassword(dto.getPassword());
+        customer.setPhone(dto.getPhone());
 
         Address address = new Address();
-        address.setStreet(dto.getAddress().getStreet());
-        address.setCity(dto.getAddress().getCity());
-        address.setState(dto.getAddress().getState());
-        address.setZipCode(dto.getAddress().getZipCode());
+        address.setStreet(dto.getAddress().street());
+        address.setCity(dto.getAddress().city());
+        address.setState(dto.getAddress().state());
+        address.setZipCode(dto.getAddress().zipCode());
 
         customer.setAddresses(Collections.singletonList(address));
 
