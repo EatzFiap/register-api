@@ -20,7 +20,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> findByIdAndIsDeletedFalse(Long id) {
+    public Optional<Customer> findById(Long id) {
         return jpaRepository.findByIdAndIsDeletedFalse(id)
                 .map(mapper::toDomain);
     }
@@ -40,6 +40,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public Optional<Customer> findByEmailAndIsDeletedFalse(String email) {
         return jpaRepository.findByEmailAndIsDeletedFalse(email)
+                .map(mapper::toDomain);
+    }
+
+    @Override
+    public Optional<Customer> findByIdAndIsDeletedFalse(Long id) {
+        return jpaRepository.findByIdAndIsDeletedFalse(id)
                 .map(mapper::toDomain);
     }
 

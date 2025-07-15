@@ -1,7 +1,9 @@
 package com.eatz.presentation.web.customer.mapper;
 
+import com.eatz.domain.address.Address;
 import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customer.Customer;
+import com.eatz.infrastructure.persistence.address.AddressEntityMapper;
 import com.eatz.presentation.web.address.dto.CustomerAddressResponse;
 import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
 import com.eatz.presentation.web.customer.dto.CustomerResponse;
@@ -22,12 +24,12 @@ public class CustomerMapper {
         customer.setCpf(dto.getCpf());
 
         Address address = new Address();
-        address.setStreet(dto.getAddress().street());
-        address.setCity(dto.getAddress().city());
-        address.setState(dto.getAddress().state());
-        address.setZipCode(dto.getAddress().zipCode());
+        address.setStreet(dto.getAddress().getStreet());
+        address.setCity(dto.getAddress().getCity());
+        address.setState(dto.getAddress().getState());
+        address.setZipCode(dto.getAddress().getZipCode());
 
-        customer.setAddresses(Collections.singletonList(address));
+        customer.setAddresses(null);
 
         return customer;
     }

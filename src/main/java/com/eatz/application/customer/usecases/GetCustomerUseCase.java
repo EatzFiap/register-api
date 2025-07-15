@@ -20,7 +20,7 @@ public class GetCustomerUseCase {
             throw new IllegalArgumentException("ID não pode ser nulo.");
         }
 
-        return customerRepository.findByIdAndIsDeletedFalse(id)
+        return customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado com o id: " + id));
     }
 
