@@ -18,6 +18,9 @@ public class CustomerResponse {
     private LocalDateTime updatedAt;
     private List<CustomerAddressResponse> addresses;
 
+    public CustomerResponse() {
+    }
+
     public CustomerResponse(
             Customer customer,
             List<CustomerAddressResponse> addresses
