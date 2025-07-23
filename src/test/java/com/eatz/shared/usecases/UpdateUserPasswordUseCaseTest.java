@@ -34,8 +34,8 @@ class UpdateUserPasswordUseCaseTest {
     class ExecuteUpdateUserPassword {
 
         @Test
-        @DisplayName("Updates password successfully")
-        void updatesPasswordSuccessfully() {
+        @DisplayName("Updates restaurant user password successfully")
+        void updatesRestaurantUserPasswordSuccessfully() {
             User restaurantUser = new RestaurantUser();
             restaurantUser.setPassword("encodedOldPassword");
 
@@ -46,7 +46,11 @@ class UpdateUserPasswordUseCaseTest {
             updateUserPasswordUseCase.execute(restaurantUser, "correctOldPassword", "newPassword");
 
             assertEquals("encodedNewPassword", restaurantUser.getPassword());
+        }
 
+        @Test
+        @DisplayName("Updates customer password successfully")
+        void updatesCustomerPasswordSuccessfully() {
             User customerUser = new Customer();
             customerUser.setPassword("encodedOldPassword");
 

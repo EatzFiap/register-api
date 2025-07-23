@@ -18,6 +18,9 @@ public class RestaurantUserResponse {
     private LocalDateTime updatedAt;
     private AddressResponse address;
 
+    public RestaurantUserResponse() {
+    }
+
     public RestaurantUserResponse(RestaurantUser restaurantUser) {
         this.id = restaurantUser.getId();
         this.name = restaurantUser.getName();
