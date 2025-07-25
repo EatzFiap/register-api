@@ -19,7 +19,7 @@ public class UpdateCustomerUseCase {
         if (id == null) throw new IllegalArgumentException("ID não pode ser nulo.");
         if (newData == null) throw new IllegalArgumentException("Dados para atualização não podem ser nulos.");
 
-        Customer existingCustomer = customerRepository.findById(id)
+        Customer existingCustomer = customerRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new CustomerNotFoundException("Usuário não encontrado para atualização."));
 
         if (newData.getName() != null) existingCustomer.setName(newData.getName());

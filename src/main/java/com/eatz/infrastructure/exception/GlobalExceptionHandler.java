@@ -2,9 +2,9 @@ package com.eatz.infrastructure.exception;
 
 import com.eatz.domain.customer.exceptions.CustomerAlreadyExistsException;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
-import com.eatz.shared.exceptions.AddressNotFoundException;
-import com.eatz.shared.exceptions.InvalidCredentialsException;
-import com.eatz.shared.exceptions.InvalidPasswordException;
+import com.eatz.shared.exception.AddressNotFoundException;
+import com.eatz.shared.exception.InvalidCredentialsException;
+import com.eatz.shared.exception.InvalidPasswordException;
 import com.eatz.domain.menuItem.exceptions.MenuItemNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantUserAlreadyExistsException;

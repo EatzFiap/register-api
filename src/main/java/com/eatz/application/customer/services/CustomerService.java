@@ -15,7 +15,7 @@ import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.presentation.web.address.dto.AddressRequest;
 import com.eatz.presentation.web.address.mapper.AddressMapper;
 import com.eatz.shared.dto.PasswordUpdateRequest;
-import com.eatz.shared.exceptions.AddressNotFoundException;
+import com.eatz.shared.exception.AddressNotFoundException;
 import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.stereotype.Service;
 

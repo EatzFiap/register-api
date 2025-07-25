@@ -6,7 +6,7 @@ import com.eatz.domain.customer.Customer;
 import com.eatz.domain.customerAddresses.CustomerAddress;
 import com.eatz.domain.customerAddresses.CustomerAddressRepository;
 import com.eatz.presentation.web.address.dto.AddressRequest;
-import com.eatz.shared.exceptions.AddressNotFoundException;
+import com.eatz.shared.exception.AddressNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
