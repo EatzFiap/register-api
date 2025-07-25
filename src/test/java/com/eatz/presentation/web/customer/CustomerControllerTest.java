@@ -12,7 +12,7 @@ import com.eatz.presentation.web.customer.mapper.CustomerMapper;
 import com.eatz.shared.dto.AuthenticationResponse;
 import com.eatz.shared.dto.LoginRequest;
 import com.eatz.shared.dto.PasswordUpdateRequest;
-import com.eatz.shared.exceptions.InvalidPasswordException;
+import com.eatz.shared.exception.InvalidPasswordException;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

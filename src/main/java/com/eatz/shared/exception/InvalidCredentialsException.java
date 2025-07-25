@@ -1,4 +1,4 @@
-package com.eatz.shared.exceptions;
+package com.eatz.shared.exception;
 
 public class InvalidCredentialsException extends RuntimeException {
 

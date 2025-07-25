@@ -4,7 +4,7 @@ import com.eatz.domain.customer.Customer;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.shared.domain.User;
 import com.eatz.shared.domain.UserRepository;
-import com.eatz.shared.exceptions.InvalidPasswordException;
+import com.eatz.shared.exception.InvalidPasswordException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

@@ -5,7 +5,7 @@ import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.shared.dto.AuthenticationResponse;
 import com.eatz.shared.dto.LoginRequest;
-import com.eatz.shared.exceptions.InvalidCredentialsException;
+import com.eatz.shared.exception.InvalidCredentialsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

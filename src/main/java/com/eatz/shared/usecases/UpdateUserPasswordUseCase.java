@@ -1,6 +1,6 @@
 package com.eatz.shared.usecases;
 
-import com.eatz.shared.exceptions.InvalidPasswordException;
+import com.eatz.shared.exception.InvalidPasswordException;
 import com.eatz.shared.domain.User;
 import com.eatz.shared.domain.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
