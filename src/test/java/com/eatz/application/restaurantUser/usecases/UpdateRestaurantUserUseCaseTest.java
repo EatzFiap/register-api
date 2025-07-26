@@ -1,7 +1,9 @@
 package com.eatz.application.restaurantUser.usecases;
 
+import com.eatz.domain.address.Address;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
+import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -31,8 +33,8 @@ class UpdateRestaurantUserUseCaseTest {
     class ExecuteUpdateRestaurantUser {
 
         @Test
-        @DisplayName("Updates restaurant user successfully")
-        void updatesRestaurantUserSuccessfully() {
+        @DisplayName("Updates restaurant user successfully with null fields")
+        void updatesRestaurantUserSuccessfully_WithNullFields() {
             Long id = 1L;
             RestaurantUser existingUser = new RestaurantUser();
             existingUser.setId(id);
@@ -40,17 +42,52 @@ class UpdateRestaurantUserUseCaseTest {
             existingUser.setEmail("old@example.com");
 
             RestaurantUser newData = new RestaurantUser();
-            newData.setName("New Name");
-            newData.setEmail("new@example.com");
+            newData.setProfileImageUrl("newImageUrl.jpg");
 
             when(restaurantUserRepository.findByIdAndIsDeletedFalse(id)).thenReturn(Optional.of(existingUser));
             when(restaurantUserRepository.save(any(RestaurantUser.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
             RestaurantUser result = updateRestaurantUserUseCase.execute(id, newData);
 
-            assertEquals("New Name", result.getName());
-            assertEquals("new@example.com", result.getEmail());
+            assertEquals("Old Name", result.getName());
+            assertEquals("newImageUrl.jpg", result.getProfileImageUrl());
             assertNotNull(result.getUpdatedAt());
+        }
+
+        @Test
+        @DisplayName("Updates restaurant user successfully")
+        void updatesRestaurantUserSuccessfully_WithAllFields() {
+            Long id = 1L;
+            Address address = new Address();
+
+            RestaurantUser existingUser = new RestaurantUser();
+            existingUser.setId(id);
+            existingUser.setName("Existing Name");
+            existingUser.setEmail("existingUser@example.com");
+            existingUser.setPhone("123456789");
+            existingUser.setCpf("123.456.789-00");
+            existingUser.setRole(RestaurantRole.EMPLOYEE);
+            existingUser.setAddress(address);
+
+            RestaurantUser newData = new RestaurantUser();
+            newData.setName("Updated Name");
+            newData.setEmail("existingUser@example.com");
+            newData.setPhone("987654321");
+            newData.setCpf("123.456.789-01");
+            newData.setRole(RestaurantRole.MANAGER);
+            newData.setAddress(address);
+
+            when(restaurantUserRepository.findByIdAndIsDeletedFalse(id)).thenReturn(Optional.of(existingUser));
+            when(restaurantUserRepository.save(any(RestaurantUser.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+            RestaurantUser result = updateRestaurantUserUseCase.execute(id, newData);
+
+            assertEquals("Updated Name", result.getName());
+            assertEquals("existingUser@example.com", result.getEmail());
+            assertEquals("987654321", result.getPhone());
+            assertEquals("123.456.789-01", result.getCpf());
+            assertEquals(RestaurantRole.MANAGER, result.getRole());
+            assertEquals(address, result.getAddress());
         }
 
         @Test
