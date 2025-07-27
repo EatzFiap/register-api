@@ -40,6 +40,9 @@ public class NewCustomerRequest {
         this.address = address;
     }
     public String getCpf() { return cpf; }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     public String getPassword() {
         return password;
     }

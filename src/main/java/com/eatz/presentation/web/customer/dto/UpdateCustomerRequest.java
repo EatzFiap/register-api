@@ -26,5 +26,11 @@ public class UpdateCustomerRequest {
         this.phone = phone;
     }
     public String getCpf() { return cpf; }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     public String getProfileImageUrl() { return profileImageUrl; }
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 }

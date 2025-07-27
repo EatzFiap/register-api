@@ -1,12 +1,10 @@
 package com.eatz.presentation.web.customer.mapper;
 
-import com.eatz.domain.address.Address;
 import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customer.Customer;
-import com.eatz.infrastructure.persistence.address.AddressEntityMapper;
 import com.eatz.presentation.web.address.dto.CustomerAddressResponse;
-import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
 import com.eatz.presentation.web.customer.dto.CustomerResponse;
+import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
 import com.eatz.presentation.web.customer.dto.UpdateCustomerRequest;
 import org.springframework.stereotype.Component;
 
@@ -23,13 +21,20 @@ public class CustomerMapper {
         customer.setPhone(dto.getPhone());
         customer.setCpf(dto.getCpf());
 
-        Address address = new Address();
-        address.setStreet(dto.getAddress().getStreet());
-        address.setCity(dto.getAddress().getCity());
-        address.setState(dto.getAddress().getState());
-        address.setZipCode(dto.getAddress().getZipCode());
+        CustomerAddressDetails address = new CustomerAddressDetails(
+                null,
+                dto.getAddress().getStreet(),
+                dto.getAddress().getNumber(),
+                dto.getAddress().getComplement(),
+                dto.getAddress().getCity(),
+                dto.getAddress().getNeighbourhood(),
+                dto.getAddress().getState(),
+                dto.getAddress().getZipCode(),
+                dto.getAddress().getNickname(),
+                dto.getAddress().isDefaultAddress()
+        );
 
-        customer.setAddresses(null);
+        customer.setAddresses(Collections.singletonList(address));
 
         return customer;
     }
