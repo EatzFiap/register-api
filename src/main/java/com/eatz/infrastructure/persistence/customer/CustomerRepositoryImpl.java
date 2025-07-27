@@ -21,7 +21,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public Optional<Customer> findById(Long id) {
-        return jpaRepository.findByIdAndIsDeletedFalse(id)
+        return jpaRepository.findById(id)
                 .map(mapper::toDomain);
     }
 
