@@ -121,4 +121,8 @@ public class CustomerEntity {
         return customerAddresses;
     }
 
+    public void setCustomerAddresses(List<CustomerAddressEntity> customerAddresses) {
+        this.customerAddresses = customerAddresses;
+    }
+
 }
