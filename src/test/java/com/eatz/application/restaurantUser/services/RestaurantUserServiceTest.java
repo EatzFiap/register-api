@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
 
+import static com.eatz.helper.RestaurantUserHelper.createRestaurantUser;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -210,6 +211,31 @@ class RestaurantUserServiceTest {
             RestaurantUser result = restaurantUserService.updateUser(userId, newData);
 
             assertNull(result.getAddress());
+        }
+
+        @Test
+        @DisplayName("Updates user successfully when existing user's address is null")
+        void updatesUserSuccessfullyWhenExistingUsersAddressIsNotNull() {
+            Long userId = 1L;
+            RestaurantUser existingUser = createRestaurantUser();
+            existingUser.setId(userId);
+            existingUser.setAddress(null);
+
+            RestaurantUser newData = createRestaurantUser();
+            newData.setProfileImageUrl("newImageUrl.png");
+            Address newAddress = new Address();
+            newAddress.setStreet("New Street");
+            newData.setAddress(newAddress);
+
+            when(getUserUseCase.execute(userId)).thenReturn(existingUser);
+            when(saveAddressUseCase.execute(newAddress)).thenReturn(newAddress);
+            when(updateUserUseCase.execute(userId, newData)).thenReturn(newData);
+
+            RestaurantUser result = restaurantUserService.updateUser(userId, newData);
+
+            assertNotNull(result);
+            assertEquals(existingUser.getName(), result.getName());
+            assertEquals("New Street", result.getAddress().getStreet());
         }
 
         @Test
