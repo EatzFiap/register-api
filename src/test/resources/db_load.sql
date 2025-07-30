@@ -1,0 +1,4 @@
+INSERT INTO TB_RESTAURANT_USER (id_restaurant_user, role, name, email, password, cpf, phone, created_at, updated_at, is_deleted, profile_image_url, fk_restaurant) VALUES
+(10900, 'ADMIN', 'Natalia Rossi', 'natalia@bellanapoli.com', '$2a$10$BpZr7WgL/4cdvBkaSKyp0O8mLlPFd/BcmWVsFHKtHUANRS88OiPyu', '111.222.333-44', '(11) 3456-7890', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false, null, 1),
+(10901, 'EMPLOYEE', 'Carlos Burger', 'carlos@burgerhouse.com', '$2a$10$BgZcFnVCzxO2Fcalom3OyetNQ1KX5lC48goghbFvr29MxkLm1cfCm', '444.555.666-77', '(11) 9876-5432', '2024-01-16 14:20:00', '2024-01-16 14:20:00', false, null, 2),
+(10902, 'ADMIN', 'Takeshi Yamamoto', 'takeshi@sushizen.com', '$2a$10$BgZcFnVCzxO2Fcalom3OyetNQ1KX5lC48goghbFvr29MxkLm1cfCm', '666.777.888-99', '(11) 2345-6789', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false, null, 3);

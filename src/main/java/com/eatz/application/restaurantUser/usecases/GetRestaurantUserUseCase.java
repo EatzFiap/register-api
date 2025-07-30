@@ -30,7 +30,7 @@ public class GetRestaurantUserUseCase {
         }
 
         return restaurantUserRepository.findByEmailAndIsDeletedFalse(email)
-                .orElseThrow(() -> new CustomerNotFoundException("User not found with email: " + email));
+                .orElseThrow(() -> new RestaurantNotFoundException("User not found with email: " + email));
     }
 
     public List<RestaurantUser> execute() {

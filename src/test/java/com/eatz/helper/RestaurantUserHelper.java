@@ -3,6 +3,7 @@ package com.eatz.helper;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import com.eatz.infrastructure.persistence.restaurantUser.RestaurantUserEntity;
+import com.eatz.presentation.web.restaurantUser.dto.RestaurantUserRequest;
 
 import java.time.LocalDateTime;
 
@@ -41,6 +42,19 @@ public abstract class RestaurantUserHelper {
         entity.setRestaurantId(10L);
         entity.setAddress(AddressHelper.createAddressEntity());
         return entity;
+    }
+
+    public static RestaurantUserRequest createRestaurantUserRequest() {
+        RestaurantUserRequest request = new RestaurantUserRequest();
+        request.setRole(RestaurantRole.MANAGER.name());
+        request.setName("Maria Oliveira");
+        request.setEmail("maria.oliveira@email.com");
+        request.setCpf("12345678900");
+        request.setPhone("11999999999");
+        request.setPassword("password123");
+        request.setProfileImageUrl("https://example.com/image.jpg");
+        request.setAddress(AddressHelper.createAddress());
+        return request;
     }
 
 }
