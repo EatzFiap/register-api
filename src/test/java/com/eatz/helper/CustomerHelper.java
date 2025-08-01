@@ -2,12 +2,12 @@ package com.eatz.helper;
 
 import com.eatz.domain.customer.Customer;
 import com.eatz.infrastructure.persistence.customer.CustomerEntity;
+import com.eatz.presentation.web.customer.dto.NewCustomerRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.eatz.helper.AddressHelper.createCustomerAddressDetails;
-import static com.eatz.helper.AddressHelper.createCustomerAddressEntity;
+import static com.eatz.helper.AddressHelper.*;
 
 public abstract class CustomerHelper {
 
@@ -39,6 +39,17 @@ public abstract class CustomerHelper {
                 createCustomerAddressDetails()
         ));
         return customer;
+    }
+
+    public static NewCustomerRequest createNewCustomerRequest() {
+        NewCustomerRequest request = new NewCustomerRequest();
+        request.setName("Artur Silva");
+        request.setEmail("artur.silva@email.com");
+        request.setCpf("12345678901");
+        request.setPhone("11987654321");
+        request.setPassword("password123");
+        request.setAddress(createAddressRequest());
+        return request;
     }
 
 }

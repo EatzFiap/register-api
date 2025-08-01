@@ -105,7 +105,7 @@ class GetRestaurantUserUseCaseTest {
 
             when(restaurantUserRepository.findByEmailAndIsDeletedFalse(email)).thenReturn(Optional.empty());
 
-            CustomerNotFoundException exception = assertThrows(CustomerNotFoundException.class,
+            RestaurantNotFoundException exception = assertThrows(RestaurantNotFoundException.class,
                     () -> getRestaurantUserUseCase.execute(email));
 
             assertEquals("User not found with email: " + email, exception.getMessage());
