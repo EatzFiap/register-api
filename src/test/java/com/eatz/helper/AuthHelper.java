@@ -7,13 +7,13 @@ import static io.restassured.RestAssured.given;
 
 public abstract class AuthHelper {
 
-    public static RequestSpecification authenticatedRestaurantUserRequest(String email, String password) {
+    public static RequestSpecification authenticatedRequest(String email, String password, String endpoint) {
         String token =
                 given()
                     .contentType("application/json")
                     .body(new LoginRequest(email, password))
                 .when()
-                    .post("/restaurant-users/login")
+                    .post(endpoint)
                 .then()
                     .statusCode(200)
                     .extract()

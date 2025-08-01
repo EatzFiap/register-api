@@ -5,10 +5,7 @@ import com.eatz.shared.dto.LoginRequest;
 import com.eatz.shared.dto.PasswordUpdateRequest;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
@@ -16,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 
-import static com.eatz.helper.AuthHelper.authenticatedRestaurantUserRequest;
+import static com.eatz.helper.AuthHelper.authenticatedRequest;
 import static com.eatz.helper.RestaurantUserHelper.createRestaurantUserRequest;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -26,6 +23,7 @@ import static org.hamcrest.Matchers.hasKey;
 @Sql(scripts = {"/db_load.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, config = @SqlConfig(errorMode = SqlConfig.ErrorMode.FAIL_ON_ERROR))
 @Sql(scripts = {"/db_clean.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Tag("integration")
 class RestaurantUserControllerIT {
 
     @LocalServerPort
@@ -37,7 +35,7 @@ class RestaurantUserControllerIT {
     void setUp() {
         RestAssured.port = port;
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        authenticatedRequest = authenticatedRestaurantUserRequest("natalia@bellanapoli.com", "password123");
+        authenticatedRequest = authenticatedRequest("natalia@bellanapoli.com", "password123", "/restaurant-users/login");
     }
 
     @Nested

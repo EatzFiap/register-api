@@ -5,6 +5,7 @@ import com.eatz.domain.address.CustomerAddressDetails;
 import com.eatz.domain.customerAddresses.CustomerAddress;
 import com.eatz.infrastructure.persistence.address.AddressEntity;
 import com.eatz.infrastructure.persistence.customerAddress.CustomerAddressEntity;
+import com.eatz.presentation.web.address.dto.AddressRequest;
 
 import java.time.LocalDateTime;
 
@@ -31,6 +32,19 @@ public abstract class AddressHelper {
         entity.setCreatedAt("2025-01-01T12:00:00");
         entity.setDeleted(false);
         return entity;
+    }
+
+    public static AddressRequest createAddressRequest() {
+        AddressRequest request = new AddressRequest();
+        request.setStreet("Rua das Flores");
+        request.setNumber("123");
+        request.setNeighbourhood("Centro");
+        request.setCity("São Paulo");
+        request.setState("SP");
+        request.setZipCode("12345-678");
+        request.setNickname("Home");
+        request.setDefaultAddress(true);
+        return request;
     }
 
     public static CustomerAddressEntity createCustomerAddressEntity() {
