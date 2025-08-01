@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 public class ValuesConverter {
 
+    private ValuesConverter() {
+    }
+
     public static BigDecimal toBigDecimal(Double value) {
         if (value == null) {
             return null;
@@ -19,10 +22,6 @@ public class ValuesConverter {
         if (value == null) {
             return null;
         }
-        try {
-            return value.doubleValue();
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid value for conversion to Double: " + value, e);
-        }
+        return value.doubleValue();
     }
 }
