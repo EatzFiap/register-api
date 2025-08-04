@@ -49,3 +49,56 @@ INSERT INTO TB_MENU_ITEM (name, description, price, only_local_consumption, phot
 ('Bacon Cheeseburger', 'Hambúrguer 180g com queijo cheddar e bacon crocante', 38.90, false, null, 2, '2024-01-16 14:25:00', '2024-01-16 14:25:00', false),
 ('Sushi Combo', 'Combinado de sushi com 12 peças variadas', 65.90, false, null, 3, '2024-01-17 09:15:00', '2024-01-17 09:15:00', false),
 ('Temaki Salmão', 'Temaki de salmão com cream cheese', 18.90, false, null, 3, '2024-01-17 09:20:00', '2024-01-17 09:20:00', false);
+
+-- Inserir Restaurants
+INSERT INTO TB_RESTAURANT (
+    name, logo_image_url, fk_address, phone, whatsapp_phone, cnpj, created_at, updated_at, is_deleted, delivery_radius
+) VALUES
+      (
+          'Restaurante Sabor da Terra',
+          'https://cdn.eatz.com.br/logos/sabor-da-terra.png',
+          1,
+          '(11) 98765-4321',
+          '(11) 91234-5678',
+          '12.345.678/0001-90',
+          NOW(),
+          NOW(),
+          FALSE,
+          5.0
+      ),
+      (
+          'Cantina Italiana',
+          'https://cdn.eatz.com.br/logos/cantina-italiana.jpg',
+          2,
+          '(21) 3232-4567',
+          '(21) 98888-1234',
+          '98.765.432/0001-12',
+          NOW(),
+          NOW(),
+          FALSE,
+          7.5
+      ),
+      (
+          'Burguer Point',
+          'https://cdn.eatz.com.br/logos/burguer-point.jpg',
+          3,
+          '(31) 99888-1122',
+          '(31) 99999-2233',
+          '11.222.333/0001-44',
+          NOW(),
+          NOW(),
+          FALSE,
+          3.2
+      ),
+      (
+          'Veggie Vibe',
+          'https://cdn.eatz.com.br/logos/veggie-vibe.jpg',
+          4,
+          '(41) 3344-5566',
+          '(41) 97777-8899',
+          '55.444.333/0001-77',
+          NOW(),
+          NOW(),
+          FALSE,
+          4.8
+      );

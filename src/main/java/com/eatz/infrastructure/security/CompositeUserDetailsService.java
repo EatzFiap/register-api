@@ -5,6 +5,7 @@ import com.eatz.domain.customer.CustomerRepository;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
 import io.jsonwebtoken.JwtException;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import static com.eatz.domain.customer.enums.UserRole.ADMIN;
 import static com.eatz.domain.customer.enums.UserRole.CUSTOMER;
 
+@Primary
 @Service
 public class CompositeUserDetailsService implements UserDetailsService {
 

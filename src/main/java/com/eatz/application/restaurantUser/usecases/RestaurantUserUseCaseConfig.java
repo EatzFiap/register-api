@@ -13,35 +13,35 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class RestaurantUserUseCaseConfig {
 
-    @Bean
+    @Bean(name = "createRestaurantUserUseCase")
     public CreateRestaurantUserUseCase createRestaurantUseCase(RestaurantUserRepository restaurantUserRepository, 
                                                              RestaurantUserTypeRepository restaurantUserTypeRepository,
                                                              PasswordEncoder passwordEncoder) {
         return new CreateRestaurantUserUseCase(restaurantUserRepository, restaurantUserTypeRepository, passwordEncoder);
     }
 
-    @Bean
+    @Bean(name = "deleteRestaurantUserUseCase")
     public DeleteRestaurantUserUseCase deleteRestaurantUseCase(RestaurantUserRepository restaurantUserRepository) {
         return new DeleteRestaurantUserUseCase(restaurantUserRepository);
     }
 
-    @Bean
+    @Bean(name = "updateRestaurantUserUseCase")
     public UpdateRestaurantUserUseCase updateRestaurantUseCase(RestaurantUserRepository restaurantUserRepository,
                                                              RestaurantUserTypeRepository restaurantUserTypeRepository) {
         return new UpdateRestaurantUserUseCase(restaurantUserRepository, restaurantUserTypeRepository);
     }
 
-    @Bean
+    @Bean(name = "getRestaurantUserUseCase")
     public GetRestaurantUserUseCase getRestaurantUseCase(RestaurantUserRepository restaurantUserRepository) {
         return new GetRestaurantUserUseCase(restaurantUserRepository);
     }
 
-    @Bean
+    @Bean(name = "updateRestaurantUserPasswordUseCase")
     public UpdateUserPasswordUseCase<RestaurantUser> updateRestaurantUserPasswordUseCase(RestaurantUserRepository restaurantUserRepository, PasswordEncoder passwordEncoder) {
         return new UpdateUserPasswordUseCase<>(restaurantUserRepository, passwordEncoder);
     }
 
-    @Bean
+    @Bean(name = "authenticateRestaurantUserUseCase")
     public AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase(
             AuthenticationManager authenticationManager,
             JwtUtil jwtUtil,
