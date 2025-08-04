@@ -61,4 +61,9 @@ public class RestaurantUserRepositoryImpl implements RestaurantUserRepository {
     public Optional<String> findRoleByEmailAndIsDeletedFalse(String email) {
         return jpaRepository.findRoleByEmailAndIsDeletedFalse(email);
     }
+
+    @Override
+    public boolean existsByRestaurantUserTypeIdAndIsDeletedFalse(Long restaurantUserTypeId) {
+        return jpaRepository.existsByRestaurantUserTypeIdAndIsDeletedFalse(restaurantUserTypeId);
+    }
 }

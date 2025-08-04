@@ -3,6 +3,7 @@ package com.eatz.infrastructure.persistence.restaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import com.eatz.infrastructure.persistence.address.AddressEntityMapper;
+import com.eatz.infrastructure.persistence.mapper.RestaurantUserTypeEntityMapper;
 
 public class RestaurantUserEntityMapper {
 
@@ -24,6 +25,8 @@ public class RestaurantUserEntityMapper {
         entity.setDeleted(user.isDeleted());
         entity.setProfileImageUrl(user.getProfileImageUrl());
         entity.setRestaurantId(user.getRestaurantId());
+        entity.setRestaurantUserTypeId(user.getRestaurantUserTypeId());
+        entity.setRestaurantUserType(RestaurantUserTypeEntityMapper.toEntity(user.getRestaurantUserType()));
         entity.setAddress(AddressEntityMapper.toEntity(user.getAddress()));
         return entity;
     }
@@ -44,6 +47,8 @@ public class RestaurantUserEntityMapper {
         user.setDeleted(entity.isDeleted());
         user.setProfileImageUrl(entity.getProfileImageUrl());
         user.setRestaurantId(entity.getRestaurantId());
+        user.setRestaurantUserTypeId(entity.getRestaurantUserTypeId());
+        user.setRestaurantUserType(RestaurantUserTypeEntityMapper.toDomain(entity.getRestaurantUserType()));
 
         if (entity.getAddress() != null && !entity.getAddress().isDeleted()) {
             user.setAddress(AddressEntityMapper.toDomain(entity.getAddress()));

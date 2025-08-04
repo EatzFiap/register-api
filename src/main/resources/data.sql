@@ -23,16 +23,23 @@ INSERT INTO TB_CUSTOMER_USER (name, email, password, cpf, phone, created_at, upd
 ('Pedro Costa Lima', 'pedro.costa@email.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '456.789.123-00', '(11) 77777-9012', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false, null);
 
 -- Inserir usuários de restaurante básicos
-INSERT INTO TB_RESTAURANT_USER (role, name, email, password, cpf, phone, created_at, updated_at, is_deleted, profile_image_url, fk_restaurant) VALUES
-('ADMIN', 'Giuseppe Rossi', 'giuseppe@bellanapoli.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '111.222.333-44', '(11) 3456-7890', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false, null, 1),
-('ADMIN', 'Carlos Burger', 'carlos@burgerhouse.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '444.555.666-77', '(11) 9876-5432', '2024-01-16 14:20:00', '2024-01-16 14:20:00', false, null, 2),
-('ADMIN', 'Takeshi Yamamoto', 'takeshi@sushizen.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '666.777.888-99', '(11) 2345-6789', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false, null, 3);
+INSERT INTO TB_RESTAURANT_USER (role, name, email, password, cpf, phone, created_at, updated_at, is_deleted, profile_image_url, fk_restaurant, fk_restaurant_user_type) VALUES
+('ADMIN', 'Giuseppe Rossi', 'giuseppe@bellanapoli.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '111.222.333-44', '(11) 3456-7890', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false, null, 1, 1),
+('ADMIN', 'Carlos Burger', 'carlos@burgerhouse.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '444.555.666-77', '(11) 9876-5432', '2024-01-16 14:20:00', '2024-01-16 14:20:00', false, null, 2, 1),
+('ADMIN', 'Takeshi Yamamoto', 'takeshi@sushizen.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '666.777.888-99', '(11) 2345-6789', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false, null, 3, 1);
 
 -- Associar endereços aos clientes
 INSERT INTO TB_CUSTOMER_ADDRESS (fk_customer, fk_address, nickname, is_default, created_at, updated_at, is_deleted) VALUES
 (1, 1, 'Casa', true, '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
 (2, 2, 'Casa', true, '2024-01-16 14:20:00', '2024-01-16 14:20:00', false),
 (3, 3, 'Casa', true, '2024-01-17 09:15:00', '2024-01-17 09:15:00', false);
+
+-- Inserir tipos de usuário de restaurante básicos
+INSERT INTO TB_RESTAURANT_USER_TYPE (name, description, created_at, updated_at, is_deleted) VALUES
+('ADMIN', 'Administrador com acesso total ao sistema', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('MANAGER', 'Gerente com acesso a gestão de funcionários e menu', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('EMPLOYEE', 'Funcionário com acesso básico ao sistema', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('DELIVERY', 'Entregador com acesso apenas a pedidos de entrega', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false);
 
 -- Inserir itens básicos do menu
 INSERT INTO TB_MENU_ITEM (name, description, price, only_local_consumption, photo_url, fk_restaurant, created_at, updated_at, is_deleted) VALUES
