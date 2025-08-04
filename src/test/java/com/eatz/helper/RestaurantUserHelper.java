@@ -22,6 +22,7 @@ public abstract class RestaurantUserHelper {
         user.setDeleted(false);
         user.setProfileImageUrl("https://example.com/image.jpg");
         user.setRestaurantId(10L);
+        user.setRestaurantUserTypeId(1L);
         user.setAddress(createAddress());
         return user;
     }
@@ -39,6 +40,7 @@ public abstract class RestaurantUserHelper {
         entity.setDeleted(false);
         entity.setProfileImageUrl("https://example.com/image.jpg");
         entity.setRestaurantId(10L);
+        entity.setRestaurantUserTypeId(1L);
         entity.setAddress(AddressHelper.createAddressEntity());
         return entity;
     }

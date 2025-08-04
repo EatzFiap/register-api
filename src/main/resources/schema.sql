@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS TB_RESTAURANT_USER CASCADE;
 DROP TABLE IF EXISTS TB_RESTAURANT CASCADE;
 DROP TABLE IF EXISTS TB_CUSTOMER_USER CASCADE;
 DROP TABLE IF EXISTS TB_ADDRESS CASCADE;
+DROP TABLE IF EXISTS TB_RESTAURANT_USER_TYPE CASCADE;
 
 CREATE TABLE TB_ADDRESS
 (
@@ -67,7 +68,9 @@ CREATE TABLE TB_RESTAURANT_USER
     is_deleted         BOOLEAN DEFAULT FALSE,
     profile_image_url  VARCHAR(500),
     fk_restaurant      INTEGER,
-    FOREIGN KEY (fk_restaurant) REFERENCES TB_RESTAURANT (id_restaurant)
+    fk_restaurant_user_type INTEGER,
+    FOREIGN KEY (fk_restaurant) REFERENCES TB_RESTAURANT (id_restaurant),
+    FOREIGN KEY (fk_restaurant_user_type) REFERENCES TB_RESTAURANT_USER_TYPE (id_restaurant_user_type)
 );
 
 CREATE TABLE TB_CUSTOMER_ADDRESS
@@ -97,4 +100,14 @@ CREATE TABLE TB_MENU_ITEM
     updated_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_deleted             BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (fk_restaurant) REFERENCES TB_RESTAURANT (id_restaurant)
+);
+
+CREATE TABLE TB_RESTAURANT_USER_TYPE
+(
+    id_restaurant_user_type SERIAL PRIMARY KEY,
+    name                    VARCHAR(50) NOT NULL UNIQUE,
+    description             VARCHAR(255),
+    created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_deleted              BOOLEAN DEFAULT FALSE
 );

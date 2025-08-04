@@ -19,6 +19,7 @@ public class RestaurantUserMapper {
         restaurantUser.setCpf(dto.getCpf());
         restaurantUser.setProfileImageUrl(dto.getProfileImageUrl());
         restaurantUser.setRestaurantId(dto.getRestaurantId());
+        restaurantUser.setRestaurantUserTypeId(dto.getRestaurantUserTypeId());
         restaurantUser.setAddress(dto.getAddress());
 
         if (dto.getRole() != null) {
@@ -35,6 +36,7 @@ public class RestaurantUserMapper {
         restaurantUser.setPhone(dto.getPhone());
         restaurantUser.setCpf(dto.getCpf());
         restaurantUser.setProfileImageUrl(dto.getProfileImageUrl());
+        restaurantUser.setRestaurantUserTypeId(dto.getRestaurantUserTypeId());
         restaurantUser.setAddress(dto.getAddress());
 
         if (dto.getRole() != null) {

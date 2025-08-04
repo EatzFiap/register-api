@@ -2,6 +2,7 @@ package com.eatz.application.restaurantUser.usecases;
 
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
+import com.eatz.domain.restaurantUserType.RestaurantUserTypeRepository;
 import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class RestaurantUserUseCaseConfig {
 
     @Bean
-    public CreateRestaurantUserUseCase createRestaurantUseCase(RestaurantUserRepository restaurantUserRepository, PasswordEncoder passwordEncoder) {
-        return new CreateRestaurantUserUseCase(restaurantUserRepository, passwordEncoder);
+    public CreateRestaurantUserUseCase createRestaurantUseCase(RestaurantUserRepository restaurantUserRepository, 
+                                                             RestaurantUserTypeRepository restaurantUserTypeRepository,
+                                                             PasswordEncoder passwordEncoder) {
+        return new CreateRestaurantUserUseCase(restaurantUserRepository, restaurantUserTypeRepository, passwordEncoder);
     }
 
     @Bean
@@ -23,8 +26,9 @@ public class RestaurantUserUseCaseConfig {
     }
 
     @Bean
-    public UpdateRestaurantUserUseCase updateRestaurantUseCase(RestaurantUserRepository restaurantUserRepository) {
-        return new UpdateRestaurantUserUseCase(restaurantUserRepository);
+    public UpdateRestaurantUserUseCase updateRestaurantUseCase(RestaurantUserRepository restaurantUserRepository,
+                                                             RestaurantUserTypeRepository restaurantUserTypeRepository) {
+        return new UpdateRestaurantUserUseCase(restaurantUserRepository, restaurantUserTypeRepository);
     }
 
     @Bean

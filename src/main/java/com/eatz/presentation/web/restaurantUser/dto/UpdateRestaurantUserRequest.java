@@ -19,6 +19,8 @@ public class UpdateRestaurantUserRequest {
 
     private String profileImageUrl;
 
+    private Long restaurantUserTypeId;
+
     private Address address;
 
     public String getName() {
@@ -62,5 +64,11 @@ public class UpdateRestaurantUserRequest {
     }
     public void setAddress(Address address) {
         this.address = address;
+    }
+    public Long getRestaurantUserTypeId() {
+        return restaurantUserTypeId;
+    }
+    public void setRestaurantUserTypeId(Long restaurantUserTypeId) {
+        this.restaurantUserTypeId = restaurantUserTypeId;
     }
 }
