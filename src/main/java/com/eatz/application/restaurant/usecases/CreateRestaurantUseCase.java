@@ -40,6 +40,7 @@ public class CreateRestaurantUseCase {
             restaurant.setAddress(savedAddress);
         }
 
+        restaurant.setIsDeleted(false);
         return restaurantRepository.save(restaurant);
     }
 }

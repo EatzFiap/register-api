@@ -54,6 +54,16 @@ CREATE TABLE TB_RESTAURANT
     FOREIGN KEY (fk_address) REFERENCES TB_ADDRESS (id_address)
 );
 
+CREATE TABLE TB_RESTAURANT_USER_TYPE
+(
+    id_restaurant_user_type SERIAL PRIMARY KEY,
+    name                    VARCHAR(50) NOT NULL UNIQUE,
+    description             VARCHAR(255),
+    created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_deleted              BOOLEAN DEFAULT FALSE
+);
+
 CREATE TABLE TB_RESTAURANT_USER
 (
     id_restaurant_user SERIAL PRIMARY KEY,
@@ -100,14 +110,4 @@ CREATE TABLE TB_MENU_ITEM
     updated_at             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_deleted             BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (fk_restaurant) REFERENCES TB_RESTAURANT (id_restaurant)
-);
-
-CREATE TABLE TB_RESTAURANT_USER_TYPE
-(
-    id_restaurant_user_type SERIAL PRIMARY KEY,
-    name                    VARCHAR(50) NOT NULL UNIQUE,
-    description             VARCHAR(255),
-    created_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_deleted              BOOLEAN DEFAULT FALSE
 );

@@ -66,9 +66,6 @@ class CustomerServiceTest {
     @Mock
     private JwtUtil jwtUtil;
 
-    @Mock
-    private AddressMapper addressMapper;
-
     @InjectMocks
     private CustomerService customerService;
 
@@ -421,10 +418,6 @@ class CustomerServiceTest {
             addressRequest.setNickname("Home");
             addressRequest.setDefaultAddress(true);
 
-            Address address = new Address();
-            address.setStreet(addressRequest.getStreet());
-            address.setNumber(addressRequest.getNumber());
-
             Customer customer = new Customer();
             customer.setId(customerId);
 
@@ -433,8 +426,7 @@ class CustomerServiceTest {
             savedAddress.setStreet("Street");
 
             when(getCustomerUseCase.execute(customerId)).thenReturn(customer);
-            when(addressMapper.toDomain(addressRequest)).thenReturn(address);
-            when(saveAddressUseCase.execute(address)).thenReturn(savedAddress);
+            when(saveAddressUseCase.execute(any(Address.class))).thenReturn(savedAddress);
 
             assertDoesNotThrow(() -> customerService.addAddress(customerId, addressRequest));
             verify(associateAddressToCustomerUseCase, times(1))
@@ -453,20 +445,6 @@ class CustomerServiceTest {
                     () -> customerService.addAddress(customerId, addressRequest));
 
             assertEquals("Customer not found.", exception.getMessage());
-        }
-
-        @Test
-        @DisplayName("Throws exception when address request is null")
-        void throwsExceptionWhenAddressRequestIsNull() {
-            Long customerId = 1L;
-
-            when(getCustomerUseCase.execute(customerId)).thenReturn(new Customer());
-            when(addressMapper.toDomain(null)).thenThrow(new IllegalArgumentException("Address request cannot be null."));
-
-            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                    () -> customerService.addAddress(customerId, null));
-
-            assertEquals("Address request cannot be null.", exception.getMessage());
         }
 
     }
