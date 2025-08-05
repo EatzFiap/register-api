@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 "/customers/register",
                                 "/restaurant-users/register",
                                 "/restaurant-users/login",
+                                "/api/restaurant-user-types/all",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",

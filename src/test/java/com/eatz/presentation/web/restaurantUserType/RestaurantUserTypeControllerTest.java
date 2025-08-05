@@ -2,9 +2,8 @@ package com.eatz.presentation.web.restaurantUserType;
 
 import com.eatz.application.restaurantUserType.RestaurantUserTypeService;
 import com.eatz.domain.restaurantUserType.RestaurantUserType;
-import com.eatz.presentation.web.restaurantUserType.dto.RestaurantUserTypeRequest;
-import com.eatz.presentation.web.restaurantUserType.dto.RestaurantUserTypeResponse;
 import com.eatz.helper.RestaurantUserTypeHelper;
+import com.eatz.presentation.web.restaurantUserType.dto.RestaurantUserTypeRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
 class RestaurantUserTypeControllerTest {
@@ -49,7 +49,7 @@ class RestaurantUserTypeControllerTest {
         when(service.getAll()).thenReturn(types);
 
         // When & Then
-        mockMvc.perform(get("/api/restaurant-user-types"))
+        mockMvc.perform(get("/api/restaurant-user-types/all"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].id").value(1))

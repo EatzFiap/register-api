@@ -22,7 +22,7 @@ public class RestaurantUserTypeController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<RestaurantUserTypeResponse>> findAll() {
         List<RestaurantUserType> types = service.getAll();
         List<RestaurantUserTypeResponse> responses = types.stream()

@@ -5,6 +5,9 @@ import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
 import com.eatz.domain.restaurantUser.enums.RestaurantRole;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
+import com.eatz.domain.restaurantUserType.RestaurantUserType;
+import com.eatz.domain.restaurantUserType.RestaurantUserTypeRepository;
+import com.eatz.domain.restaurantUserType.exceptions.RestaurantUserTypeNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,6 +20,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,6 +28,9 @@ class UpdateRestaurantUserUseCaseTest {
 
     @Mock
     private RestaurantUserRepository restaurantUserRepository;
+
+    @Mock
+    private RestaurantUserTypeRepository restaurantUserTypeRepository;
 
     @InjectMocks
     private UpdateRestaurantUserUseCase updateRestaurantUserUseCase;
@@ -122,6 +129,70 @@ class UpdateRestaurantUserUseCaseTest {
                     () -> updateRestaurantUserUseCase.execute(id, newData));
 
             assertEquals("Usuário não encontrado para atualização.", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Throws exception when email is already in use by another user")
+        void throwsExceptionWhenEmailIsAlreadyInUseByAnotherUser() {
+            Long id = 1L;
+            RestaurantUser existingUser = new RestaurantUser();
+            existingUser.setId(id);
+            existingUser.setEmail("existing@example.com");
+
+            RestaurantUser newData = new RestaurantUser();
+            newData.setEmail("new@example.com");
+
+            when(restaurantUserRepository.findByIdAndIsDeletedFalse(id)).thenReturn(Optional.of(existingUser));
+            when(restaurantUserRepository.existsByEmailAndIsDeletedFalse("new@example.com")).thenReturn(true);
+
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                    () -> updateRestaurantUserUseCase.execute(id, newData));
+
+            assertEquals("Este e-mail já está em uso.", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Throws exception when restaurant user type ID does not exist")
+        void throwsExceptionWhenRestaurantUserTypeIdDoesNotExist() {
+            Long id = 1L;
+            RestaurantUser existingUser = new RestaurantUser();
+            existingUser.setId(id);
+
+            RestaurantUser newData = new RestaurantUser();
+            newData.setRestaurantUserTypeId(2L);
+
+            when(restaurantUserRepository.findByIdAndIsDeletedFalse(id)).thenReturn(Optional.of(existingUser));
+            when(restaurantUserTypeRepository.findById(2L)).thenReturn(Optional.empty());
+
+            RestaurantUserTypeNotFoundException exception = assertThrows(RestaurantUserTypeNotFoundException.class,
+                    () -> updateRestaurantUserUseCase.execute(id, newData));
+
+            assertEquals("Restaurant user type not found with id: 2", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Updates restaurant user type successfully when valid type ID is provided")
+        void updatesRestaurantUserTypeSuccessfullyWhenValidTypeIdIsProvided() {
+            Long id = 1L;
+            RestaurantUser existingUser = new RestaurantUser();
+            existingUser.setId(id);
+
+            RestaurantUser newData = new RestaurantUser();
+            newData.setRestaurantUserTypeId(2L);
+
+            RestaurantUserType restaurantUserType = new RestaurantUserType();
+            restaurantUserType.setId(2L);
+            restaurantUserType.setName("MANAGER");
+
+            when(restaurantUserRepository.findByIdAndIsDeletedFalse(id)).thenReturn(Optional.of(existingUser));
+            when(restaurantUserTypeRepository.findById(2L)).thenReturn(Optional.of(restaurantUserType));
+            when(restaurantUserRepository.save(any(RestaurantUser.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+            RestaurantUser result = updateRestaurantUserUseCase.execute(id, newData);
+
+            assertEquals(2L, result.getRestaurantUserTypeId());
+            verify(restaurantUserTypeRepository).findById(2L);
+            verify(restaurantUserRepository).save(existingUser);
         }
 
     }
