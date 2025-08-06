@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id 'jacoco'
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
@@ -13,6 +14,10 @@ java {
 	}
 }
 
+jacoco {
+	toolVersion = "0.8.11"
+}
+
 repositories {
 	mavenCentral()
 }
@@ -23,14 +28,62 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9'
 	implementation 'org.postgresql:postgresql:42.7.3'
+	implementation 'io.minio:minio:8.5.7'
 	implementation 'io.jsonwebtoken:jjwt:0.12.6'
 	runtimeOnly 'com.h2database:h2'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.assertj:assertj-core:3.25.3'
+	testImplementation 'io.rest-assured:rest-assured:5.4.0'
+	testImplementation 'io.rest-assured:json-path:5.4.0'
+	testImplementation 'io.rest-assured:xml-path:5.4.0'
+	testImplementation 'io.rest-assured:json-schema-validator:5.4.0'
+	testImplementation platform("io.qameta.allure:allure-bom:2.25.0")
+	testImplementation "io.qameta.allure:allure-junit5"
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+	useJUnitPlatform {
+		excludeTags 'integration'
+	}
+}
+
+tasks.register('integrationTest', Test) {
+	description = 'Runs only integration tests'
+	group = 'verification'
+	useJUnitPlatform {
+		includeTags 'integration'
+	}
+	testClassesDirs = sourceSets.test.output.classesDirs
+	classpath = sourceSets.test.runtimeClasspath
+	shouldRunAfter test
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		html.required.set(true)
+	}
+	classDirectories.setFrom(
+			files(classDirectories.files.collect { fileTree(dir: it, exclude: [
+					'**/config/**',
+					'**/dto/**',
+					'**/domain/**',
+					'**/exception/**',
+					'**/exceptions/**',
+					'**/properties/**',
+					'**/request/**',
+					'**/response/**',
+					'**/*Config.class',
+					'**/*Entity.class',
+					'**/*Application.class'
+			]) })
+	)
+}
+
+test {
+	finalizedBy jacocoTestReport
 }

@@ -2,6 +2,7 @@ package com.eatz.presentation.web.restaurantUser.dto;
 
 import com.eatz.domain.address.Address;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class RestaurantUserRequest {
     @NotBlank
@@ -22,6 +23,9 @@ public class RestaurantUserRequest {
     private String profileImageUrl;
 
     private Long restaurantId;
+
+    @NotNull(message = "Restaurant user type ID is required")
+    private Long restaurantUserTypeId;
 
     private Address address;
 
@@ -75,5 +79,14 @@ public class RestaurantUserRequest {
     }
     public Address getAddress() {
         return address;
+    }
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    public Long getRestaurantUserTypeId() {
+        return restaurantUserTypeId;
+    }
+    public void setRestaurantUserTypeId(Long restaurantUserTypeId) {
+        this.restaurantUserTypeId = restaurantUserTypeId;
     }
 }

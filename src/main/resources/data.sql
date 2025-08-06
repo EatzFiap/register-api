@@ -1,23 +1,104 @@
-INSERT INTO TB_ADDRESS (street, number, complement, city, neighbourhood, state, zip_code)
-VALUES
-    ('Rua das Flores', '123', 'Apto 202', 'São Paulo', 'Jardins', 'SP', '01234-567'),
-    ('Avenida Paulista', '456', '', 'São Paulo', 'Centro', 'SP', '01311-000'),
-    ('Av. Brasil', '1000', '', 'Rio de Janeiro', 'Copacabana', 'RJ', '22040-002');
+-- =====================================================
+-- DADOS BÁSICOS - EATZ DATABASE (POSTGRESQL)
+-- =====================================================
 
-INSERT INTO TB_CUSTOMER (name, email, password, cpf, phone)
-VALUES
-    ('Maria Silva', 'maria@email.com', '$2a$10$iR6HsE.nl6fS6nPJ6SmajO9DubU/HDQg87C7GCpYm4zT18jKN43ji', '123.456.789-00', '(11) 91234-5678'),
-    ('João Souza', 'joao@email.com', '$2a$10$iR6HsE.nl6fS6nPJ6SmajO9DubU/HDQg87C7GCpYm4zT18jKN43ji', '987.654.321-00', '(21) 99876-5432');
+-- Inserir endereços básicos
+INSERT INTO TB_ADDRESS (street, number, complement, city, neighbourhood, state, zip_code, created_at, updated_at, is_deleted) VALUES
+('Rua das Flores', '123', 'Apto 45', 'São Paulo', 'Vila Madalena', 'SP', '05435-000', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('Avenida Paulista', '1000', 'Conjunto 12', 'São Paulo', 'Bela Vista', 'SP', '01310-100', '2024-01-16 14:20:00', '2024-01-16 14:20:00', false),
+('Rua Augusta', '500', null, 'São Paulo', 'Consolação', 'SP', '01305-000', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false),
+('Rua Oscar Freire', '800', 'Loja 5', 'São Paulo', 'Jardins', 'SP', '01426-001', '2024-01-18 11:45:00', '2024-01-18 11:45:00', false),
+('Avenida Faria Lima', '2500', 'Sala 1001', 'São Paulo', 'Itaim Bibi', 'SP', '01452-000', '2024-01-19 16:30:00', '2024-01-19 16:30:00', false);
 
-INSERT INTO TB_RESTAURANT (name, logo_image_url, fk_address, phone, whatsapp_phone, cnpj, delivery_radius)
-VALUES
-    ('Restaurante Bom Sabor', 'https://imgur.com/logo1.png', 3, '(11) 3456-7890', '(11) 91234-1111', '12.345.678/0001-99', 10.5);
+-- Inserir restaurantes básicos
+INSERT INTO TB_RESTAURANT (name, logo_image_url, fk_address, phone, whatsapp_phone, cnpj, created_at, updated_at, is_deleted, delivery_radius) VALUES
+('Pizzaria Bella Napoli', 'https://example.com/logos/bella-napoli.jpg', 1, '(11) 3456-7890', '(11) 99456-7890', '12.345.678/0001-90', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false, 5.0),
+('Burger House Premium', 'https://example.com/logos/burger-house.jpg', 2, '(11) 9876-5432', '(11) 99876-5432', '23.456.789/0001-01', '2024-01-16 14:20:00', '2024-01-16 14:20:00', false, 8.0),
+('Sushi Zen Master', 'https://example.com/logos/sushi-zen.jpg', 3, '(11) 2345-6789', '(11) 92345-6789', '34.567.890/0001-12', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false, 6.0);
 
-INSERT INTO TB_ADMIN (name, email, password, cpf, phone, fk_restaurant)
-VALUES
-    ('Carlos Admin', 'admin@restaurante.com', 'adminpass', '321.654.987-00', '(11) 98888-8888', 1);
+-- Inserir usuários clientes básicos
+INSERT INTO TB_CUSTOMER_USER (name, email, password, cpf, phone, created_at, updated_at, is_deleted, profile_image_url) VALUES
+('João Silva Santos', 'joao.silva@email.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '123.456.789-00', '(11) 99999-1234', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false, null),
+('Maria Santos Oliveira', 'maria.santos@email.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '987.654.321-00', '(11) 88888-5678', '2024-01-16 14:20:00', '2024-01-16 14:20:00', false, null),
+('Pedro Costa Lima', 'pedro.costa@email.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '456.789.123-00', '(11) 77777-9012', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false, null);
 
-INSERT INTO TB_CUSTOMER_ADDRESS (fk_customer, fk_address, nickname, is_default)
-VALUES
-    (1, 1, 'Casa', TRUE),
-    (2, 2, 'Trabalho', FALSE);
+-- Inserir tipos de usuário de restaurante básicos
+INSERT INTO TB_RESTAURANT_USER_TYPE (name, description, created_at, updated_at, is_deleted) VALUES
+('ADMIN', 'Administrador com acesso total ao sistema', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('MANAGER', 'Gerente com acesso a gestão de funcionários e menu', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('EMPLOYEE', 'Funcionário com acesso básico ao sistema', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('DELIVERY', 'Entregador com acesso apenas a pedidos de entrega', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false);
+
+-- Inserir usuários de restaurante básicos
+INSERT INTO TB_RESTAURANT_USER (role, name, email, password, cpf, phone, created_at, updated_at, is_deleted, profile_image_url, fk_restaurant, fk_restaurant_user_type) VALUES
+('ADMIN', 'Giuseppe Rossi', 'giuseppe@bellanapoli.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '111.222.333-44', '(11) 3456-7890', '2024-01-15 10:30:00', '2024-01-15 10:30:00', false, null, 1, 1),
+('ADMIN', 'Carlos Burger', 'carlos@burgerhouse.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '444.555.666-77', '(11) 9876-5432', '2024-01-16 14:20:00', '2024-01-16 14:20:00', false, null, 2, 1),
+('ADMIN', 'Takeshi Yamamoto', 'takeshi@sushizen.com', '$2a$10$9bIcjxlSEUdcammR4jgtjusvw0VETveHfBgtjVYIfYabJZsGN4umy', '666.777.888-99', '(11) 2345-6789', '2024-01-17 09:15:00', '2024-01-17 09:15:00', false, null, 3, 1);
+
+-- Associar endereços aos clientes
+INSERT INTO TB_CUSTOMER_ADDRESS (fk_customer, fk_address, nickname, is_default, created_at, updated_at, is_deleted) VALUES
+(1, 1, 'Casa', true, '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+(2, 2, 'Casa', true, '2024-01-16 14:20:00', '2024-01-16 14:20:00', false),
+(3, 3, 'Casa', true, '2024-01-17 09:15:00', '2024-01-17 09:15:00', false);
+
+-- Inserir itens básicos do menu
+INSERT INTO TB_MENU_ITEM (name, description, price, only_local_consumption, photo_url, fk_restaurant, created_at, updated_at, is_deleted) VALUES
+('Pizza Margherita', 'Pizza clássica com molho de tomate, mussarela e manjericão', 45.90, false, null, 1, '2024-01-15 10:30:00', '2024-01-15 10:30:00', false),
+('Pizza Pepperoni', 'Pizza com molho de tomate, mussarela e pepperoni', 52.90, false, null, 1, '2024-01-15 10:35:00', '2024-01-15 10:35:00', false),
+('Classic Burger', 'Hambúrguer artesanal 180g com alface, tomate e molho especial', 32.90, false, null, 2, '2024-01-16 14:20:00', '2024-01-16 14:20:00', false),
+('Bacon Cheeseburger', 'Hambúrguer 180g com queijo cheddar e bacon crocante', 38.90, false, null, 2, '2024-01-16 14:25:00', '2024-01-16 14:25:00', false),
+('Sushi Combo', 'Combinado de sushi com 12 peças variadas', 65.90, false, null, 3, '2024-01-17 09:15:00', '2024-01-17 09:15:00', false),
+('Temaki Salmão', 'Temaki de salmão com cream cheese', 18.90, false, null, 3, '2024-01-17 09:20:00', '2024-01-17 09:20:00', false);
+
+-- Inserir Restaurants
+INSERT INTO TB_RESTAURANT (
+    name, logo_image_url, fk_address, phone, whatsapp_phone, cnpj, created_at, updated_at, is_deleted, delivery_radius
+) VALUES
+      (
+          'Restaurante Sabor da Terra',
+          'https://cdn.eatz.com.br/logos/sabor-da-terra.png',
+          1,
+          '(11) 98765-4321',
+          '(11) 91234-5678',
+          '12.345.678/0001-90',
+          NOW(),
+          NOW(),
+          FALSE,
+          5.0
+      ),
+      (
+          'Cantina Italiana',
+          'https://cdn.eatz.com.br/logos/cantina-italiana.jpg',
+          2,
+          '(21) 3232-4567',
+          '(21) 98888-1234',
+          '98.765.432/0001-12',
+          NOW(),
+          NOW(),
+          FALSE,
+          7.5
+      ),
+      (
+          'Burguer Point',
+          'https://cdn.eatz.com.br/logos/burguer-point.jpg',
+          3,
+          '(31) 99888-1122',
+          '(31) 99999-2233',
+          '11.222.333/0001-44',
+          NOW(),
+          NOW(),
+          FALSE,
+          3.2
+      ),
+      (
+          'Veggie Vibe',
+          'https://cdn.eatz.com.br/logos/veggie-vibe.jpg',
+          4,
+          '(41) 3344-5566',
+          '(41) 97777-8899',
+          '55.444.333/0001-77',
+          NOW(),
+          NOW(),
+          FALSE,
+          4.8
+      );

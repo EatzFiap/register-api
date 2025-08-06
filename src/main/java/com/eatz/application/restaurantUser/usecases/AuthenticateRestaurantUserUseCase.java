@@ -6,7 +6,7 @@ import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.shared.auth.AuthenticateUserUseCase;
 import com.eatz.shared.dto.AuthenticationResponse;
 import com.eatz.shared.dto.LoginRequest;
-import com.eatz.shared.exceptions.InvalidCredentialsException;
+import com.eatz.shared.exception.InvalidCredentialsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

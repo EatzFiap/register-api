@@ -1,6 +1,7 @@
 package com.eatz.infrastructure.persistence.restaurantUser;
 
 import com.eatz.infrastructure.persistence.address.AddressEntity;
+import com.eatz.infrastructure.persistence.entity.RestaurantUserTypeEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -37,12 +38,19 @@ public class RestaurantUserEntity {
     @Column(name = "fk_restaurant")
     private Long restaurantId;
 
+    @Column(name = "fk_restaurant_user_type", insertable = false, updatable = false)
+    private Long restaurantUserTypeId;
+
     @Column(name = "fk_address", insertable=false, updatable=false)
     private Long addressId;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_address")
     private AddressEntity address;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_restaurant_user_type")
+    private RestaurantUserTypeEntity restaurantUserType;
 
     public Long getId() {
         return id;
@@ -154,6 +162,22 @@ public class RestaurantUserEntity {
 
     public void setAddress(AddressEntity address) {
         this.address = address;
+    }
+
+    public Long getRestaurantUserTypeId() {
+        return restaurantUserTypeId;
+    }
+
+    public void setRestaurantUserTypeId(Long restaurantUserTypeId) {
+        this.restaurantUserTypeId = restaurantUserTypeId;
+    }
+
+    public RestaurantUserTypeEntity getRestaurantUserType() {
+        return restaurantUserType;
+    }
+
+    public void setRestaurantUserType(RestaurantUserTypeEntity restaurantUserType) {
+        this.restaurantUserType = restaurantUserType;
     }
 
 }

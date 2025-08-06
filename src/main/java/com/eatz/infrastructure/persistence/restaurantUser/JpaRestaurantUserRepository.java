@@ -21,4 +21,6 @@ public interface JpaRestaurantUserRepository extends JpaRepository<RestaurantUse
     Optional<String> findRoleByEmailAndIsDeletedFalse(@Param("email") String email);
 
     Optional<RestaurantUserEntity> findByEmailAndIsDeletedFalse(String email);
+    
+    boolean existsByRestaurantUserTypeIdAndIsDeletedFalse(Long restaurantUserTypeId);
 }

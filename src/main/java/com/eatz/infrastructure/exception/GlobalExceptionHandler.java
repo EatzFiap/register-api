@@ -2,11 +2,15 @@ package com.eatz.infrastructure.exception;
 
 import com.eatz.domain.customer.exceptions.CustomerAlreadyExistsException;
 import com.eatz.domain.customer.exceptions.CustomerNotFoundException;
-import com.eatz.shared.exceptions.AddressNotFoundException;
-import com.eatz.shared.exceptions.InvalidCredentialsException;
-import com.eatz.shared.exceptions.InvalidPasswordException;
+import com.eatz.shared.exception.AddressNotFoundException;
+import com.eatz.shared.exception.InvalidCredentialsException;
+import com.eatz.shared.exception.InvalidPasswordException;
+import com.eatz.domain.menuItem.exceptions.MenuItemNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantNotFoundException;
 import com.eatz.domain.restaurantUser.exceptions.RestaurantUserAlreadyExistsException;
+import com.eatz.domain.restaurantUserType.exceptions.RestaurantUserTypeNotFoundException;
+import com.eatz.domain.restaurantUserType.exceptions.RestaurantUserTypeAlreadyExistsException;
+import com.eatz.domain.restaurantUserType.exceptions.RestaurantUserTypeInUseException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
@@ -109,6 +113,30 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleAddressNotFound(AddressNotFoundException ex, HttpServletRequest request) {
         log.warn(ex.getMessage());
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null, request.getRequestURI());
+    }
+
+    @ExceptionHandler(MenuItemNotFoundException.class)
+    public ResponseEntity<Object> handleMenuItemNotFound(MenuItemNotFoundException ex, HttpServletRequest request) {
+        log.warn("Menu item not found: {}", ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null, request.getRequestURI());
+    }
+
+    @ExceptionHandler(RestaurantUserTypeNotFoundException.class)
+    public ResponseEntity<Object> handleRestaurantUserTypeNotFound(RestaurantUserTypeNotFoundException ex, HttpServletRequest request) {
+        log.warn("Restaurant user type not found: {}", ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null, request.getRequestURI());
+    }
+
+    @ExceptionHandler(RestaurantUserTypeAlreadyExistsException.class)
+    public ResponseEntity<Object> handleRestaurantUserTypeAlreadyExists(RestaurantUserTypeAlreadyExistsException ex, HttpServletRequest request) {
+        log.warn("Restaurant user type already exists: {}", ex.getMessage());
+        return buildResponse(HttpStatus.CONFLICT, ex.getMessage(), null, request.getRequestURI());
+    }
+
+    @ExceptionHandler(RestaurantUserTypeInUseException.class)
+    public ResponseEntity<Object> handleRestaurantUserTypeInUse(RestaurantUserTypeInUseException ex, HttpServletRequest request) {
+        log.warn("Restaurant user type in use: {}", ex.getMessage());
+        return buildResponse(HttpStatus.CONFLICT, ex.getMessage(), null, request.getRequestURI());
     }
 
     private ResponseEntity<Object> buildResponse(HttpStatus status, String message, Object details, String path) {

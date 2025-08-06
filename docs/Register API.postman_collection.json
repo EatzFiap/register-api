@@ -1919,7 +1919,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"João Funcionário\",\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"role\": \"ADMIN\",\r\n    \"cpf\": \"88877799901\",\r\n    \"phone\": \"970708080\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Floriculturas\",\r\n        \"number\": \"42\",\r\n        \"complement\": \"222B\",\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01234-567\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"João Funcionário\",\r\n    \"email\": \"joao.ferreira@email.com\",\r\n    \"password\": \"senha*123\",\r\n    \"role\": \"ADMIN\",\r\n    \"cpf\": \"88877799901\",\r\n    \"phone\": \"970708080\",\r\n    \"profileImageUrl\": \"www.image-url.com\",\r\n    \"restaurantUserTypeId\": 1,\r\n    \"address\": {\r\n        \"street\": \"Rua das Floriculturas\",\r\n        \"number\": \"42\",\r\n        \"complement\": \"222B\",\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01234-567\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2825,6 +2825,472 @@
 							"body": "{\n    \"path\": \"/restaurant-users/1\",\n    \"error\": \"Not Found\",\n    \"message\": \"Usuário não encontrado para exclusão.\",\n    \"timestamp\": \"2025-05-23T01:00:41.6035735\",\n    \"status\": 404\n}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "restaurant",
+			"item": [
+				{
+					"name": "find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/restaurants/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create restaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pizzaria Delícia\",\r\n    \"logoImageUrl\": \"https://site.com/imagens/logo.png\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Flores\",\r\n        \"number\": \"123\",\r\n        \"complement\": \"Loja 1\",\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01000-000\"\r\n    },\r\n    \"phone\": \"(11) 99999-9999\",\r\n    \"whatsappPhone\": \"(11) 98888-8888\",\r\n    \"cnpj\": \"12.345.678/0001-99\",\r\n    \"deliveryRadius\": 5.0,\r\n    \"ownerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/restaurants",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update restaurant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pizzaria Atualizada\",\r\n    \"logoImageUrl\": \"https://site.com/imagens/logo-2.png\",\r\n    \"address\": {\r\n        \"street\": \"Rua das Laranjeiras\",\r\n        \"number\": \"125\",\r\n        \"complement\": \"Loja 4\",\r\n        \"neighbourhood\": \"Centro\",\r\n        \"city\": \"Osasco\",\r\n        \"state\": \"SP\",\r\n        \"zipCode\": \"01000-000\"\r\n    },\r\n    \"phone\": \"(11) 99999-9998\",\r\n    \"whatsappPhone\": \"(11) 98888-8889\",\r\n    \"cnpj\": \"12.345.678/0001-99\",\r\n    \"deliveryRadius\": 10.0,\r\n    \"ownerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/restaurants/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete restaurant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/restaurants/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{restaurant_user_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "restaurantUserTypes",
+			"item": [
+				{
+					"name": "find all",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/restaurant-user-types/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"restaurant-user-types",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/restaurant-user-types/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"restaurant-user-types",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"KITCHEN_ASSISTANT\",\r\n  \"description\": \"Auxiliar de cozinha com acesso limitado à lista de preparo dos pedidos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/restaurant-user-types",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"restaurant-user-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"ADMINISTRATOR\",\r\n  \"description\": \"Administrador com acesso completo ao sistema\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/restaurant-user-types/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"restaurant-user-types",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"KITCHEN_ASSISTANT\",\r\n  \"description\": \"Auxiliar de cozinha com acesso limitado à lista de preparo dos pedidos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/restaurant-user-types/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"restaurant-user-types",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "menuItem",
+			"item": [
+				{
+					"name": "find by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/menu-items/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"menu-items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/menu-items/restaurant/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"menu-items",
+								"restaurant",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create menu item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Pizza Margherita\",\r\n  \"description\": \"Pizza com molho de tomate e mussarela\",\r\n  \"price\": 39.90,\r\n  \"onlyLocalConsumption\": false,\r\n  \"photoBase64\": \"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wIAAgMBApQ5xQAAAABJRU5ErkJggg==\",\r\n  \"photoContentType\": \"image/png\",\r\n  \"restaurantId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/menu-items",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"menu-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update menu item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Pizza Margherita\",\r\n  \"description\": \"Pizza com molho de tomate e mussarela\",\r\n  \"price\": 39.90,\r\n  \"onlyLocalConsumption\": false,\r\n  \"photoBase64\": \"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wIAAgMBApQ5xQAAAABJRU5ErkJggg==\",\r\n  \"photoContentType\": \"image/png\",\r\n  \"restaurantId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/menu-items/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"menu-items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete menu item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{restaurant_user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Pizza Margherita\",\r\n  \"description\": \"Pizza com molho de tomate e mussarela\",\r\n  \"price\": 39.90,\r\n  \"onlyLocalConsumption\": false,\r\n  \"photoBase64\": \"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wIAAgMBApQ5xQAAAABJRU5ErkJggg==\",\r\n  \"photoContentType\": \"image/png\",\r\n  \"restaurantId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/menu-items/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"menu-items",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

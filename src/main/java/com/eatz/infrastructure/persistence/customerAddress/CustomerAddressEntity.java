@@ -83,9 +83,15 @@ public class CustomerAddressEntity {
         isDefault = aDefault;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
@@ -102,4 +108,9 @@ public class CustomerAddressEntity {
     public AddressEntity getAddress() {
         return address;
     }
+
+    public void setAddress(AddressEntity address) {
+        this.address = address;
+    }
+
 }

@@ -14,9 +14,14 @@ public class RestaurantUserResponse {
     private String role;
     private String profileImageUrl;
     private Long restaurantId;
+    private Long restaurantUserTypeId;
+    private String restaurantUserTypeName;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private AddressResponse address;
+
+    public RestaurantUserResponse() {
+    }
 
     public RestaurantUserResponse(RestaurantUser restaurantUser) {
         this.id = restaurantUser.getId();
@@ -27,6 +32,8 @@ public class RestaurantUserResponse {
         this.role = restaurantUser.getRole() != null ? restaurantUser.getRole().name() : null;
         this.profileImageUrl = restaurantUser.getProfileImageUrl();
         this.restaurantId = restaurantUser.getRestaurantId();
+        this.restaurantUserTypeId = restaurantUser.getRestaurantUserTypeId();
+        this.restaurantUserTypeName = restaurantUser.getRestaurantUserType() != null ? restaurantUser.getRestaurantUserType().getName() : null;
         this.createdAt = restaurantUser.getCreatedAt();
         this.updatedAt = restaurantUser.getUpdatedAt();
         this.address = restaurantUser.getAddress() != null ? new AddressResponse(restaurantUser.getAddress()) : null;
@@ -96,5 +103,17 @@ public class RestaurantUserResponse {
     }
     public AddressResponse getAddress() {
         return address;
+    }
+    public Long getRestaurantUserTypeId() {
+        return restaurantUserTypeId;
+    }
+    public void setRestaurantUserTypeId(Long restaurantUserTypeId) {
+        this.restaurantUserTypeId = restaurantUserTypeId;
+    }
+    public String getRestaurantUserTypeName() {
+        return restaurantUserTypeName;
+    }
+    public void setRestaurantUserTypeName(String restaurantUserTypeName) {
+        this.restaurantUserTypeName = restaurantUserTypeName;
     }
 }

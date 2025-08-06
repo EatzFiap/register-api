@@ -3,6 +3,10 @@ spring:
     activate:
       on-profile: ${SPRING_PROFILES_ACTIVE:dev}
 
+springdoc:
+  api-docs:
+    version: OPENAPI_3_0
+
   datasource:
     driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/register_db}
@@ -13,11 +17,14 @@ spring:
     hibernate:
       ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
     show-sql: ${SPRING_JPA_SHOW_SQL:true}
-  h2:
-    console:
-      enabled: ${SPRING_H2_CONSOLE_ENABLED:true}
 
 security:
   jwt:
       secret: ${JWT_SECRET:12123581251298035890123980512890350981298053295132253802531925312352138923589}
       expiration: ${JWT_EXPIRATION:3600000}
+
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin123}
+  bucket-name: ${MINIO_BUCKET_NAME:eatz-images}

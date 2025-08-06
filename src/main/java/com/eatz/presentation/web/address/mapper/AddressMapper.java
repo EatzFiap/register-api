@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Component
 public class AddressMapper {
 
-    public Address toDomain(AddressRequest request) {
+    public static Address toDomain(AddressRequest request) {
         Address address = new Address();
         address.setStreet(request.getStreet());
         address.setNumber(request.getNumber());
@@ -24,7 +24,7 @@ public class AddressMapper {
         return address;
     }
 
-    public AddressResponse toResponse(Address address) {
+    public static AddressResponse toResponse(Address address) {
         return new AddressResponse(
                 address.getId(),
                 address.getStreet(),

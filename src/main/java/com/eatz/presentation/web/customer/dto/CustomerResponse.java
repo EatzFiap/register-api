@@ -18,6 +18,9 @@ public class CustomerResponse {
     private LocalDateTime updatedAt;
     private List<CustomerAddressResponse> addresses;
 
+    public CustomerResponse() {
+    }
+
     public CustomerResponse(
             Customer customer,
             List<CustomerAddressResponse> addresses
@@ -39,22 +42,6 @@ public class CustomerResponse {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public List<CustomerAddressResponse> getAddresses() {
@@ -83,5 +70,21 @@ public class CustomerResponse {
 
     public String getProfileImageUrl() {
         return profileImageUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

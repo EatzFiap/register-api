@@ -2,6 +2,7 @@ package com.eatz.application.restaurantUser.usecases;
 
 import com.eatz.domain.restaurantUser.RestaurantUser;
 import com.eatz.domain.restaurantUser.RestaurantUserRepository;
+import com.eatz.domain.restaurantUserType.RestaurantUserTypeRepository;
 import com.eatz.infrastructure.security.JwtUtil;
 import com.eatz.shared.usecases.UpdateUserPasswordUseCase;
 import org.springframework.context.annotation.Bean;
@@ -12,32 +13,35 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class RestaurantUserUseCaseConfig {
 
-    @Bean
-    public CreateRestaurantUserUseCase createRestaurantUseCase(RestaurantUserRepository restaurantUserRepository, PasswordEncoder passwordEncoder) {
-        return new CreateRestaurantUserUseCase(restaurantUserRepository, passwordEncoder);
+    @Bean(name = "createRestaurantUserUseCase")
+    public CreateRestaurantUserUseCase createRestaurantUseCase(RestaurantUserRepository restaurantUserRepository, 
+                                                             RestaurantUserTypeRepository restaurantUserTypeRepository,
+                                                             PasswordEncoder passwordEncoder) {
+        return new CreateRestaurantUserUseCase(restaurantUserRepository, restaurantUserTypeRepository, passwordEncoder);
     }
 
-    @Bean
+    @Bean(name = "deleteRestaurantUserUseCase")
     public DeleteRestaurantUserUseCase deleteRestaurantUseCase(RestaurantUserRepository restaurantUserRepository) {
         return new DeleteRestaurantUserUseCase(restaurantUserRepository);
     }
 
-    @Bean
-    public UpdateRestaurantUserUseCase updateRestaurantUseCase(RestaurantUserRepository restaurantUserRepository) {
-        return new UpdateRestaurantUserUseCase(restaurantUserRepository);
+    @Bean(name = "updateRestaurantUserUseCase")
+    public UpdateRestaurantUserUseCase updateRestaurantUseCase(RestaurantUserRepository restaurantUserRepository,
+                                                             RestaurantUserTypeRepository restaurantUserTypeRepository) {
+        return new UpdateRestaurantUserUseCase(restaurantUserRepository, restaurantUserTypeRepository);
     }
 
-    @Bean
+    @Bean(name = "getRestaurantUserUseCase")
     public GetRestaurantUserUseCase getRestaurantUseCase(RestaurantUserRepository restaurantUserRepository) {
         return new GetRestaurantUserUseCase(restaurantUserRepository);
     }
 
-    @Bean
+    @Bean(name = "updateRestaurantUserPasswordUseCase")
     public UpdateUserPasswordUseCase<RestaurantUser> updateRestaurantUserPasswordUseCase(RestaurantUserRepository restaurantUserRepository, PasswordEncoder passwordEncoder) {
         return new UpdateUserPasswordUseCase<>(restaurantUserRepository, passwordEncoder);
     }
 
-    @Bean
+    @Bean(name = "authenticateRestaurantUserUseCase")
     public AuthenticateRestaurantUserUseCase authenticateRestaurantUserUseCase(
             AuthenticationManager authenticationManager,
             JwtUtil jwtUtil,
